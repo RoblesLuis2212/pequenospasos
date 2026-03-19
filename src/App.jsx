@@ -1,8 +1,13 @@
+import Menu from "./components/Menu"
+
 function App() {
 
   return (
     <>
-      <h1>Pequeños pasos</h1>
+      <header>
+        <Menu></Menu>
+      </header>
+      <main></main>
     </>
   )
 }
