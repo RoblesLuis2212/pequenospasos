@@ -66,3 +66,20 @@ main{
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(255, 143, 177, 0.3);
 }
+.btn-secundario{
+    background-color: var(--color-principal);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease;   
+}
+.btn-secundario:hover{
+    background-color: var(--color-principal);
+    transform: translateY(-1px);
+}
+.btn-principal-2{
+    text-transform: none;
+}
