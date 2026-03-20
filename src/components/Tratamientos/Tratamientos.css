@@ -6,3 +6,27 @@
     font-weight: 600;
     font-style: italic;
 }
+.links{
+    display: inline-block;
+    color: #5C1D52;
+    font-weight: 600;
+    margin: 50px 0 0 420px;
+}
+
+.bg-fondo{
+    background: #FCE9F1;
+}
+
+/* Media query para dispositivos medium (tablets) */
+@media(max-width: 1024px){
+    .links{
+        margin: 0;
+    }
+}
+
+/* Media query para dispositivos mobiles */
+@media(max-width: 768px){
+    .links{
+        margin: 0;
+    }
+}
