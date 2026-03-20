@@ -43,7 +43,7 @@ main{
 }
 
 .nav-link:hover:not(.active) {
-    color: var(--color-active) !important;
+    color: var(--color-btn-primario) !important;
     opacity: 0.8;
 }
 .btn-principal{
