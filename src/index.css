@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* Declaracion de variables */
+:root{
+    --color-principal: #6B46C1;
+    --color-btn-primario: #FF9EBC;
+    --color-fondo-nav: #FDF8FF;
+    --font-menu: 'Poppins', sans-serif;
+    --font-logo: 'Nunito', sans-serif;
+    --texto-boton: #5C1D52;
+    --color-link-activo: #A34070;
+    --color-linea-linkActivo: #FF8FB1;
+}
+
+#root{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main{
+    flex-grow: 1;
+}
+.navbar{
+    background: var(--color-fondo-nav);
+}
+.logo{
+    font-family: var(--font-logo);
+    color: var(--color-principal);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+.nav-link{
+    font-family: var(--font-menu);
+    color: var(--color-principal) !important;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.nav-link.active{
+    color: var(--color-link-activo);
+    border-bottom: 3px solid var(--color-linea-linkActivo);
+}
+
+.nav-link:hover:not(.active) {
+    color: var(--color-btn-primario) !important;
+    opacity: 0.8;
+}
+.btn-principal{
+    background-color: var(--color-btn-primario);
+    color: var(--texto-boton);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease;
+}
+/* Darle prioridad a nuestros estilos para tener mas especifidad que bootstrap */
+.nav-link.btn-principal:hover, 
+.btn.btn-principal:hover {
+    background-color: #ff6b9d !important;
+    color: var(--texto-boton) !important;
+    filter: brightness(0.92);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 143, 177, 0.3);
+}
