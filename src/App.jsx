@@ -1,3 +1,4 @@
+import HeroSection from "./components/HeroSection/HeroSection"
 import Menu from "./components/Menu"
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
       <header>
         <Menu></Menu>
       </header>
-      <main></main>
+      <main>
+        <HeroSection></HeroSection>
+      </main>
     </>
   )
 }
