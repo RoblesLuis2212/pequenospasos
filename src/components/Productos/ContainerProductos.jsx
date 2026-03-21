@@ -3,9 +3,9 @@ import "./Productos.css";
 
 const ContainerProductos = () => {
     return (
-        <section className='container-fluid bg-container'>
+        <section className='container-fluid bg-container py-3'>
             <h3 className='text-center titulo-tienda mt-3'>Nuestra Tienda</h3>
-            <p className='text-muted text-center mt-3'>Herramientas profesionales para continuar la terapia en casa de forma divertida</p>
+            <p className='text-muted text-center mt-2'>Herramientas profesionales para continuar la terapia en casa de forma divertida</p>
             <div className="row">
                 <div className="col-12 col-md-6 col-lg-3">
                     <CardProducto nombre={"Balde Bloque de Ladrillos"} imagen={"https://tribilinbb.com.ar/wp-content/uploads/2021/05/LADRILLLOS-DURAVIT-10.jpg"} precio={20000}></CardProducto>

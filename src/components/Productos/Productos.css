@@ -10,6 +10,10 @@
     object-fit: contain;
     padding: 15px;
     border-radius: 20px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);;
+}
+.img-producto:hover{
+    transform: scale(1.03);
 }
 .btn-carrito{
     width: 100%;
@@ -28,4 +32,23 @@
 }
 .bg-container{
     background: #FDF8FF;
+}
+.nombre-producto{
+    font-family: 'Poppins', sans-serif;
+    color: #5C1D52;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.precio-producto{
+    color: #A33A5B; 
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.card-link{
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
 }
