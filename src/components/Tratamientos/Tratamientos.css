@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.titulo-tratamientos{
+    font-family: 'Poppins', sans-serif;
+    color: #5C1D52;
+    font-weight: 600;
+    font-style: italic;
+}
+.links{
+    display: inline-block;
+    color: #5C1D52;
+    font-weight: 600;
+    margin: 50px 0 0 420px;
+}
+
+.bg-fondo{
+    background: #FCE9F1;
+}
+.icono{
+    width: 50px;
+    height: 50px;
+    margin: 10px 0 0 15px;
+    background: #F3E8FF;
+    border-radius: 15px;
+    color: #A34070;
+}
+.card-tratamiento{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.card-tratamiento:hover{
+    transform: translateY(-10px);
+}
+
+/* Media query para dispositivos medium (tablets) */
+@media(max-width: 1024px){
+    .links{
+        margin: 0;
+    }
+}
+
+/* Media query para dispositivos mobiles */
+@media(max-width: 768px){
+    .links{
+        margin: 0;
+    }
+}

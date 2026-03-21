@@ -1,5 +1,6 @@
 import HeroSection from "./components/HeroSection/HeroSection"
 import Menu from "./components/Menu"
+import Tratamientos from "./components/Tratamientos/Tratamientos"
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       </header>
       <main>
         <HeroSection></HeroSection>
+        <Tratamientos></Tratamientos>
       </main>
     </>
   )
