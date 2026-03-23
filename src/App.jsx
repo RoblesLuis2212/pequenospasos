@@ -1,3 +1,4 @@
+import FormularioContacto from "./components/Contacto/FormularioContacto"
 import HeroSection from "./components/HeroSection/HeroSection"
 import Menu from "./components/Menu"
 import ContainerProductos from "./components/Productos/ContainerProductos"
@@ -14,6 +15,7 @@ function App() {
         <HeroSection></HeroSection>
         <Tratamientos></Tratamientos>
         <ContainerProductos></ContainerProductos>
+        <FormularioContacto></FormularioContacto>
       </main>
     </>
   )
