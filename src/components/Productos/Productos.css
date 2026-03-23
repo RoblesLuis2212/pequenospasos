@@ -26,9 +26,9 @@
     transition: all 0.3s ease;
 }
 .btn-carrito:hover{
-    background-color: #5C1D52;
-    color: white;
-    border: none;
+    background-color: #5C1D52 !important;
+    color: white !important;
+    border: none !important;
 }
 .bg-container{
     background: #FDF8FF;
@@ -52,9 +52,35 @@
     text-decoration: none;
     color: inherit;
 }
-.btn-carrito .seguir-compra{
-    transition: none;
+.btn-principal.seguir-compra{
+    background: transparent;
+    color: #5C1D52;
+    border: 2px solid #5C1D52;
 }
 .img-detalle{
+    width: 100%;
     border-radius: 15px;
+    height: auto;
+    object-fit: cover;
+}
+.categoria-producto{
+    display: inline-block;
+    background-color: #f3e5f5; 
+    color: #8e44ad;           
+    font-size: 10px;        
+    font-weight: 700;         
+    text-transform: uppercase; 
+    padding: 8px 20px;        
+    border-radius: 50px;      
+    letter-spacing: 1px;      
+    margin-bottom: 15px
+}
+.nombre-producto.nombre-modal{
+    font-size: 30px;
+}
+
+.btn-principal.seguir-compra:hover{
+    background-color: #5C1D52 !important;
+    color: white !important;
+    border: #5C1D52 !important;
 }
