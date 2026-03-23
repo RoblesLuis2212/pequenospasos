@@ -5,11 +5,13 @@ import "./Contacto.css";
 const FormularioContacto = () => {
     return (
         <section className='container-fluid bg-fondo py-3'>
-            <h3 className='text-center'>Acompañamos el crecimiento de tu pequeño</h3>
-            <p className='text-center'>¿Tienes dudas sobre la fonoudiologia? Estamos aqui para ayudarte a navegar cada paso de este camino ligero como una nube.</p>
-            <div className="row">
-                <div className="col-12 col-md-6 custom-form-container">
+            <h3 className='text-center titulo mt-3'>Acompañamos el crecimiento de tu pequeño</h3>
+            <p className='text-center text-muted'>¿Tienes dudas sobre la fonoudiologia? Estamos aqui para ayudarte a navegar cada paso de este camino ligero como una nube.</p>
+            <div className="row justify-content-center animacion-entrada">
+                {/* Formulario de contacto */}
+                <div className="col-12 col-md-8 custom-form-container">
                     <Form>
+                        <h3 className='text-center titulo'>Contacto</h3>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label className='etiquetas'>Nombre completo</Form.Label>
                             <Form.Control type="text" placeholder="ej: Juan Perez" className='custom-input' />
@@ -31,12 +33,11 @@ const FormularioContacto = () => {
                                 style={{ height: '100px' }}
                             />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Button className="btn-principal" type="submit">
+                            Enviar mensaje
                         </Button>
                     </Form>
                 </div>
-                <div className="col-12 col-md-6">1234</div>
             </div>
         </section>
     );

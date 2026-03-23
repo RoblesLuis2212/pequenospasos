@@ -14,11 +14,16 @@ textarea{
     padding: 2rem;
 }
 .etiquetas{
-    font-size: 0.8rem;
-    color: #5e4d8b;
-    margin-left: 15px;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
+    display: block;
+    font-size: 0.75rem; 
+    font-weight: 700;
+    text-transform: uppercase; 
+    letter-spacing: 1.2px;    
+    color: #5C1D52;           
+    margin-bottom: 6px; 
+    margin-left: 10px;
+    opacity: 0.8;
+    font-family: 'Poppins', sans-serif;
 }
 .custom-input{
     background-color: #f8f0ff;
@@ -32,7 +37,17 @@ textarea{
 }
 
 .custom-input:focus {
-    outline: none !important;     
-    box-shadow: none !important; 
-    background-color: #f3e8ff !important; 
+    outline: none !important; 
+    border-style: solid !important; 
+    border-width: 2px !important;   
+    
+    border-color: #A34070 !important; 
+    
+    box-shadow: 0 0 0 4px rgba(181, 146, 255, 0.25) !important; 
+}
+.titulo{
+    color: #5C1D52;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
 }
