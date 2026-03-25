@@ -1,0 +1,25 @@
+footer {
+    background-color: #fdf2f8; /* El rosa clarito de tu navbar */
+    color: #555;
+    font-family: 'Poppins', sans-serif;
+}
+footer h3 {
+    color: #7c4dff; /* El violeta de Pequeños Pasos */
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: none; /* O uppercase si quieres que sea igual al menú */
+}
+footer a {
+    color: #7c4dff; 
+    text-decoration: none; /* Sin subrayado */
+    display: block;
+    margin-bottom: 8px;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    color: #ff80ab; /* Rosa fuerte al pasar el mouse (como tu botón) */
+}
+.texto{
+    color: #7c4dff;
+}

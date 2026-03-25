@@ -3,6 +3,7 @@ import HeroSection from "./components/HeroSection/HeroSection"
 import Menu from "./components/Menu"
 import ContainerProductos from "./components/Productos/ContainerProductos"
 import Tratamientos from "./components/Tratamientos/Tratamientos"
+import Footer from "./components/Footer/Footer"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Tratamientos></Tratamientos>
         <ContainerProductos></ContainerProductos>
         <FormularioContacto></FormularioContacto>
+        <Footer></Footer>
       </main>
     </>
   )
