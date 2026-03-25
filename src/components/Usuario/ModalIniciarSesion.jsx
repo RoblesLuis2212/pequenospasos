@@ -8,8 +8,7 @@ const ModalIniciarSesion = ({ handleClose, show }) => {
     return (
         <Modal show={show} onHide={handleClose}>
             <div className="header d-flex flex-column justify-content-center align-items-center">
-                <div className="icono-nube"><i className="bi bi-cloud-fill"></i></div>
-                <h3 className='titulo-bienvenido'>Bienvenido de nuevo</h3>
+                <h3 className='titulo-bienvenido mt-4'>Bienvenido de nuevo</h3>
                 <p className='text-muted'>Ingresa a tu cuenta para continuar con el progreso de tu peque</p>
             </div>
             <Modal.Body>

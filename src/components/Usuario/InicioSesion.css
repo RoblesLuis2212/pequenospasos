@@ -10,21 +10,26 @@
 }
 /* Estilo para el cuadrito del icono */
 .input-pildora .input-group-text {
-    background-color: transparent; /* Para que se vea el lila del padre */
+    background-color: transparent;
     border: none;
-    color: #8e7696;                /* Color del icono */
-    padding-left: 20px;            /* Espacio al inicio de la píldora */
+    color: #8e7696;                
+    padding-left: 20px;            
 }
 
-/* Estilo para el input real */
 .input-pildora .form-control {
-    background-color: transparent; /* Transparente para no tapar el lila */
+    background-color: transparent;
     border: none;
-    box-shadow: none;              /* Quita el brillo azul de Bootstrap */
-    padding: 12px 20px 12px 10px;  /* Aire interno */
+    box-shadow: none;             
+    padding: 12px 20px 12px 10px; 
     color: #5C1D52;
 }
 
 .input-pildora .form-control::placeholder {
     color: #8e7696;
+}
+.input-pildora:focus-within {
+    background-color: #ffffff;
+    border: 2px solid #5C1D52;      
+    box-shadow: 0 0 12px rgba(92, 29, 82, 0.2);     
+   transform: scale(1.01);
 }

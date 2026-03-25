@@ -35,7 +35,7 @@ const FormularioInicioSesion = () => {
                 <Button className='btn-principal' type="submit">
                     Iniciar Sesion
                 </Button>
-                <p className='text-center mt-2'>¿No tienes cuenta? <Link to={"/registro"}>Registrate gratis</Link></p>
+                <p className='text-center mt-2'>¿No tienes cuenta? <Link to={"/registro"}>Registrate</Link></p>
             </div>
         </Form>
     );
