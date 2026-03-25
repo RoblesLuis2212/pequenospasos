@@ -5,10 +5,11 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import ModalIniciarSesion from './Usuario/ModalIniciarSesion';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
     // Estados para abrir el modal de inicio de sesion
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -26,7 +27,7 @@ const Menu = () => {
                             <Nav.Link>Tienda</Nav.Link>
                         </Nav>
                         <Nav className='align-items-center me-4'>
-                            <Nav.Link className='ms-4 ms-md-2'>Registrarse</Nav.Link>
+                            <Nav.Link className='ms-4 ms-md-2' as={Link} to={"/registro"}>Registrarse</Nav.Link>
                             <Button className='btn-principal ms-4 ms-md-2' onClick={handleShow}>Iniciar Sesion</Button>
                         </Nav>
                     </Navbar.Collapse>
