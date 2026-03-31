@@ -1,0 +1,50 @@
+/* Barra de herramientas */
+.fc-toolbar {
+  background-color: #FF9EBC;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+/* Celdas del mes */
+.fc-daygrid-day {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+/* Celdas de horario (semana/día) */
+.fc-timegrid-slot {
+  height: 50px;
+  border-bottom: 1px dashed #ddd;
+}
+/* Cabecera de días */
+.fc-col-header-cell {
+  background-color: #f0e6f2;
+  color: #5C1D52;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 2px solid #5C1D52;
+}
+
+/* Eventos */
+.fc-event {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 4px;
+  color: white;
+}
+.fc-today-button{
+    background: #FF9EBC !important;
+    color: white !important;
+    border: none !important;
+}
+.fc-prev-button{
+    background: #FF9EBC !important;
+    color: white !important;
+    border: none !important;
+}
+.fc-next-button{
+    background-color: #FF9EBC !important;
+    color: white !important;
+    border: none !important;
+}
