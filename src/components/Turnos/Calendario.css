@@ -48,3 +48,18 @@
     color: white !important;
     border: none !important;
 }
+.fc-toolbar button {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: #FF9EBC !important;
+  color: white !important;
+  border-radius: 10px !important;
+  padding: 6px 12px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+}
+
+.fc-toolbar button:hover {
+  background-color: #FF7AA0 !important;
+}
