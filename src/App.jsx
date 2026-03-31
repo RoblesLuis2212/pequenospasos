@@ -6,6 +6,7 @@ import Tratamientos from "./components/Tratamientos/Tratamientos"
 import Footer from "./components/Footer/Footer"
 import { Routes, Route } from "react-router-dom"
 import Registro from "./components/Usuario/Registro"
+import Turnos from "./components/Turnos/Turnos"
 
 function App() {
 
@@ -35,6 +36,14 @@ function App() {
             path="/registro"
             element={
               <Registro></Registro>
+            }
+          >
+          </Route>
+          {/* Pagina de solicitud de turnos */}
+          <Route
+            path="/turnos"
+            element={
+              <Turnos></Turnos>
             }
           >
           </Route>
