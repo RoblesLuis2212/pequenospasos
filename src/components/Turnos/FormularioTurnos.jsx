@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const FormularioTurnos = () => {
+const FormularioTurnos = ({ siguientePaso }) => {
     return (
         <Form>
             <Form.Group className="mb-3">
@@ -43,8 +43,8 @@ const FormularioTurnos = () => {
                     <option value="5">Ricardo Mora</option>
                 </Form.Select>
             </Form.Group>
-            <Button className='btn-registro btn-principal mt-3' type="submit">
-                Guardar
+            <Button className='btn-registro btn-principal mt-3' type="submit" onClick={siguientePaso}>
+                Siguiente
             </Button>
         </Form>
     );

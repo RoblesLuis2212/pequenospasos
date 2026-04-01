@@ -5,7 +5,7 @@ import Calendario from "./Calendario";
 
 const Turnos = () => {
     //Estado para controlar la vista
-    const [paso, setPaso] = useState(2);
+    const [paso, setPaso] = useState(1);
 
     const siguientePaso = () => {
         setPaso(paso + 1);
@@ -17,7 +17,7 @@ const Turnos = () => {
             <div className="row d-flex justify-content-center">
                 <div className="col-12">
                     {paso === 1 && (
-                        <FormularioTurnos></FormularioTurnos>
+                        <FormularioTurnos siguientePaso={siguientePaso}></FormularioTurnos>
                     )}
                     {paso === 2 && (
                         <Calendario></Calendario>
