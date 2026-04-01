@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const Menu = () => {
     // Estados para abrir el modal de inicio de sesion
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
