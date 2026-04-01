@@ -10,7 +10,6 @@ const Turnos = () => {
     const siguientePaso = () => {
         setPaso(paso + 1);
     }
-
     return (
         <section className='container-fluid contenedor-registro form-registro'>
             <h3 className='text-center mt-3 titulo-registro'>{paso === 1 ? "Datos del paciente" : "Seleccione su turno"}</h3>
