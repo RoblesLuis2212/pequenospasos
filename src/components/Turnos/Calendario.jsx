@@ -15,7 +15,7 @@ const Calendario = () => {
     }
 
     //Estado para manejar el modal de informacion del turno
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -32,13 +32,14 @@ const Calendario = () => {
         const horaLegible = fecha.toLocaleTimeString('es-ES', opcionesHora);
 
         Swal.fire({
-            title: "¿Reservar Turno?",
-            text: `Reservaras un turno para el dia ${fechaLegible} a las ${horaLegible}`,
-            icon: "warning",
+            title: "¿Confirmar Reserva?",
+            text: `Has seleccionado un turno para el dia ${fechaLegible} a las ${horaLegible} hs`,
+            icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Si, reservar",
+            cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
                 setShow(true);
