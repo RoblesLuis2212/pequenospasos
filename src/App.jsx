@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer"
 import { Routes, Route } from "react-router-dom"
 import Registro from "./components/Usuario/Registro"
 import Turnos from "./components/Turnos/Turnos"
+import FormularioPacientes from "./components/Pacientes/FormularioPacientes";
 
 function App() {
 
@@ -44,6 +45,14 @@ function App() {
             path="/turnos"
             element={
               <Turnos></Turnos>
+            }
+          >
+          </Route>
+          {/* Pagina de registro de pacientes */}
+          <Route
+            path="/registro-pacientes"
+            element={
+              <FormularioPacientes></FormularioPacientes>
             }
           >
           </Route>
