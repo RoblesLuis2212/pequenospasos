@@ -18,7 +18,7 @@ const Menu = () => {
         <div>
             <Navbar expand="lg" className="navbar">
                 <Container fluid>
-                    <Navbar.Brand className='logo ms-2'>Pequeños Pasos</Navbar.Brand>
+                    <Navbar.Brand className='logo ms-2' as={Link} to="/">Pequeños Pasos</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mx-auto align-items-center mt-1 mt-md-0">
