@@ -48,7 +48,7 @@ const Calendario = () => {
     }
 
     return (
-        <div style={{ maxWidth: "900px", margin: "40px auto" }}>
+        <div>
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView="timeGridWeek"

@@ -17,8 +17,8 @@ const ModalDatosTurno = ({ handleClose, show }) => {
                 <p><strong>Horario:</strong> 16:30 hs</p>
                 <p><strong>Duración de consulta:</strong> 30 min</p>
                 <div className="opciones d-flex justify-content-around">
-                    <Button className='btn-principal mt-2' onClick={handleClose}><i className="bi bi-patch-check-fill me-2"></i>Aceptar</Button>
                     <Button className='btn-secundario mt-2'><i className="bi bi-printer-fill me-2"></i>Imprimir</Button>
+                    <Button className='btn-principal mt-2' onClick={handleClose}><i className="bi bi-patch-check-fill me-2"></i>Aceptar</Button>
                 </div>
             </Modal.Body>
         </Modal>

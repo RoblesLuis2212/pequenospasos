@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="col-12 col-md-4 col-lg-3 d-flex flex-column align-items-center align-items-md-start order-1">
                     {/* Columna principal */}
                     <h5 className="logo">Pequeños Pasos</h5>
-                    <Link className="text-decoration-none link-footer mt-2">Inicio</Link>
+                    <Link className="text-decoration-none link-footer mt-2" to={"/"}>Inicio</Link>
                     <Link className="text-decoration-none link-footer mt-2">Nuestros servicios</Link>
                     <Link className="text-decoration-none link-footer mt-2">Preguntas frecuentes</Link>
                     <Link className="text-decoration-none link-footer mt-2">Acerca de nosotros</Link>

@@ -83,3 +83,13 @@ main{
 .btn-principal-2{
     text-transform: none;
 }
+.logo,
+.logo:hover,
+.logo:focus,
+.logo:active,
+.logo:focus-visible {
+  color: var(--color-principal) ;
+  text-decoration: none;
+  outline: none;
+  box-shadow: none;
+}
