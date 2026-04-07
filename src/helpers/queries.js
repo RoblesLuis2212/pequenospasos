@@ -1,5 +1,9 @@
+import { get } from "react-hook-form";
+import { data } from "react-router-dom";
+
 const usuariosBackend = import.meta.env.VITE_API_USUARIOS;
 const pacientesBackend = import.meta.env.VITE_API_PACIENTES;
+const turnosBackend = import.meta.env.VITE_API_TURNOS;
 
 export const login = async (usuario) => {
   try {
@@ -36,6 +40,23 @@ export const registro = async (usuario) => {
 export const registroPacientes = async (paciente) => {
   try {
     const respuesta = await fetch(pacientesBackend, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(paciente),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const reservarTurno = async (paciente) => {
+  try {
+    const respuesta = await fetch(turnosBackend, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

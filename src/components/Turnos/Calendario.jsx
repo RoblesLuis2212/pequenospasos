@@ -20,6 +20,8 @@ const Calendario = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [turnoSeleccionado, setTurnoSeleccionado] = useState();
+
     //Ventana de sweet alert para confirmar la reserva del turno
     const confirmarTurno = (selectInfo) => {
         const fecha = selectInfo.start;
@@ -42,6 +44,7 @@ const Calendario = () => {
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
+                setTurnoSeleccionado(fecha)
                 setShow(true);
             }
         });
