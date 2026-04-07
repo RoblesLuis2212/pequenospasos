@@ -8,16 +8,20 @@ import { login } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 
 const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
-    const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, clearErrors, setError } = useForm();
 
     const postValidaciones = async (data) => {
+        //utilizamos el helper de inicio de sesion pasandole los datos del usuario
         const respuesta = await login(data);
+        //si la respuesta del servidor es 200 los datos enviados son correctos
         if (respuesta.status === 200) {
-            const datos = await respuesta.json();
+            const datos = await respuesta.json(); //convertimos esos datos a json
+            //se guardan los datos de la sesion del usuario en el estado del componente
             setUsuarioLogueado({
                 usuario: datos.usuario,
                 token: datos.token
             })
+            //mensaje de exito en caso del inicio de sesion exitoso
             Swal.fire({
                 icon: 'success',
                 title: '¡Inicio de sesión exitoso!',
@@ -27,8 +31,13 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                 timerProgressBar: true
             });
             handleClose();
+            reset();
+        } else {
+            setError("root", {
+                type: "manual",
+                message: "correo electronico o contraseña incorrectos"
+            })
         }
-        reset();
     }
 
     return (
@@ -63,16 +72,17 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                         {...register("password", {
                             required: "Este campo es obligatorio",
                             pattern: {
-                                value: /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])\S{8,64}$/,
                                 message: "contraseña no valida"
                             }
                         })}
-                        onChange={() => clearErrors("password")}
+                        onChange={() => clearErrors("root")}
                     />
                 </InputGroup>
-                <Form.Text className="text-danger">
-                    {errors.password?.message}
-                </Form.Text>
+                {errors.root && (
+                    <Form.Text className="text-danger">
+                        {errors.root.message}
+                    </Form.Text>
+                )}
             </Form.Group>
             <div className='d-flex flex-column'>
                 <Link className='text-decoration-none mb-2 align-self-end me-3'>¿Olvidaste tu contraseña?</Link>
