@@ -1,10 +1,13 @@
 import { ListGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const ModalPacientes = ({ showPacientes, cerrarModalPacientes }) => {
+
+    const navigate = useNavigate();
+
     return (
         <Modal show={showPacientes}>
             <Modal.Header className='titulo d-flex justify-content-center'>
@@ -21,7 +24,10 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes }) => {
 
                         {/* Botones */}
                         <div className="d-flex gap-2">
-                            <Button className='btn-secundario' size="sm">
+                            <Button className='btn-secundario' size="sm" onClick={() => {
+                                cerrarModalPacientes();
+                                navigate("/turnos")
+                            }}>
                                 Solicitar Turno
                             </Button>
                             <Button className="btn-secundario" as={Link} to={"/registro-pacientes"} size="sm">

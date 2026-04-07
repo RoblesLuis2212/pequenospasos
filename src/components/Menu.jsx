@@ -28,7 +28,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
         navigate("/"); //Al cerrar sesion redirigimos al usuario a la pagina principal
     }
 
-    const [showPacientes, setShowPacientes] = useState(true);
+    const [showPacientes, setShowPacientes] = useState(false);
 
     const cerrarModalPacientes = () => setShowPacientes(false);
     const abrirModalPacientes = () => setShowPacientes(true);
