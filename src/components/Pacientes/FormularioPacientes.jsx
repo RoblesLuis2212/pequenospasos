@@ -2,13 +2,21 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./FormularioPaciente.css";
 import { useForm } from 'react-hook-form';
+import { registroPacientes } from '../../helpers/queries';
 
 const FormularioPacientes = () => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
+    //obtenemos el ID del usuario registrado (padre) para poder relacionarlo con el paciente
+    const rolUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.id;
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const postValidaciones = async (data) => {
+        const dataCompleta = { ...data, usuarioId: rolUsuario }
+
+        const respuesta = await registroPacientes(dataCompleta);
+        if (respuesta.status === 201) {
+            alert("Paciente registrado correctamente");
+        }
         reset();
     }
 
