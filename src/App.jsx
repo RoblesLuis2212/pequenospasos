@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <header>
-        <Menu setUsuarioLogueado={setUsuarioLogueado}></Menu>
+        <Menu setUsuarioLogueado={setUsuarioLogueado} usuarioLogueado={usuarioLogueado}></Menu>
       </header>
       <main>
         {/* Pagina principal */}
