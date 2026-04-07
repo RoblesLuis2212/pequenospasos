@@ -1,8 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./Contacto.css";
+import { useForm } from 'react-hook-form';
 
 const FormularioContacto = () => {
+
+    const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
+
+    const postValidaciones = (data) => {
+        console.log(data);
+        reset();
+    }
     return (
         <section className='container-fluid bg-fondo py-3'>
             <h3 className='text-center titulo mt-3'>Acompañamos el crecimiento de tu pequeño</h3>
@@ -10,19 +18,45 @@ const FormularioContacto = () => {
             <div className="row justify-content-center animacion-entrada">
                 {/* Formulario de contacto */}
                 <div className="col-12 col-md-8 custom-form-container">
-                    <Form>
+                    <Form onSubmit={handleSubmit(postValidaciones)}>
                         <h3 className='text-center titulo'>Contacto</h3>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label className='etiquetas'>Nombre completo</Form.Label>
-                            <Form.Control type="text" placeholder="ej: Juan Perez" className='custom-input' />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
+                            <Form.Control type="text" placeholder="ej: Juan Perez" className='custom-input'
+                                {...register("nombreCompleto", {
+                                    required: "El nombre es un dato obligatorio",
+                                    minLength: {
+                                        value: 5,
+                                        message: "El nombre debe contener minimo 5 caracteres"
+                                    },
+                                    maxLength: {
+                                        value: 100,
+                                        message: "El nombre debe contener maximo 100 caracteres"
+
+                                    }
+                                })}
+                                onChange={() => clearErrors("nombreCompleto")}
+                            />
+                            <Form.Text className="text-danger">
+                                {errors.nombreCompleto?.message}
                             </Form.Text>
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label className='etiquetas'>Correo electronico</Form.Label>
-                            <Form.Control type="email" placeholder="ej: juanperez@gmail.com" className='custom-input' />
+                            <Form.Control type="email" placeholder="ej: juanperez@gmail.com" className='custom-input'
+                                {...register("email", {
+                                    required: "El email es un dato obligatorio",
+                                    pattern: {
+                                        value: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                                        message: "Email invalido"
+                                    }
+                                })}
+                                onChange={() => clearErrors("email")}
+                            />
+                            <Form.Text className='text-danger'>
+                                {errors.email?.message}
+                            </Form.Text>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label className='etiquetas'>¿Como podemos ayudarte?</Form.Label>
@@ -31,7 +65,22 @@ const FormularioContacto = () => {
                                 as="textarea"
                                 placeholder="deja tu comentario aqui"
                                 style={{ height: '100px' }}
+                                {...register("consulta", {
+                                    required: "Este campo es obligatorio",
+                                    minLength: {
+                                        value: 20,
+                                        message: "La consulta debe contener minimo 20 caracteres"
+                                    },
+                                    maxLength: {
+                                        value: "200",
+                                        message: "La consulta debe contener maximo 200 caracteres"
+                                    }
+                                })}
+                                onChange={() => clearErrors("consulta")}
                             />
+                            <Form.Text className='text-danger'>
+                                {errors.consulta?.message}
+                            </Form.Text>
                         </Form.Group>
                         <Button className="btn-principal" type="submit">
                             Enviar mensaje
