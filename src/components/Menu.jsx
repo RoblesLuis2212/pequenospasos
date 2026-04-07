@@ -38,6 +38,11 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
                             <Nav.Link>Tratamientos</Nav.Link>
                             <Nav.Link>Tienda</Nav.Link>
+                            {usuarioLogueado?.usuario ? (
+                                <Nav.Link as={Link} to="/turnos">Turnos</Nav.Link>
+                            ) : (
+                                <Nav.Link as={Link} onClick={handleShow}>Turnos</Nav.Link>
+                            )}
                         </Nav>
                         <Nav className='align-items-center me-4'>
                             {usuarioLogueado.usuario ? (
