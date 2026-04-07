@@ -7,7 +7,7 @@ import ModalIniciarSesion from './Usuario/ModalIniciarSesion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Menu = () => {
+const Menu = ({ setUsuarioLogueado }) => {
     // Estados para abrir el modal de inicio de sesion
     const [show, setShow] = useState(false);
 
@@ -33,7 +33,7 @@ const Menu = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <ModalIniciarSesion handleClose={handleClose} show={show}></ModalIniciarSesion>
+            <ModalIniciarSesion handleClose={handleClose} show={show} setUsuarioLogueado={setUsuarioLogueado}></ModalIniciarSesion>
         </div>
     );
 };

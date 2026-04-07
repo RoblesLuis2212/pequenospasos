@@ -8,14 +8,23 @@ import { Routes, Route } from "react-router-dom"
 import Registro from "./components/Usuario/Registro"
 import Turnos from "./components/Turnos/Turnos"
 import FormularioPacientes from "./components/Pacientes/FormularioPacientes";
+import { useEffect, useState } from "react"
 
 function App() {
+
+
+  const sesionUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")) || {};
+  const [usuarioLogueado, setUsuarioLogueado] = useState(sesionUsuario);
+
+  useEffect(() => {
+    sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
+  }, [usuarioLogueado])
 
   //Aqui se realiza la configuracion de las diferentes rutas a las que se podra acceder en la pagina
   return (
     <>
       <header>
-        <Menu></Menu>
+        <Menu setUsuarioLogueado={setUsuarioLogueado}></Menu>
       </header>
       <main>
         {/* Pagina principal */}

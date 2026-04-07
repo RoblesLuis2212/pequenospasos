@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import "./InicioSesion.css";
 import FormularioInicioSesion from './FormularioInicioSesion';
 
-const ModalIniciarSesion = ({ handleClose, show }) => {
+const ModalIniciarSesion = ({ handleClose, show, setUsuarioLogueado }) => {
     return (
         <Modal show={show} onHide={handleClose}>
             <div className="header d-flex flex-column justify-content-center align-items-center">
@@ -12,7 +12,7 @@ const ModalIniciarSesion = ({ handleClose, show }) => {
                 <p className='text-muted'>Ingresa a tu cuenta para continuar con el progreso de tu peque</p>
             </div>
             <Modal.Body>
-                <FormularioInicioSesion></FormularioInicioSesion>
+                <FormularioInicioSesion setUsuarioLogueado={setUsuarioLogueado} handleClose={handleClose}></FormularioInicioSesion>
             </Modal.Body>
         </Modal>
     );
