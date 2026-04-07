@@ -1,17 +1,39 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { registro } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
 const FormularioRegistro = () => {
 
     const { register, handleSubmit, formState: { errors }, watch, reset, clearErrors } = useForm()
     const password = watch("password");
 
-    const postValidaciones = (data) => {
-        console.log(data);
-        alert("Carga exitosa");
-        reset();
+    const navigate = useNavigate();
+
+    const postValidaciones = async (data) => {
+        const { confirmarPassword, ...dataSinConfirmar } = data;
+
+        const dataCompleta = { ...dataSinConfirmar, rolId: 2 };
+        const respuesta = await registro(dataCompleta);
+        if (respuesta.status === 201) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registro exitoso!',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            });
+            navigate("/");
+            reset();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en el registro',
+                text: 'No se pudo crear la cuenta. Intentelo mas tarde.',
+            });
+        }
     }
 
     return (
@@ -51,6 +73,26 @@ const FormularioRegistro = () => {
                 />
                 <Form.Text className='text-danger'>
                     {errors.email?.message}
+                </Form.Text>
+            </Form.Group>
+            <Form.Group className='mb-3'>
+                <Form.Label className='etiquetas'>Telefono</Form.Label>
+                <Form.Control className='custom-input input-form' type='text' placeholder='ej: 3863587896'
+                    {...register("telefono", {
+                        required: "El telefono es un dato obligatorio",
+                        minLength: {
+                            value: 10,
+                            message: "El telefono debe tener minimo 10 digitos"
+                        },
+                        maxLength: {
+                            value: 15,
+                            message: "El telefono debe tener maximo 15 digitos"
+                        }
+                    })}
+                    onChange={() => clearErrors("telefono")}
+                />
+                <Form.Text>
+                    {errors.telefono?.message}
                 </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
