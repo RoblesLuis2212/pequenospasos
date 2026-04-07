@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import ModalIniciarSesion from './Usuario/ModalIniciarSesion';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import ModalPacientes from './Pacientes/ModalPacientes';
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     // Estados para abrir el modal de inicio de sesion
@@ -27,6 +28,11 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
         navigate("/"); //Al cerrar sesion redirigimos al usuario a la pagina principal
     }
 
+    const [showPacientes, setShowPacientes] = useState(true);
+
+    const cerrarModalPacientes = () => setShowPacientes(false);
+    const abrirModalPacientes = () => setShowPacientes(true);
+
     return (
         <div>
             <Navbar expand="lg" className="navbar">
@@ -38,11 +44,11 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
                             <Nav.Link>Tratamientos</Nav.Link>
                             <Nav.Link>Tienda</Nav.Link>
-                            {usuarioLogueado?.usuario ? (
-                                <Nav.Link as={Link} to="/turnos">Turnos</Nav.Link>
-                            ) : (
-                                <Nav.Link as={Link} onClick={handleShow}>Turnos</Nav.Link>
-                            )}
+                            <NavDropdown title="Niños">
+                                <NavDropdown.Item as={Link} to="/turnos" className='nav-link'>Solicitar turno</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/registro-pacientes" className='nav-link'>Registrar Paciente</NavDropdown.Item>
+                                <NavDropdown.Item className='nav-link' onClick={abrirModalPacientes}>Mis Niños</NavDropdown.Item>
+                            </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>
                             {usuarioLogueado.usuario ? (
@@ -63,6 +69,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 </Container>
             </Navbar>
             <ModalIniciarSesion handleClose={handleClose} show={show} setUsuarioLogueado={setUsuarioLogueado}></ModalIniciarSesion>
+            <ModalPacientes showPacientes={showPacientes} cerrarModalPacientes={cerrarModalPacientes}></ModalPacientes>
         </div>
     );
 };
