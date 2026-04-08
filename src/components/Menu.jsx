@@ -45,9 +45,9 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                             <Nav.Link>Tratamientos</Nav.Link>
                             <Nav.Link>Tienda</Nav.Link>
                             <NavDropdown title="Niños">
-                                <NavDropdown.Item as={Link} to="/turnos" className='nav-link'>Solicitar turno</NavDropdown.Item>
+                                <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Solicitar turno</NavDropdown.Item>
                                 <NavDropdown.Item as={Link} to="/registro-pacientes" className='nav-link'>Registrar Paciente</NavDropdown.Item>
-                                <NavDropdown.Item className='nav-link' onClick={abrirModalPacientes}>Mis Niños</NavDropdown.Item>
+                                {/* <NavDropdown.Item className='nav-link' onClick={abrirModalPacientes}>Mis Niños</NavDropdown.Item> */}
                             </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>
@@ -69,7 +69,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 </Container>
             </Navbar>
             <ModalIniciarSesion handleClose={handleClose} show={show} setUsuarioLogueado={setUsuarioLogueado}></ModalIniciarSesion>
-            <ModalPacientes showPacientes={showPacientes} cerrarModalPacientes={cerrarModalPacientes}></ModalPacientes>
+            <ModalPacientes showPacientes={showPacientes} cerrarModalPacientes={cerrarModalPacientes} usuarioLogueado={usuarioLogueado}></ModalPacientes>
         </div>
     );
 };

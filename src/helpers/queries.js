@@ -70,3 +70,18 @@ export const reservarTurno = async (paciente) => {
     return null;
   }
 };
+
+export const obtenerUsuarioIDApi = async (id, token) => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}/${id}`, {
+      method: "GET",
+      headers: {
+        "x-token": token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

@@ -51,7 +51,7 @@ function App() {
           </Route>
           {/* Pagina de solicitud de turnos */}
           <Route
-            path="/turnos"
+            path="/turnos/:id"
             element={
               <Turnos></Turnos>
             }
