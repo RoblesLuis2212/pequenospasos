@@ -7,7 +7,7 @@ import "./Calendario.css";
 import Swal from 'sweetalert2';
 import ModalDatosTurno from './ModalDatosTurno';
 import { useEffect, useState } from 'react';
-import { obtenerPacienteIDAPI, solicitarTurnoAPI } from '../../helpers/queries';
+import { listarTurnos, obtenerPacienteIDAPI, solicitarTurnoAPI } from '../../helpers/queries';
 import { useParams } from 'react-router-dom';
 
 const Calendario = () => {
@@ -22,7 +22,9 @@ const Calendario = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [turnoSeleccionado, setTurnoSeleccionado] = useState();
+
+    const [turnos, setTurnos] = useState([]);
+    const [turnosSeleccionado, setTurnoSeleccionado] = useState();
     const [datosPaciente, setDatosPaciente] = useState(null);
     const [fechaLegibleS, setFechaLegible] = useState();
     const [horaLegibleS, setHoraLegible] = useState();
@@ -39,8 +41,37 @@ const Calendario = () => {
         }
     }
 
+    const obtenerTurnos = async () => {
+        const respuesta = await listarTurnos();
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            const eventos = datos.map((turno) => ({
+                id: turno.idTurno,
+                title: 'Ocupado',
+                start: turno.fecha,
+                end: new Date(new Date(turno.fecha).getTime() + 30 * 60000).toISOString(),
+                backgroundColor: '#dc3545',
+                borderColor: '#dc3545',
+            }));
+            setTurnos(eventos);
+        }
+    }
+
+    const selectAllow = (selectInfo) => {
+        const fechaSeleccionada = selectInfo.start.toISOString();
+
+        // Verificamos si la fecha seleccionada coincide con algún turno ocupado
+        const estaOcupado = turnos.some((turno) => {
+            const fechaTurno = new Date(turno.start).toISOString();
+            return fechaTurno === fechaSeleccionada;
+        });
+
+        return !estaOcupado; // si está ocupado retorna false y bloquea la selección
+    }
+
     useEffect(() => {
         obtenerDatosPaciente();
+        obtenerTurnos();
     }, [])
 
     //Ventana de sweet alert para confirmar la reserva del turno
@@ -69,6 +100,7 @@ const Calendario = () => {
                 const respuesta = await solicitarTurnoAPI(data);
                 if (respuesta.status === 201) {
                     alert("Turno reservado exitosamente");
+                    obtenerTurnos();
                 }
                 setFechaLegible(fechaLegible);
                 setHoraLegible(horaLegible);
@@ -102,6 +134,9 @@ const Calendario = () => {
                 }}
                 selectable={"true"}
                 select={confirmarTurno}
+                events={turnos}
+                selectAllow={selectAllow}
+                displayEventTime={false}
             />
             <ModalDatosTurno handleClose={handleClose} show={show} datosPaciente={datosPaciente} fechaLegible={fechaLegibleS} horaLegible={horaLegibleS}></ModalDatosTurno>
         </div>

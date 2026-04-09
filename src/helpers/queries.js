@@ -133,3 +133,18 @@ export const solicitarTurnoAPI = async (datos) => {
     return null;
   }
 };
+
+export const listarTurnos = async () => {
+  try {
+    const respuesta = await fetch(turnosBackend, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
