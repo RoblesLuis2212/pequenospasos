@@ -32,7 +32,10 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado }
     }
 
     useEffect(() => {
-        if (!usuarioLogueado?.usuario?.id || !usuarioLogueado?.token) return;
+        if (!usuarioLogueado?.usuario?.id || !usuarioLogueado?.token) {
+            setDatosUsuario(null);
+            return;
+        }
         obtenerUsuarioID();
     }, [usuarioLogueado]);
 
@@ -54,7 +57,7 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado }
 
                                 {/* Botones */}
                                 <div className="d-flex gap-2">
-                                    <Button className='btn-secundario' size="sm" onClick={() => {
+                                    <Button className='btn-secundario text-nowrap' size="sm" onClick={() => {
                                         cerrarModalPacientes();
                                         navigate(`/turnos/${itemPaciente.idPaciente}`)
                                     }}>

@@ -2,9 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./FormularioPaciente.css";
 import { useForm } from 'react-hook-form';
-import { obtenerPacienteIDAPI, registroPacientes } from '../../helpers/queries';
-import { useParams } from 'react-router-dom';
+import { actualizarDatosPaciente, obtenerPacienteIDAPI, registroPacientes } from '../../helpers/queries';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const FormularioPacientes = ({ titulo }) => {
 
@@ -13,6 +14,7 @@ const FormularioPacientes = ({ titulo }) => {
     const rolUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.id;
     //se obtiene el id del usuario pasado por parametro
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const postValidaciones = async (data) => {
         if (titulo === "Datos del paciente") {
@@ -20,11 +22,34 @@ const FormularioPacientes = ({ titulo }) => {
 
             const respuesta = await registroPacientes(dataCompleta);
             if (respuesta.status === 201) {
-                alert("Paciente registrado correctamente");
+                Swal.fire({
+                    title: "Paciente agregado correctamente",
+                    text: `El paciente fue agregado exitosamente`,
+                    icon: "success",
+                }).then(() => {
+                    navigate("/");
+                });
             }
             reset();
         } else if (titulo === "Editar datos del paciente") {
-
+            const { obraSocial } = data;
+            const dataCompleta = {
+                nombreCompleto: data.nombreCompleto,
+                dni: data.dni,
+                domicilio: data.domicilio,
+                fechaNacimiento: data.fechaNacimiento,
+                obraSocialId: Number(obraSocial)
+            }
+            const respuesta = await actualizarDatosPaciente(id, dataCompleta);
+            if (respuesta.status === 200) {
+                Swal.fire({
+                    title: "Actualizacion exitosa",
+                    text: `Los datos del paciente ${dataCompleta.nombreCompleto} se actualizaron correctamente`,
+                    icon: "success",
+                }).then(() => {
+                    navigate("/");
+                });
+            }
         }
     }
 
@@ -37,13 +62,14 @@ const FormularioPacientes = ({ titulo }) => {
             const respuesta = await obtenerPacienteIDAPI(id);
             if (respuesta.status === 200) {
                 const pacienteBuscado = await respuesta.json();
+                console.log(pacienteBuscado);
                 setValue("nombreCompleto", pacienteBuscado.nombreCompleto);
                 setValue("dni", pacienteBuscado.dni);
                 setValue("domicilio", pacienteBuscado.domicilio);
                 //se formatea la fecha obtenida de la BD para poder leerla
                 const fechaFormato = pacienteBuscado.fechaNacimiento.split("T")[0];
                 setValue("fechaNacimiento", fechaFormato);
-                setValue("obraSocial", pacienteBuscado.obraSocial);
+                setValue("obraSocial", pacienteBuscado.obraSocialId);
             }
         }
     }
@@ -53,7 +79,7 @@ const FormularioPacientes = ({ titulo }) => {
     return (
         <section className='container-fluid contenedor-registro-pacientes form-paciente'>
             <h3 className='text-center mt-3 titulo-registro'>{titulo}</h3>
-            <p className='text-center text-muted'>Por favor complete el formulario con la siguiente informacion.</p>
+            <p className='text-center text-muted'>{titulo === "Datos del paciente" ? "Por favor complete el formulario con la siguiente informacion." : "Por favor complete el formulario con informacion actualizada del paciente."}</p>
             <div className="row">
                 <div className="col-12">
                     <Form onSubmit={handleSubmit(postValidaciones)}>

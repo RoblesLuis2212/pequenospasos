@@ -99,3 +99,20 @@ export const obtenerPacienteIDAPI = async (id) => {
     return null;
   }
 };
+
+export const actualizarDatosPaciente = async (id, usuario) => {
+  try {
+    const respuesta = await fetch(`${pacientesBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(usuario),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

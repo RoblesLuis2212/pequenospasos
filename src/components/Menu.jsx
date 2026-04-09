@@ -7,6 +7,7 @@ import ModalIniciarSesion from './Usuario/ModalIniciarSesion';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ModalPacientes from './Pacientes/ModalPacientes';
+import Swal from 'sweetalert2';
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     // Estados para abrir el modal de inicio de sesion
@@ -28,6 +29,21 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
         navigate("/"); //Al cerrar sesion redirigimos al usuario a la pagina principal
     }
 
+    //verificamos si el usuario esta logueado para permitirle sacar un turno
+    const verificarSesion = () => {
+        if (!usuarioLogueado.usuario) {
+            Swal.fire({
+                icon: "warning",
+                title: "Atención",
+                text: "Debes iniciar sesión para realizar esta acción",
+                confirmButtonText: "Entendido",
+                confirmButtonColor: "#f0ad4e",
+            });
+            return false;
+        }
+        return true;
+    }
+
     const [showPacientes, setShowPacientes] = useState(false);
 
     const cerrarModalPacientes = () => setShowPacientes(false);
@@ -45,9 +61,12 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                             <Nav.Link>Tratamientos</Nav.Link>
                             <Nav.Link>Tienda</Nav.Link>
                             <NavDropdown title="Niños">
-                                <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Solicitar turno</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/registro-pacientes" className='nav-link'>Registrar Paciente</NavDropdown.Item>
-                                {/* <NavDropdown.Item className='nav-link' onClick={abrirModalPacientes}>Mis Niños</NavDropdown.Item> */}
+                                <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Turnos</NavDropdown.Item>
+                                <NavDropdown.Item className='nav-link' onClick={() => {
+                                    if (verificarSesion()) {
+                                        navigate("/registro-pacientes");
+                                    }
+                                }}>Registrar Paciente</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>
