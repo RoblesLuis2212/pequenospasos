@@ -6,7 +6,9 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "./Calendario.css";
 import Swal from 'sweetalert2';
 import ModalDatosTurno from './ModalDatosTurno';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { obtenerPacienteIDAPI, solicitarTurnoAPI } from '../../helpers/queries';
+import { useParams } from 'react-router-dom';
 
 const Calendario = () => {
     const fechayhoraSeleccionada = (selectInfo) => {
@@ -21,6 +23,25 @@ const Calendario = () => {
     const handleShow = () => setShow(true);
 
     const [turnoSeleccionado, setTurnoSeleccionado] = useState();
+    const [datosPaciente, setDatosPaciente] = useState(null);
+    const [fechaLegibleS, setFechaLegible] = useState();
+    const [horaLegibleS, setHoraLegible] = useState();
+    const { id } = useParams(); //Se extrae el ID del paciente de la url
+    const idUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.id;
+
+
+    const obtenerDatosPaciente = async () => {
+        const respuesta = await obtenerPacienteIDAPI(Number(id));
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            setDatosPaciente(datos);
+            console.log("datos del paciente: ", datos);
+        }
+    }
+
+    useEffect(() => {
+        obtenerDatosPaciente();
+    }, [])
 
     //Ventana de sweet alert para confirmar la reserva del turno
     const confirmarTurno = (selectInfo) => {
@@ -42,8 +63,15 @@ const Calendario = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Si, reservar",
             cancelButtonText: "Cancelar"
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
+                const data = { fecha: fecha.toISOString(), pacienteId: Number(id), idUsuario };
+                const respuesta = await solicitarTurnoAPI(data);
+                if (respuesta.status === 201) {
+                    alert("Turno reservado exitosamente");
+                }
+                setFechaLegible(fechaLegible);
+                setHoraLegible(horaLegible);
                 setTurnoSeleccionado(fecha)
                 setShow(true);
             }
@@ -75,7 +103,7 @@ const Calendario = () => {
                 selectable={"true"}
                 select={confirmarTurno}
             />
-            <ModalDatosTurno handleClose={handleClose} show={show}></ModalDatosTurno>
+            <ModalDatosTurno handleClose={handleClose} show={show} datosPaciente={datosPaciente} fechaLegible={fechaLegibleS} horaLegible={horaLegibleS}></ModalDatosTurno>
         </div>
     );
 };

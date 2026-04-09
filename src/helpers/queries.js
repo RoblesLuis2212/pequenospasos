@@ -116,3 +116,20 @@ export const actualizarDatosPaciente = async (id, usuario) => {
     return null;
   }
 };
+
+export const solicitarTurnoAPI = async (datos) => {
+  try {
+    const respuesta = await fetch(turnosBackend, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(datos),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
