@@ -88,7 +88,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                 </Container>
             </Navbar>
             <ModalIniciarSesion handleClose={handleClose} show={show} setUsuarioLogueado={setUsuarioLogueado}></ModalIniciarSesion>
-            <ModalPacientes showPacientes={showPacientes} cerrarModalPacientes={cerrarModalPacientes} usuarioLogueado={usuarioLogueado}></ModalPacientes>
+            <ModalPacientes showPacientes={showPacientes} cerrarModalPacientes={cerrarModalPacientes} usuarioLogueado={usuarioLogueado} show={handleShow}></ModalPacientes>
         </div>
     );
 };

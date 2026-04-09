@@ -19,7 +19,6 @@ const FormularioPacientes = ({ titulo }) => {
     const postValidaciones = async (data) => {
         if (titulo === "Datos del paciente") {
             const dataCompleta = { ...data, usuarioId: rolUsuario }
-
             const respuesta = await registroPacientes(dataCompleta);
             if (respuesta.status === 201) {
                 Swal.fire({
@@ -62,7 +61,6 @@ const FormularioPacientes = ({ titulo }) => {
             const respuesta = await obtenerPacienteIDAPI(id);
             if (respuesta.status === 200) {
                 const pacienteBuscado = await respuesta.json();
-                console.log(pacienteBuscado);
                 setValue("nombreCompleto", pacienteBuscado.nombreCompleto);
                 setValue("dni", pacienteBuscado.dni);
                 setValue("domicilio", pacienteBuscado.domicilio);
