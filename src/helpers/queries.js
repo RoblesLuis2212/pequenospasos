@@ -70,3 +70,81 @@ export const reservarTurno = async (paciente) => {
     return null;
   }
 };
+
+export const obtenerUsuarioIDApi = async (id, token) => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}/${id}`, {
+      method: "GET",
+      headers: {
+        "x-token": token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const obtenerPacienteIDAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${pacientesBackend}/${id}`, {
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const actualizarDatosPaciente = async (id, usuario) => {
+  try {
+    const respuesta = await fetch(`${pacientesBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(usuario),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const solicitarTurnoAPI = async (datos) => {
+  try {
+    const respuesta = await fetch(turnosBackend, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(datos),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const listarTurnos = async () => {
+  try {
+    const respuesta = await fetch(turnosBackend, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

@@ -51,7 +51,7 @@ function App() {
           </Route>
           {/* Pagina de solicitud de turnos */}
           <Route
-            path="/turnos"
+            path="/turnos/:id"
             element={
               <Turnos></Turnos>
             }
@@ -61,8 +61,13 @@ function App() {
           <Route
             path="/registro-pacientes"
             element={
-              <FormularioPacientes></FormularioPacientes>
+              <FormularioPacientes titulo="Datos del paciente"></FormularioPacientes>
             }
+          >
+          </Route>
+          {/* Pagina para editar datos del paciente */}
+          <Route path="/editar-paciente/:id"
+            element={<FormularioPacientes titulo="Editar datos del paciente"></FormularioPacientes>}
           >
           </Route>
         </Routes>

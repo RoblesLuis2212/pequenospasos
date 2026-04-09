@@ -63,3 +63,28 @@
 .fc-toolbar button:hover {
   background-color: #FF7AA0 !important;
 }
+.fc-timegrid-event .fc-event-title {
+    font-size: 0.75rem;
+    font-weight: bold;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+}
+
+.fc-timegrid-event {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.fc-timegrid-event-short .fc-event-title {
+    display: block !important;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.fc-timegrid-event-short .fc-event-main {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+}

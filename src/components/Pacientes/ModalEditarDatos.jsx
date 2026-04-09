@@ -2,8 +2,11 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FormularioEditarPaciente from './FormularioEditarPaciente';
+import { useEffect } from 'react';
+import { obtenerUsuarioIDApi } from '../../helpers/queries';
 
 const ModalEditarDatos = ({ show, handleClose }) => {
+
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header className='d-flex justify-content-center'>
