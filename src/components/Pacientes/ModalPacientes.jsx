@@ -27,7 +27,6 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado }
         const respuesta = await obtenerUsuarioIDApi(idUsuario, usuarioLogueado?.token);
         if (respuesta?.status === 200) {
             const datos = await respuesta.json();
-            console.log(datos);
             setDatosUsuario(datos);
         }
     }
@@ -46,7 +45,7 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado }
                 <Modal.Body>
                     <ListGroup>
                         {datosUsuario?.pacientes.map((itemPaciente) => (
-                            <ListGroup.Item className='d-flex justify-content-between'>
+                            <ListGroup.Item className='d-flex justify-content-between' key={itemPaciente.idPaciente}>
                                 {/* Info del paciente */}
                                 <div className="d-flex align-items-center gap-2">
                                     <i className="bi bi-person-square fs-4"></i>
@@ -63,7 +62,7 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado }
                                     </Button>
                                     <Button className="btn-secundario" onClick={() => {
                                         cerrarModalPacientes();
-                                        AbrirModalEditarDatos();
+                                        navigate(`editar-paciente/${itemPaciente.idPaciente}`)
                                     }} size="sm">
                                         Editar
                                     </Button>

@@ -2,27 +2,57 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./FormularioPaciente.css";
 import { useForm } from 'react-hook-form';
-import { registroPacientes } from '../../helpers/queries';
+import { obtenerPacienteIDAPI, registroPacientes } from '../../helpers/queries';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const FormularioPacientes = () => {
+const FormularioPacientes = ({ titulo }) => {
 
-    const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, reset, formState: { errors }, clearErrors, setValue } = useForm();
     //obtenemos el ID del usuario registrado (padre) para poder relacionarlo con el paciente
     const rolUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.id;
+    //se obtiene el id del usuario pasado por parametro
+    const { id } = useParams();
 
     const postValidaciones = async (data) => {
-        const dataCompleta = { ...data, usuarioId: rolUsuario }
+        if (titulo === "Datos del paciente") {
+            const dataCompleta = { ...data, usuarioId: rolUsuario }
 
-        const respuesta = await registroPacientes(dataCompleta);
-        if (respuesta.status === 201) {
-            alert("Paciente registrado correctamente");
+            const respuesta = await registroPacientes(dataCompleta);
+            if (respuesta.status === 201) {
+                alert("Paciente registrado correctamente");
+            }
+            reset();
+        } else if (titulo === "Editar datos del paciente") {
+
         }
-        reset();
     }
+
+    useEffect(() => {
+        obtenerPacienteID();
+    }, [])
+
+    const obtenerPacienteID = async () => {
+        if (titulo === "Editar datos del paciente") {
+            const respuesta = await obtenerPacienteIDAPI(id);
+            if (respuesta.status === 200) {
+                const pacienteBuscado = await respuesta.json();
+                setValue("nombreCompleto", pacienteBuscado.nombreCompleto);
+                setValue("dni", pacienteBuscado.dni);
+                setValue("domicilio", pacienteBuscado.domicilio);
+                //se formatea la fecha obtenida de la BD para poder leerla
+                const fechaFormato = pacienteBuscado.fechaNacimiento.split("T")[0];
+                setValue("fechaNacimiento", fechaFormato);
+                setValue("obraSocial", pacienteBuscado.obraSocial);
+            }
+        }
+    }
+
+
 
     return (
         <section className='container-fluid contenedor-registro-pacientes form-paciente'>
-            <h3 className='text-center mt-3 titulo-registro'>Datos del pacientes</h3>
+            <h3 className='text-center mt-3 titulo-registro'>{titulo}</h3>
             <p className='text-center text-muted'>Por favor complete el formulario con la siguiente informacion.</p>
             <div className="row">
                 <div className="col-12">

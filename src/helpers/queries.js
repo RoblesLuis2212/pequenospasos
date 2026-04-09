@@ -85,3 +85,17 @@ export const obtenerUsuarioIDApi = async (id, token) => {
     return null;
   }
 };
+
+export const obtenerPacienteIDAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${pacientesBackend}/${id}`, {
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
