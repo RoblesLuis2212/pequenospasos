@@ -42,7 +42,7 @@ const Calendario = () => {
         const respuesta = await listarTurnos();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            const eventos = datos.map((turno) => ({
+            const eventos = datos.filter((turno) => turno.estado !== "CANCELADO").map((turno) => ({
                 id: turno.idTurno,
                 title: 'Ocupado',
                 start: turno.fecha,
