@@ -60,7 +60,7 @@ const ItemTurno = ({ itemTurno, nombreTutor, obtenerTurnos }) => {
 
     return (
         <>
-            <tr>
+            <tr className='text-center'>
                 <td>{itemTurno.idTurno}</td>
                 <td>{itemTurno.paciente?.nombreCompleto}</td>
                 <td>{new Date(itemTurno.fecha).toLocaleTimeString("es-AR", {
@@ -72,16 +72,17 @@ const ItemTurno = ({ itemTurno, nombreTutor, obtenerTurnos }) => {
                     hour12: false
                 })} hs</td>
                 <td>
-                    {getBadge(itemTurno.estado)}</td>
+                    {getBadge(itemTurno.estado)}
+                </td>
                 <td>
-                    <div className='d-flex'>
+                    <div className='d-flex justify-content-center'>
                         <Button variant='success' className='me-2' onClick={handleShow}><i className="bi bi-eye-fill"></i></Button>
                         {itemTurno.estado !== "CANCELADO" && itemTurno.estado !== "FINALIZADO" && (
                             <Button variant='danger' onClick={cambiarEstado}><i className="bi bi-x-circle-fill"></i></Button>
                         )}
                     </div>
                 </td>
-            </tr>
+            </tr >
             <ModalDatosTurno show={show} handleClose={handleClose} fechaLegible={fechaLegible} horaLegible={horaLegible} datosPaciente={itemTurno.paciente}></ModalDatosTurno >
         </>
     );

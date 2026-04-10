@@ -26,11 +26,11 @@ const TablaTurnos = () => {
         <Table responsive className='mt-2'>
             <thead className='tabla-encabezado'>
                 <tr>
-                    <th>Codigo</th>
-                    <th>Nombre Paciente</th>
-                    <th>Fecha y hora</th>
-                    <th>Estado del turno</th>
-                    <th>Acciones</th>
+                    <th className='text-center'>Codigo</th>
+                    <th className='text-center'>Nombre Paciente</th>
+                    <th className='text-center'>Fecha y hora</th>
+                    <th className='text-center'>Estado del turno</th>
+                    <th className='text-center'>Acciones</th>
                 </tr>
             </thead>
             <tbody>
