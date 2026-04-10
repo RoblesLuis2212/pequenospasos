@@ -67,6 +67,11 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                         navigate("/registro-pacientes");
                                     }
                                 }}>Registrar Paciente</NavDropdown.Item>
+                                <NavDropdown.Item className='nav-link' onClick={() => {
+                                    if (verificarSesion()) {
+                                        navigate("/mis-turnos")
+                                    }
+                                }}>Mis turnos</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>

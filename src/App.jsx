@@ -9,6 +9,7 @@ import Registro from "./components/Usuario/Registro"
 import Turnos from "./components/Turnos/Turnos"
 import FormularioPacientes from "./components/Pacientes/FormularioPacientes";
 import { useEffect, useState } from "react"
+import TurnosPaciente from "./components/Turnos/TurnosPaciente"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -68,6 +69,11 @@ function App() {
           {/* Pagina para editar datos del paciente */}
           <Route path="/editar-paciente/:id"
             element={<FormularioPacientes titulo="Editar datos del paciente"></FormularioPacientes>}
+          >
+          </Route>
+          <Route
+            path="/mis-turnos"
+            element={<TurnosPaciente></TurnosPaciente>}
           >
           </Route>
         </Routes>

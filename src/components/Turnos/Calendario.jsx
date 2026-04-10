@@ -8,19 +8,16 @@ import Swal from 'sweetalert2';
 import ModalDatosTurno from './ModalDatosTurno';
 import { useEffect, useState } from 'react';
 import { listarTurnos, obtenerPacienteIDAPI, solicitarTurnoAPI } from '../../helpers/queries';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Calendario = () => {
-    const fechayhoraSeleccionada = (selectInfo) => {
-        const fecha = selectInfo.start;
-        alert(`Seleccionaste: ${fecha.toLocaleString()}`)
-    }
-
     //Estado para manejar el modal de informacion del turno
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const navigate = useNavigate();
 
 
     const [turnos, setTurnos] = useState([]);
@@ -45,7 +42,7 @@ const Calendario = () => {
         const respuesta = await listarTurnos();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            const eventos = datos.map((turno) => ({
+            const eventos = datos.filter((turno) => turno.estado !== "CANCELADO").map((turno) => ({
                 id: turno.idTurno,
                 title: 'Ocupado',
                 start: turno.fecha,
@@ -99,13 +96,23 @@ const Calendario = () => {
                 const data = { fecha: fecha.toISOString(), pacienteId: Number(id), idUsuario };
                 const respuesta = await solicitarTurnoAPI(data);
                 if (respuesta.status === 201) {
-                    alert("Turno reservado exitosamente");
+                    Swal.fire({
+                        title: "Reserva de turno exitosa!",
+                        icon: "success",
+                        draggable: true
+                    });
                     obtenerTurnos();
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Ocurrió un error al reservar el turno. Inténtalo nuevamente.",
+                    });
                 }
                 setFechaLegible(fechaLegible);
                 setHoraLegible(horaLegible);
-                setTurnoSeleccionado(fecha)
-                setShow(true);
+                setTurnoSeleccionado(fecha);
+                navigate("/mis-turnos");
             }
         });
     }
