@@ -2,7 +2,6 @@ import { ListGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link, useNavigate } from 'react-router-dom';
-import ModalEditarDatos from './ModalEditarDatos';
 import { useEffect, useState } from 'react';
 import { obtenerUsuarioIDApi } from '../../helpers/queries';
 
@@ -88,7 +87,6 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado, 
                     </Modal.Footer>
                 </Modal.Body>
             </Modal >
-            <ModalEditarDatos show={showModalEditarDatos} handleClose={CerrarModalEditarDatos} usuarioLogueado={usuarioLogueado}></ModalEditarDatos>
         </>
     );
 };
