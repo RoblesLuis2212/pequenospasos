@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import ModalDatosTurno from './ModalDatosTurno';
 import { useEffect, useState } from 'react';
 import { listarTurnos, obtenerPacienteIDAPI, solicitarTurnoAPI } from '../../helpers/queries';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Calendario = () => {
     //Estado para manejar el modal de informacion del turno
@@ -16,6 +16,8 @@ const Calendario = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const navigate = useNavigate();
 
 
     const [turnos, setTurnos] = useState([]);
@@ -94,13 +96,17 @@ const Calendario = () => {
                 const data = { fecha: fecha.toISOString(), pacienteId: Number(id), idUsuario };
                 const respuesta = await solicitarTurnoAPI(data);
                 if (respuesta.status === 201) {
-                    alert("Turno reservado exitosamente");
+                    Swal.fire({
+                        title: "Reserva de turno exitosa!",
+                        icon: "success",
+                        draggable: true
+                    });
                     obtenerTurnos();
                 }
                 setFechaLegible(fechaLegible);
                 setHoraLegible(horaLegible);
-                setTurnoSeleccionado(fecha)
-                setShow(true);
+                setTurnoSeleccionado(fecha);
+                navigate("/mis-turnos");
             }
         });
     }
