@@ -75,10 +75,10 @@ const ItemTurno = ({ itemTurno, nombreTutor, obtenerTurnos }) => {
                     {getBadge(itemTurno.estado)}
                 </td>
                 <td>
-                    <div className='d-flex justify-content-center'>
-                        <Button variant='success' className='me-2' onClick={handleShow}><i className="bi bi-eye-fill"></i></Button>
+                    <div className='d-flex flex-column justify-content-center'>
+                        <Button variant='success' onClick={handleShow}><i className="bi bi-eye-fill"></i> </Button>
                         {itemTurno.estado !== "CANCELADO" && itemTurno.estado !== "FINALIZADO" && (
-                            <Button variant='danger' onClick={cambiarEstado}><i className="bi bi-x-circle-fill"></i></Button>
+                            <Button variant='danger' className='mt-2' onClick={cambiarEstado}><i className="bi bi-x-circle-fill me-1"></i></Button>
                         )}
                     </div>
                 </td>

@@ -23,7 +23,7 @@ const TablaTurnos = () => {
 
 
     return (
-        <Table responsive className='mt-2'>
+        <Table responsive>
             <thead className='tabla-encabezado'>
                 <tr>
                     <th className='text-center'>Codigo</th>
