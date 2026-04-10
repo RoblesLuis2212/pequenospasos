@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { Button, Badge } from 'react-bootstrap';
+import { Button, Badge, CardImg } from 'react-bootstrap';
 import ModalDatosTurno from './ModalDatosTurno';
 import { useState } from 'react';
-import { obtenerPacienteIDAPI } from '../../helpers/queries';
+import { cambiarEstadoTurnoPaciente, obtenerPacienteIDAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
-const ItemTurno = ({ itemTurno, nombreTutor }) => {
+const ItemTurno = ({ itemTurno, nombreTutor, obtenerTurnos }) => {
     //Estado para manejar el modal de informacion del turno
     const [show, setShow] = useState(false);
 
@@ -36,6 +37,27 @@ const ItemTurno = ({ itemTurno, nombreTutor }) => {
         hour12: false,
     });
 
+    const cambiarEstado = async () => {
+        const result = await Swal.fire({
+            title: "¿Cancelar turno?",
+            text: "Esta acción no se puede deshacer",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, cancelar",
+            cancelButtonText: "No",
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+        });
+        if (!result.isConfirmed) return;
+
+        const respuesta = await cambiarEstadoTurnoPaciente(itemTurno.idTurno, "CANCELADO");
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            Swal.fire("Cancelado", "El turno fue cancelado", "success");
+            obtenerTurnos();
+        }
+    }
+
     return (
         <>
             <tr>
@@ -54,7 +76,9 @@ const ItemTurno = ({ itemTurno, nombreTutor }) => {
                 <td>
                     <div className='d-flex'>
                         <Button variant='success' className='me-2' onClick={handleShow}><i className="bi bi-eye-fill"></i></Button>
-                        <Button variant='danger'><i className="bi bi-x-circle-fill"></i></Button>
+                        {itemTurno.estado !== "CANCELADO" && itemTurno.estado !== "FINALIZADO" && (
+                            <Button variant='danger' onClick={cambiarEstado}><i className="bi bi-x-circle-fill"></i></Button>
+                        )}
                     </div>
                 </td>
             </tr>

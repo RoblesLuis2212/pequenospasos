@@ -35,7 +35,7 @@ const TablaTurnos = () => {
             </thead>
             <tbody>
                 {turnos.map((itemTurno) => (
-                    <ItemTurno key={itemTurno.idTurno} itemTurno={itemTurno}></ItemTurno>
+                    <ItemTurno key={itemTurno.idTurno} itemTurno={itemTurno} obtenerTurnos={obtenerTurnos}></ItemTurno>
                 ))}
             </tbody>
         </Table>

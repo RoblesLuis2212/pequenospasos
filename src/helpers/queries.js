@@ -167,3 +167,20 @@ export const pacientesconTurnos = async (id) => {
     return null;
   }
 };
+
+export const cambiarEstadoTurnoPaciente = async (id, nuevoEstado) => {
+  try {
+    const respuesta = await fetch(`${turnosBackend}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify({ estado: nuevoEstado }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

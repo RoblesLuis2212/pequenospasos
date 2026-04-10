@@ -102,6 +102,12 @@ const Calendario = () => {
                         draggable: true
                     });
                     obtenerTurnos();
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Ocurrió un error al reservar el turno. Inténtalo nuevamente.",
+                    });
                 }
                 setFechaLegible(fechaLegible);
                 setHoraLegible(horaLegible);
