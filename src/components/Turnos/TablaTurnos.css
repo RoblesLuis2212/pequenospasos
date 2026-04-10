@@ -1,0 +1,17 @@
+.tabla-encabezado th {
+    background-color: #6B46C1;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabla-encabezado th,
+tbody tr td {
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #f3eeff;
+}

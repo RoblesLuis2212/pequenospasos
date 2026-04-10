@@ -148,3 +148,22 @@ export const listarTurnos = async () => {
     return null;
   }
 };
+
+export const pacientesconTurnos = async (id) => {
+  try {
+    const sesionUsuario = JSON.parse(sessionStorage.getItem("usuarioKey"));
+    const respuesta = await fetch(
+      `${turnosBackend}/turnos-usuario/${sesionUsuario.usuario.id}`,
+      {
+        method: "GET",
+        headers: {
+          "x-token": sesionUsuario.token,
+        },
+      },
+    );
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
