@@ -11,11 +11,6 @@ import { listarTurnos, obtenerPacienteIDAPI, solicitarTurnoAPI } from '../../hel
 import { useParams } from 'react-router-dom';
 
 const Calendario = () => {
-    const fechayhoraSeleccionada = (selectInfo) => {
-        const fecha = selectInfo.start;
-        alert(`Seleccionaste: ${fecha.toLocaleString()}`)
-    }
-
     //Estado para manejar el modal de informacion del turno
     const [show, setShow] = useState(false);
 

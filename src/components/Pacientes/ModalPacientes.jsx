@@ -10,11 +10,6 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado, 
 
     const navigate = useNavigate();
 
-    const [showModalEditarDatos, setModalEditarDatos] = useState(false);
-
-    const CerrarModalEditarDatos = () => setModalEditarDatos(false);
-    const AbrirModalEditarDatos = () => setModalEditarDatos(true);
-
     //guardarmos el usuario ID del usuario que se guarda en el estado del componente App
     const idUsuario = usuarioLogueado?.usuario?.id;
 
@@ -42,7 +37,7 @@ const ModalPacientes = ({ showPacientes, cerrarModalPacientes, usuarioLogueado, 
         <>
             <Modal show={showPacientes}>
                 <Modal.Header className='titulo d-flex justify-content-center'>
-                    <h4> Mis Niños</h4>
+                    <h4>Mis Niños</h4>
                 </Modal.Header>
                 <Modal.Body>
                     <ListGroup>

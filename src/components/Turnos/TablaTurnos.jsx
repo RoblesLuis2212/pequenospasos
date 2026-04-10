@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import ItemTurno from './ItemTurno';
 import "./TablaTurnos.css";
 import { useEffect, useState } from 'react';
-import { pacientesconTurnos } from '../../helpers/queries';
+import { obtenerPacienteIDAPI, pacientesconTurnos } from '../../helpers/queries';
 
 const TablaTurnos = () => {
     const [turnos, setTurnos] = useState([]);
@@ -11,24 +11,23 @@ const TablaTurnos = () => {
         const respuesta = await pacientesconTurnos();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
+            console.log(datos);
             setTurnos(datos);
         }
     }
 
     useEffect(() => {
         obtenerTurnos();
-    }, [])
+    }, []);
 
-    const sesionUsuario = JSON.parse(sessionStorage.getItem("usuarioKey"));
-    const nombreTutor = sesionUsuario.usuario.nombre;
+
 
     return (
-        <Table responsive>
+        <Table responsive className='mt-2'>
             <thead className='tabla-encabezado'>
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre Paciente</th>
-                    <th>Nombre Padre/tutor</th>
                     <th>Fecha y hora</th>
                     <th>Estado del turno</th>
                     <th>Acciones</th>
@@ -36,7 +35,7 @@ const TablaTurnos = () => {
             </thead>
             <tbody>
                 {turnos.map((itemTurno) => (
-                    <ItemTurno key={itemTurno.idTurno} itemTurno={itemTurno} nombreTutor={nombreTutor}></ItemTurno>
+                    <ItemTurno key={itemTurno.idTurno} itemTurno={itemTurno}></ItemTurno>
                 ))}
             </tbody>
         </Table>

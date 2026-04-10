@@ -92,7 +92,7 @@ const ModalDatosTurno = ({ handleClose, show, datosPaciente, fechaLegible, horaL
                 <p><strong>Obra Social:</strong> {datosPaciente?.obraSocial?.nombre ?? 'Sin obra social'}</p>
                 <p><strong>Fecha:</strong> {fechaLegible}</p>
                 <p><strong>Horario:</strong> {horaLegible} hs</p>
-                <p><strong>Duración de consulta:</strong> {datosPaciente?.obraSocial.duracionConsulta}</p>
+                <p><strong>Duración de consulta:</strong> {datosPaciente?.obraSocial?.duracionConsulta}</p>
                 <div className="opciones d-flex justify-content-around">
                     <Button className='btn-secundario mt-2' onClick={descargarPDF}><i className="bi bi-filetype-pdf me-2"></i>Descargar PDF</Button>
                     <Button className='btn-principal mt-2' onClick={handleClose}><i className="bi bi-patch-check-fill me-2"></i>Aceptar</Button>

@@ -3,7 +3,7 @@ import TablaTurnos from './TablaTurnos';
 
 const TurnosPaciente = () => {
     return (
-        <section className='container border border-black mt-2'>
+        <section className='container mt-2 mb-5'>
             <h3 className='text-center titulo mt-3'>Pacientes turnos</h3>
             <div className="row">
                 <div className="col-12">
