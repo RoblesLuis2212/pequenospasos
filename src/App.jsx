@@ -10,6 +10,7 @@ import Turnos from "./components/Turnos/Turnos"
 import FormularioPacientes from "./components/Pacientes/FormularioPacientes";
 import { useEffect, useState } from "react"
 import TurnosPaciente from "./components/Turnos/TurnosPaciente"
+import RecuperarContrasena from "./components/Usuario/RecuperarContrasena";
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -74,6 +75,11 @@ function App() {
           <Route
             path="/mis-turnos"
             element={<TurnosPaciente></TurnosPaciente>}
+          >
+          </Route>
+          <Route
+            path="/recuperar-contrasena"
+            element={<RecuperarContrasena></RecuperarContrasena>}
           >
           </Route>
         </Routes>
