@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import "./RecuperarContrasena.css";
 import { useForm } from 'react-hook-form';
 
-const RecuperarContrasena = () => {
+const SolicitarRecuperacion = () => {
     const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
 
     const postValidaciones = (data) => {
@@ -54,4 +54,4 @@ const RecuperarContrasena = () => {
     );
 };
 
-export default RecuperarContrasena;
+export default SolicitarRecuperacion;

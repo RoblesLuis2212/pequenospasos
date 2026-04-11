@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { login } from '../../helpers/queries';
 import Swal from 'sweetalert2';
-import ModalRecuperarContrasena from './RecuperarContrasena';
+import SolicitarRecuperacion from './SolicitarRecuperacion';
 import { useState } from 'react';
 
 const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
@@ -90,7 +90,7 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                     )}
                 </Form.Group>
                 <div className='d-flex flex-column'>
-                    <Link className='text-decoration-none mb-2 align-self-end me-3' to={"/recuperar-contrasena"} onClick={handleClose} >¿Olvidaste tu contraseña?</Link>
+                    <Link className='text-decoration-none mb-2 align-self-end me-3' to={"/solicitar-recuperacion"} onClick={handleClose} >¿Olvidaste tu contraseña?</Link>
                     <Button className='btn-principal' type="submit">
                         Iniciar Sesion
                     </Button>

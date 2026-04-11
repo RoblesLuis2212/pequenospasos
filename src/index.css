@@ -94,3 +94,17 @@ main{
   outline: none;
   box-shadow: none;
 }
+.btn-transparente {
+    border-radius: 50px !important;
+    border: 1.5px solid #6a1b9a !important;
+    background: transparent !important;
+    color: #6a1b9a !important;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-transparente:hover {
+    background-color: #6a1b9a !important;
+    color: white !important;
+}
