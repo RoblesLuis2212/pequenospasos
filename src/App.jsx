@@ -90,7 +90,7 @@ function App() {
           >
           </Route>
           <Route
-            path="/restablecer-contrasena"
+            path="/resetPassword"
             element={<RestablecerContrasena></RestablecerContrasena>}
           >
 

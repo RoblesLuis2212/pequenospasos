@@ -1,13 +1,19 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./RecuperarContrasena.css";
 import { useForm } from 'react-hook-form';
+import { solicitarRecuperacionPassword } from '../../helpers/queries';
 
 const SolicitarRecuperacion = () => {
     const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
+    const navigate = useNavigate();
 
-    const postValidaciones = (data) => {
+    const postValidaciones = async (data) => {
+        const respuesta = await solicitarRecuperacionPassword(data.email);
+        if (respuesta.status === 200) {
+            navigate("/confirmacion-correo", { state: { email: data.email } });
+        }
         console.log(data);
         reset();
     }

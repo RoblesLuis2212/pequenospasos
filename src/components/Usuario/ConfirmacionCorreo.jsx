@@ -11,7 +11,7 @@ const ConfirmacionCorreo = () => {
                         <div className="recuperar-icono text-center"><i className="bi bi-envelope-at-fill"></i></div>
                         <h4 className="text-center titulo">¡Correo Enviado!</h4>
                         <p className="text-muted">Enviamos un enlace de recuperacion a <Link>correoejemplo@gmail.com</Link></p>
-                        <p className="text-muted text-center">El enlace expira en <strong>30 min</strong> Revisa tu bandeja de entrada</p>
+                        <p className="text-muted text-center">El enlace expira en <strong>1 h.</strong> Revisa tu bandeja de entrada</p>
                         <Alert variant="warning">
                             <i className="bi bi-info-circle me-2"></i>
                             Si no llega en unos minutos, revisa tu carpeta de spam.

@@ -184,3 +184,35 @@ export const cambiarEstadoTurnoPaciente = async (id, nuevoEstado) => {
     return null;
   }
 };
+
+export const solicitarRecuperacionPassword = async (email) => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}/forgot-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const restablecerPassword = async (token, nuevaPassword) => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token, nuevaPassword }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
