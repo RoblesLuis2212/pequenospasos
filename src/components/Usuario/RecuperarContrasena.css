@@ -1,0 +1,56 @@
+.recuperar-container{
+    background: #f9d6e8;
+}
+
+.recuperar-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 3rem;
+    box-shadow: 0 4px 24px rgba(106, 27, 154, 0.1);
+    margin: 1.5rem auto;
+}
+.recuperar-icono i {
+    font-size: 1.6rem;
+    color: #c2185b;
+}
+.recuperar-form {
+    width: 100%;
+    max-width: 420px;
+}
+.recuperar-btn-volver {
+    border-radius: 50px !important;
+    border-color: #6a1b9a !important;
+    color: #6a1b9a !important;
+}
+
+.recuperar-btn-volver:hover {
+    background-color: #6a1b9a !important;
+    color: white !important;
+}
+.recuperar-texto{
+    color: #e91e8c;
+}
+.fuerza-barra {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.fuerza-segmento {
+    flex: 1;
+    height: 4px;
+    border-radius: 4px;
+    background: #e0e0e0;
+    transition: background 0.3s ease;
+}
+
+.fuerza-texto {
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+.bg-alert{
+    background-color: #f9d6e8;
+    border: none;
+}

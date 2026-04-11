@@ -56,6 +56,7 @@ main{
     border-radius: 50px;
     border: none;
     transition: all 0.3s ease;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
 }
 /* Darle prioridad a nuestros estilos para tener mas especifidad que bootstrap */
 .nav-link.btn-principal:hover, 
@@ -92,4 +93,18 @@ main{
   text-decoration: none;
   outline: none;
   box-shadow: none;
+}
+.btn-transparente {
+    border-radius: 50px !important;
+    border: 1.5px solid #6a1b9a !important;
+    background: transparent !important;
+    color: #6a1b9a !important;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-transparente:hover {
+    background-color: #6a1b9a !important;
+    color: white !important;
 }
