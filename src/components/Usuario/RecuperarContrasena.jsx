@@ -2,8 +2,16 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import "./RecuperarContrasena.css";
+import { useForm } from 'react-hook-form';
 
 const RecuperarContrasena = () => {
+    const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
+
+    const postValidaciones = (data) => {
+        console.log(data);
+        reset();
+    }
+
     return (
         <section className="container-fluid recuperar-container">
             <div className="row">
@@ -13,12 +21,21 @@ const RecuperarContrasena = () => {
                         <h4 className="text-center titulo mt-2">¿Olvidaste tu contraseña?</h4>
                         <p className="text-muted text-center">Te enviaremos un enlace para restablecer tu contraseña. Valido por 30 minutos.</p>
                         <div className="d-flex justify-content-center">
-                            <Form className='recuperar-form'>
+                            <Form className='recuperar-form' onSubmit={handleSubmit(postValidaciones)}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className='etiquetas'>Correo Electronico</Form.Label>
-                                    <Form.Control className='custom-input' type="email" placeholder="ej: juanperez@gmail.com" />
-                                    <Form.Text className="text-muted">
-                                        We'll never share your email with anyone else.
+                                    <Form.Control className='custom-input' type="email" placeholder="ej: juanperez@gmail.com"
+                                        {...register("email", {
+                                            required: "El correo es obligatorio",
+                                            pattern: {
+                                                value: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                                                message: "Email no valido"
+                                            }
+                                        })}
+                                        onChange={() => clearErrors("email")}
+                                    />
+                                    <Form.Text className="text-danger">
+                                        {errors.email?.message}
                                     </Form.Text>
                                 </Form.Group>
                                 <div className='d-flex flex-column'>
