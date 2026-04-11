@@ -76,7 +76,8 @@ const RestablecerContrasena = () => {
                                     <Form.Label className='etiquetas'>Confirmar contraseña</Form.Label>
                                     <Form.Control className='custom-input' type="password" placeholder="Password"
                                         {...register("confirmarPassword", {
-                                            required: "La contraseñas deben ser iguales"
+                                            required: "Este campo es obligatorio",
+                                            validate: (valor) => valor === password || "Las contraseñas no coinciden"
                                         })}
                                     />
                                     <Form.Text className='text-danger'>
