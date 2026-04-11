@@ -4,6 +4,7 @@ import { Alert } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { restablecerPassword } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
 const RestablecerContrasena = () => {
 
@@ -18,10 +19,22 @@ const RestablecerContrasena = () => {
     const postValidaciones = async (data) => {
         const respuesta = await restablecerPassword(token, data.password);
         if (respuesta.status === 200) {
-            alert("Contreña actualizada correctamente");
+            Swal.fire({
+                icon: 'success',
+                title: '¡Listo!',
+                text: 'Tu contraseña fue restablecida correctamente.',
+                confirmButtonText: 'Continuar'
+            });
+            reset();
+            navigate("/");
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo restablecer la contraseña. Intentalo nuevamente.',
+                confirmButtonText: 'Aceptar'
+            });
         }
-        reset();
-        navigate("/");
     }
 
     const calcularFuerza = (password) => {
