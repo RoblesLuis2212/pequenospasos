@@ -2,14 +2,26 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Alert } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { restablecerPassword } from '../../helpers/queries';
 
 const RestablecerContrasena = () => {
 
     const { register, handleSubmit, formState: { errors }, reset, clearErrors, watch } = useForm();
     const password = watch("password", "");
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get('token');
+    const navigate = useNavigate();
+
+
+    const postValidaciones = async (data) => {
+        const respuesta = await restablecerPassword(token, data.password);
+        if (respuesta.status === 200) {
+            alert("Contreña actualizada correctamente");
+        }
+        reset();
+        navigate("/");
     }
 
     const calcularFuerza = (password) => {
