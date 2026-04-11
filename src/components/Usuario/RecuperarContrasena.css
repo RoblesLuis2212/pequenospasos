@@ -30,4 +30,27 @@
 .recuperar-texto{
     color: #e91e8c;
 }
+.fuerza-barra {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+}
 
+.fuerza-segmento {
+    flex: 1;
+    height: 4px;
+    border-radius: 4px;
+    background: #e0e0e0;
+    transition: background 0.3s ease;
+}
+
+.fuerza-texto {
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+.bg-alert{
+    background-color: #f9d6e8;
+    border: none;
+}

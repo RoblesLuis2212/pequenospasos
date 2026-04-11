@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 import TurnosPaciente from "./components/Turnos/TurnosPaciente"
 import SolicitarRecuperacion from "./components/Usuario/SolicitarRecuperacion"
 import ConfirmacionCorreo from "./components/Usuario/ConfirmacionCorreo"
+import RestablecerContrasena from "./components/Usuario/RestablecerContrasena"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -87,6 +88,12 @@ function App() {
             path="/confirmacion-correo"
             element={<ConfirmacionCorreo></ConfirmacionCorreo>}
           >
+          </Route>
+          <Route
+            path="/restablecer-contrasena"
+            element={<RestablecerContrasena></RestablecerContrasena>}
+          >
+
           </Route>
         </Routes>
         <Footer />
