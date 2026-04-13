@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ModalPacientes from './Pacientes/ModalPacientes';
 import Swal from 'sweetalert2';
+import ModalActualizarDatos from './Usuario/ModalActualizarDatos';
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     // Estados para abrir el modal de inicio de sesion
@@ -49,6 +50,12 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     const cerrarModalPacientes = () => setShowPacientes(false);
     const abrirModalPacientes = () => setShowPacientes(true);
 
+    //Estado para abrir modal de datos del usuario
+    const [showPadres, setShowPadres] = useState(false);
+
+    const cerrarModalPadre = () => setShowPadres(false);
+    const abrirModalPadre = () => setShowPadres(true);
+
     return (
         <div>
             <Navbar expand="lg" className="navbar">
@@ -73,6 +80,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                     }
                                 }}>Mis turnos</NavDropdown.Item>
                                 <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
+                                <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>
@@ -95,6 +103,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
             </Navbar>
             <ModalIniciarSesion handleClose={handleClose} show={show} setUsuarioLogueado={setUsuarioLogueado}></ModalIniciarSesion>
             <ModalPacientes showPacientes={showPacientes} cerrarModalPacientes={cerrarModalPacientes} usuarioLogueado={usuarioLogueado} show={handleShow}></ModalPacientes>
+            <ModalActualizarDatos showPadres={showPadres} cerrarModalPadre={cerrarModalPadre}></ModalActualizarDatos>
         </div>
     );
 };
