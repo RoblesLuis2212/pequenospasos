@@ -216,3 +216,12 @@ export const restablecerPassword = async (token, nuevaPassword) => {
     return null;
   }
 };
+
+export const cambiarContrasena = async (id, nuevaPassword) => {
+  try {
+    // const respuesta = await fetch(`${}`);
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

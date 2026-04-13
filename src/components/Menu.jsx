@@ -72,6 +72,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                         navigate("/mis-turnos")
                                     }
                                 }}>Mis turnos</NavDropdown.Item>
+                                <NavDropdown.Item className='nav-link'>Cambiar contraseña</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>
