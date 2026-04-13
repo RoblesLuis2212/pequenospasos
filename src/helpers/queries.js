@@ -217,9 +217,17 @@ export const restablecerPassword = async (token, nuevaPassword) => {
   }
 };
 
-export const cambiarContrasena = async (id, nuevaPassword) => {
+export const cambiarContrasena = async (data) => {
   try {
-    // const respuesta = await fetch(`${}`);
+    const respuesta = await fetch(`${usuariosBackend}/cambiar-password`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
   } catch (err) {
     console.error(err);
     return null;
