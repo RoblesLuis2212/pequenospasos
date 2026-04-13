@@ -16,7 +16,7 @@ const FormularioCambiarContrasena = () => {
         const respuesta = await cambiarContrasena(data);
         if (respuesta.status === 200) {
             Swal.fire({
-                title: "Contraseña actualizada exisamente!",
+                title: "Contraseña actualizada exitosamente!",
                 icon: "success",
                 draggable: true
             });
