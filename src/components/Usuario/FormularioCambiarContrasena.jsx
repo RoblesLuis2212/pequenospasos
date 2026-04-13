@@ -1,15 +1,27 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm, Watch } from 'react-hook-form';
+import { cambiarContrasena } from '../../helpers/queries';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const FormularioCambiarContrasena = () => {
 
     const { handleSubmit, register, formState: { errors }, reset, clearErrors, watch } = useForm();
 
     const password = watch("nuevaPassword");
+    const navigate = useNavigate();
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const postValidaciones = async (data) => {
+        const respuesta = await cambiarContrasena(data);
+        if (respuesta.status === 200) {
+            Swal.fire({
+                title: "Contraseña actualizada exisamente!",
+                icon: "success",
+                draggable: true
+            });
+        }
+        navigate("/");
         reset();
     }
 
