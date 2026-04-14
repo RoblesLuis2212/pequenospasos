@@ -1,12 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import VisaLogo from ".././../assets/visa-logo.jpg";
-import MPLogo from ".././../assets/logo-mercadoPago.png";
+import VisaLogo from "../../assets/visa-logo.jpg";
+import MPLogo from "../../assets/logo-mercadoPago.png";
+import masterCardLogo from "../../assets/logo-masterCard.png";
 
 const CardResumen = () => {
     return (
         <Card>
             <Card.Body>
+                {/* Resumen del pedido */}
                 <Card.Title>RESUMEN DEL PEDIDO</Card.Title>
                 <hr />
                 <div className='d-flex justify-content-between'>
@@ -21,9 +23,11 @@ const CardResumen = () => {
                     <Button className='btn-secundario mt-2 w-100'>Finalizar Pedido</Button>
                 </div>
                 <hr />
-                <div className="metodos-pago">
-                    <img src={VisaLogo} className='metodo-pago' alt="" />
-                    <img src={MPLogo} className='metodo-pago' alt="" />
+                {/* metodos de pago */}
+                <div className="d-flex justify-content-around">
+                    <img src={VisaLogo} className='metodo-pago' alt="metodo de pago Visa" />
+                    <img src={masterCardLogo} className='metodo-pago' alt="metodo de pago Master Card" />
+                    <img src={MPLogo} className='metodo-pago' alt="metodo de pago Mercado pago" />
                 </div>
             </Card.Body>
         </Card>
