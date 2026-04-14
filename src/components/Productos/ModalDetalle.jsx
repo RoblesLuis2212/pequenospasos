@@ -15,7 +15,7 @@ const ModalDetalle = ({ handleClose, show, itemProducto }) => {
                         <h3 className='nombre-producto nombre-modal ms-4 ms-md-0'>{itemProducto.nombre}</h3>
                         <div className='d-flex justify-content-start'>
                             <p className='precio-producto ms-4 ms-md-0'>${itemProducto.precio}</p>
-                            <p className='categoria-producto ms-2'>Juegos de mesa</p>
+                            <p className='categoria-producto ms-2'>{itemProducto.categoria?.nombre}</p>
                         </div>
                         <p className='text-muted ms-3 ms-md-0'>{itemProducto.descripcion}</p>
                         <div className='d-flex flex-column gap-2 gap-md-3'>
