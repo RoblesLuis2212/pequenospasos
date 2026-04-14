@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ModalDetalle from './ModalDetalle';
 import { useState } from 'react';
 
-const CardProducto = ({ nombre, imagen, precio }) => {
+const CardProducto = ({ itemProducto }) => {
     //Estados para abrir la ventana modal
 
     const [show, setShow] = useState(false);
@@ -15,14 +15,14 @@ const CardProducto = ({ nombre, imagen, precio }) => {
     return (
         <Link className='card-link'>
             <Card className='d-flex flex-column mt-4 mt-lg-3'>
-                <Card.Img className='img-producto' src={imagen} />
+                <Card.Img className='img-producto' src={itemProducto.imagen} />
                 <Card.Body className='d-flex flex-column align-items-start'>
-                    <Card.Title className='nombre-producto'>{nombre}</Card.Title>
-                    <p className='precio-producto'>${precio}</p>
+                    <Card.Title className='nombre-producto'>{itemProducto.nombre}</Card.Title>
+                    <p className='precio-producto'>${itemProducto.precio}</p>
                     <Button className='btn-carrito' onClick={handleShow}>Ver Más</Button>
                 </Card.Body>
             </Card>
-            <ModalDetalle handleClose={handleClose} show={show}></ModalDetalle>
+            <ModalDetalle handleClose={handleClose} show={show} itemProducto={itemProducto}></ModalDetalle>
         </Link>
     );
 };

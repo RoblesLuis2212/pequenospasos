@@ -4,6 +4,7 @@ import { data } from "react-router-dom";
 const usuariosBackend = import.meta.env.VITE_API_USUARIOS;
 const pacientesBackend = import.meta.env.VITE_API_PACIENTES;
 const turnosBackend = import.meta.env.VITE_API_TURNOS;
+const productosBackend = import.meta.env.VITE_API_PRODUCTOS;
 
 export const login = async (usuario) => {
   try {
@@ -244,6 +245,16 @@ export const actualizarDatosUsuario = async (id, datos) => {
       },
       body: JSON.stringify(datos),
     });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const listarProductosAPI = async () => {
+  try {
+    const respuesta = await fetch(productosBackend);
     return respuesta;
   } catch (err) {
     console.error(err);
