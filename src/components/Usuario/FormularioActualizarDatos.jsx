@@ -34,6 +34,7 @@ const FormularioActualizarDatos = ({ usuarioLogueado, cerrarModalPadre }) => {
                 title: "Datos actualizados exitosamente!",
                 icon: "success",
             }).then(() => {
+                cerrarModalPadre();
                 navigate("/");
                 reset();
             });
