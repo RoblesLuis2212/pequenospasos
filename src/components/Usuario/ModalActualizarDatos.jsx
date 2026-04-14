@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FormularioActualizarDatos from './FormularioActualizarDatos';
 
-const ModalActualizarDatos = ({ showPadres, cerrarModalPadre }) => {
+const ModalActualizarDatos = ({ showPadres, cerrarModalPadre, usuarioLogueado }) => {
     return (
         <Modal show={showPadres} onHide={cerrarModalPadre}>
             <div className='d-flex flex-column p-3'>
@@ -10,7 +10,7 @@ const ModalActualizarDatos = ({ showPadres, cerrarModalPadre }) => {
                 <p className='text-center text-muted'>Mantené tus datos personales actualizados para no perderte ninguna novedad.</p>
             </div>
             <Modal.Body>
-                <FormularioActualizarDatos></FormularioActualizarDatos>
+                <FormularioActualizarDatos usuarioLogueado={usuarioLogueado}></FormularioActualizarDatos>
             </Modal.Body>
         </Modal>
     );
