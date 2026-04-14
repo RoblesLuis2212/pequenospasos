@@ -6,7 +6,7 @@ import masterCardLogo from "../../assets/logo-masterCard.png";
 
 const CardResumen = () => {
     return (
-        <Card>
+        <Card className='shadow-sm'>
             <Card.Body>
                 {/* Resumen del pedido */}
                 <Card.Title>RESUMEN DEL PEDIDO</Card.Title>
@@ -19,8 +19,9 @@ const CardResumen = () => {
                     <p className='fw-bold'>Retiro en:</p>
                     <span>Belgrano 625 Monteros</span>
                 </div>
-                <div className='d-flex justify-content-center'>
-                    <Button className='btn-secundario mt-2 w-100'>Finalizar Pedido</Button>
+                <div className='d-flex flex-column justify-content-center'>
+                    <Button className='btn-principal mt-2 w-100'>Finalizar Pedido</Button>
+                    <Button className='btn-transparente mt-3'>Seguir comprando</Button>
                 </div>
                 <hr />
                 {/* metodos de pago */}
@@ -29,8 +30,8 @@ const CardResumen = () => {
                     <img src={masterCardLogo} className='metodo-pago' alt="metodo de pago Master Card" />
                     <img src={MPLogo} className='metodo-pago' alt="metodo de pago Mercado pago" />
                 </div>
-            </Card.Body>
-        </Card>
+            </Card.Body >
+        </Card >
     );
 };
 

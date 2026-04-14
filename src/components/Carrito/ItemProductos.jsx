@@ -11,9 +11,11 @@ const ItemProductos = () => {
             </td>
             <td className='fw-bold'>$15000</td>
             <td className='fw-bold'>
-                <Button variant="outline-secondary" className="me-2">-</Button>
-                <span>3</span>
-                <Button variant="outline-secondary" className="ms-2">+</Button>
+                <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
+                    <Button variant="outline-secondary" className="me-md-2 mb-2 mb-md-0">-</Button>
+                    <span>3</span>
+                    <Button variant="outline-secondary" className="ms-md-2 mt-2 mt-md-0">+</Button>
+                </div>
             </td>
             <td className='fw-bold'>$45000</td>
         </tr>

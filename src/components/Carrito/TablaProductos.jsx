@@ -15,6 +15,9 @@ const TablaProductos = () => {
                 </thead>
                 <tbody>
                     <ItemProductos></ItemProductos>
+                    <ItemProductos></ItemProductos>
+                    <ItemProductos></ItemProductos>
+                    <ItemProductos></ItemProductos>
                 </tbody>
             </Table>
         </>
