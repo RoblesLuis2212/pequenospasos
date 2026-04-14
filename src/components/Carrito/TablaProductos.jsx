@@ -11,6 +11,7 @@ const TablaProductos = () => {
                         <th>Precio</th>
                         <th>Cantidad</th>
                         <th>Total</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

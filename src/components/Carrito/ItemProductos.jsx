@@ -18,6 +18,9 @@ const ItemProductos = () => {
                 </div>
             </td>
             <td className='fw-bold'>$45000</td>
+            <td>
+                <Button variant="danger"><i className="bi bi-trash3-fill"></i></Button>
+            </td>
         </tr>
     );
 };
