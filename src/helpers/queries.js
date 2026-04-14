@@ -233,3 +233,20 @@ export const cambiarContrasena = async (data) => {
     return null;
   }
 };
+
+export const actualizarDatosUsuario = async (id, datos) => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(datos),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

@@ -3,12 +3,42 @@ import InputGroupText from 'react-bootstrap/esm/InputGroupText';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { InputGroup } from 'react-bootstrap';
+import { actualizarDatosUsuario, obtenerUsuarioIDApi } from '../../helpers/queries';
+import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
-const FormularioActualizarDatos = () => {
-    const { handleSubmit, register, formState: { errors }, reset, clearErrors } = useForm();
+const FormularioActualizarDatos = ({ usuarioLogueado, cerrarModalPadre }) => {
+    const { handleSubmit, register, formState: { errors }, reset, clearErrors, setValue } = useForm();
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const idUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.id;
+
+    const obtenerDatosUsuario = async () => {
+        const respuesta = await obtenerUsuarioIDApi(idUsuario);
+        if (respuesta.status === 200) {
+            const usuarioBuscado = await respuesta.json();
+            setValue("nombreCompleto", usuarioBuscado.nombreCompleto);
+            setValue("telefono", usuarioBuscado.telefono);
+            setValue("email", usuarioBuscado.email);
+        }
+    }
+
+    useEffect(() => {
+        obtenerDatosUsuario();
+    }, [])
+
+    const postValidaciones = async (data) => {
+        const dataCompleta = { ...data, rolId: 2 };
+        const respuesta = await actualizarDatosUsuario(idUsuario, dataCompleta);
+        if (respuesta.status === 200) {
+            Swal.fire({
+                title: "Datos actualizados exitosamente!",
+                icon: "success",
+            }).then(() => {
+                cerrarModalPadre();
+                navigate("/");
+                reset();
+            });
+        }
     }
 
     return (
@@ -17,7 +47,7 @@ const FormularioActualizarDatos = () => {
                 <Form.Label className='etiquetas'>Nombre completo</Form.Label>
                 <InputGroup className='input-pildora'>
                     <InputGroupText>
-                        <i className="bi bi-house-door-fill"></i>
+                        <i className="bi bi-person-fill"></i>
                     </InputGroupText>
                     <Form.Control type="text" placeholder="Ej: Juan Perez"
                         {...register("nombreCompleto", {

@@ -103,7 +103,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
             </Navbar>
             <ModalIniciarSesion handleClose={handleClose} show={show} setUsuarioLogueado={setUsuarioLogueado}></ModalIniciarSesion>
             <ModalPacientes showPacientes={showPacientes} cerrarModalPacientes={cerrarModalPacientes} usuarioLogueado={usuarioLogueado} show={handleShow}></ModalPacientes>
-            <ModalActualizarDatos showPadres={showPadres} cerrarModalPadre={cerrarModalPadre}></ModalActualizarDatos>
+            <ModalActualizarDatos showPadres={showPadres} cerrarModalPadre={cerrarModalPadre} usuarioLogueado={usuarioLogueado}></ModalActualizarDatos>
         </div>
     );
 };

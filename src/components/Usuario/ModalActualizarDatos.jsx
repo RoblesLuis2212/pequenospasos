@@ -10,7 +10,7 @@ const ModalActualizarDatos = ({ showPadres, cerrarModalPadre }) => {
                 <p className='text-center text-muted'>Mantené tus datos personales actualizados para no perderte ninguna novedad.</p>
             </div>
             <Modal.Body>
-                <FormularioActualizarDatos></FormularioActualizarDatos>
+                <FormularioActualizarDatos cerrarModalPadre={cerrarModalPadre}></FormularioActualizarDatos>
             </Modal.Body>
         </Modal>
     );
