@@ -14,6 +14,7 @@ import SolicitarRecuperacion from "./components/Usuario/SolicitarRecuperacion"
 import ConfirmacionCorreo from "./components/Usuario/ConfirmacionCorreo"
 import RestablecerContrasena from "./components/Usuario/RestablecerContrasena"
 import CambiarContrasena from "./components/Usuario/CambiarContrasena"
+import Carrito from "./components/Carrito/Carrito"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -98,6 +99,11 @@ function App() {
           <Route
             path="/cambiar-contrasena"
             element={<CambiarContrasena></CambiarContrasena>}
+          >
+          </Route>
+          <Route
+            path="/carrito"
+            element={<Carrito></Carrito>}
           >
           </Route>
         </Routes>

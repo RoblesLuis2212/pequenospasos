@@ -86,6 +86,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                         <Nav className='align-items-center me-4'>
                             {usuarioLogueado.usuario ? (
                                 <>
+                                    <Button className='btn-secundario' as={Link} to="/carrito"><i className="bi bi-cart-fill"></i></Button>
                                     <Button className='btn-principal ms-4 ms-md-2' onClick={cerrarSesion}><i className="bi bi-box-arrow-left me-2"></i>Cerrar Sesion</Button>
                                 </>
                             ) : (
