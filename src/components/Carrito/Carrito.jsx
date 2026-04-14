@@ -1,0 +1,20 @@
+import TablaProductos from "./TablaProductos";
+import "./Carrito.css";
+import CardResumen from "./CardResumen";
+
+const Carrito = () => {
+    return (
+        <section className='container mt-3'>
+            <div className="row g-4">
+                <div className="col-12 col-md-8 col-md-8">
+                    <TablaProductos></TablaProductos>
+                </div>
+                <div className="col-12 col-md-4 col-lg-4">
+                    <CardResumen></CardResumen>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Carrito;
