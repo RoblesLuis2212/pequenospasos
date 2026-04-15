@@ -8,8 +8,8 @@ const ContainerProductos = ({ productos }) => {
             <p className='text-muted text-center mt-2'>Herramientas profesionales para continuar la terapia en casa de forma divertida</p>
             <div className="row">
                 {productos.map((itemProducto) => (
-                    <div className="col-12 col-md-6 col-lg-3" key={itemProducto.idProducto}>
-                        <CardProducto itemProducto={itemProducto}></CardProducto>
+                    <div className="col-12 col-md-6 col-lg-3 d-flex">
+                        <CardProducto itemProducto={itemProducto} key={itemProducto.idProducto} />
                     </div>
                 ))}
             </div>

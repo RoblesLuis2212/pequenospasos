@@ -1,0 +1,22 @@
+.input-search{
+    width: 320px;
+    height: 40px;
+    padding: 10px;
+}
+.filtro-select {
+  width: 300px;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+.filtro-select:focus {
+  border-color: #a855f7; /* violeta suave */
+  box-shadow: 0 0 0 0.2rem rgba(168, 85, 247, 0.2);
+}
+.fondo-tienda{
+    background-color: #f9d6e8;
+}

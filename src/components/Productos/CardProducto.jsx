@@ -14,12 +14,12 @@ const CardProducto = ({ itemProducto }) => {
 
     return (
         <Link className='card-link'>
-            <Card className='d-flex flex-column mt-4 mt-lg-3'>
+            <Card className='d-flex flex-column mt-4 mt-lg-3 h-100 w-100'>
                 <Card.Img className='img-producto' src={itemProducto.imagen} />
                 <Card.Body className='d-flex flex-column align-items-start'>
                     <Card.Title className='nombre-producto'>{itemProducto.nombre}</Card.Title>
                     <p className='precio-producto'>${itemProducto.precio}</p>
-                    <Button className='btn-carrito' onClick={handleShow}>Ver Más</Button>
+                    <Button className='btn-carrito mt-auto' onClick={handleShow}>Ver Más</Button>
                 </Card.Body>
             </Card>
             <ModalDetalle handleClose={handleClose} show={show} itemProducto={itemProducto}></ModalDetalle>
