@@ -15,7 +15,7 @@ import ConfirmacionCorreo from "./components/Usuario/ConfirmacionCorreo"
 import RestablecerContrasena from "./components/Usuario/RestablecerContrasena"
 import CambiarContrasena from "./components/Usuario/CambiarContrasena"
 import Carrito from "./components/Carrito/Carrito"
-import { listarProductosAPI } from "./helpers/queries"
+import { listarProductosAPI, listarProductosInicioAPI } from "./helpers/queries"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -29,17 +29,16 @@ function App() {
 
   const [productos, setProductos] = useState([]);
 
-  const obtenerProductos = async () => {
-    const respuesta = await listarProductosAPI();
+  const obtenerProductosInicio = async () => {
+    const respuesta = await listarProductosInicioAPI();
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       setProductos(datos);
-      console.log(datos);
     }
   }
 
   useEffect(() => {
-    obtenerProductos();
+    obtenerProductosInicio();
   }, [])
 
   //Aqui se realiza la configuracion de las diferentes rutas a las que se podra acceder en la pagina

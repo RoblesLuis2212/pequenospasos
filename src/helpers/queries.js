@@ -261,3 +261,13 @@ export const listarProductosAPI = async () => {
     return null;
   }
 };
+
+export const listarProductosInicioAPI = async () => {
+  try {
+    const respuesta = await fetch(`${productosBackend}/inicio`);
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
