@@ -12,16 +12,12 @@ const CardResumen = ({ detalleCarrito }) => {
                 <Card.Title>RESUMEN DEL PEDIDO</Card.Title>
                 <hr />
                 <div className='d-flex justify-content-between'>
-                    <p className='fw-bold'>Subtotal pedido: </p>
-                    <span>${detalleCarrito.total}</span>
+                    <span>Retiro en:</span>
+                    <p className='fw-bold'>Belgrano 625 Monteros</p>
                 </div>
                 <div className='d-flex justify-content-between'>
-                    <p className='fw-bold'>Retiro en:</p>
-                    <span>Belgrano 625 Monteros</span>
-                </div>
-                <div className='d-flex justify-content-between'>
-                    <p className='fw-bold'>Total del pedido:</p>
-                    <span>$120000</span>
+                    <span>Total del pedido: </span>
+                    <p className='fw-bold'>${detalleCarrito.total}</p>
                 </div>
                 <div className='d-flex flex-column justify-content-center'>
                     <Button className='btn-principal mt-2 w-100'>Finalizar Pedido</Button>

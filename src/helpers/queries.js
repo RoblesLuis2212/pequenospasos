@@ -323,3 +323,20 @@ export const obtenerCarritoUsuarioAPI = async () => {
     return null;
   }
 };
+
+export const AgregarAlCarritoAPI = async (productoId, cantidad) => {
+  try {
+    const respuesta = await fetch(`${carritoBackend}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify({ productoId, cantidad }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

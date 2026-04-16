@@ -2,7 +2,7 @@ import TablaProductos from "./TablaProductos";
 import "./Carrito.css";
 import CardResumen from "./CardResumen";
 import ContainerProductosRecomendados from "./ContainerProductosRecomendados";
-import { obtenerCarritoUsuarioAPI } from "../../helpers/queries";
+import { AgregarAlCarritoAPI, obtenerCarritoUsuarioAPI } from "../../helpers/queries";
 import { useEffect, useState } from "react";
 
 const Carrito = () => {
@@ -27,19 +27,13 @@ const Carrito = () => {
         //Evitamos se asignen cantidades negativas
         if (nuevaCantidad < 1) return;
 
-        //actualizacion del estado local
-        const carritoActualizado = productosCarrito.map((item) => {
-            if (item.idDetalleCarrito === idDetalle) {
-                return { ...item, cantidad: nuevaCantidad }
-            }
-            return item;
-        })
-        setProductosCarrito(carritoActualizado);
-    }
+        const item = productosCarrito.find(i => i.idDetalleCarrito === idDetalle)
+        if (!item) return;
+        console.log(item);
 
-    // const actualizarTotal = () => {
-    //     const totalActualizado = 
-    // }
+        await AgregarAlCarritoAPI(item.productoId, nuevaCantidad);
+        await obtenerCarrito();
+    }
 
     return (
         <>
