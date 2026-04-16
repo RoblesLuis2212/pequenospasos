@@ -1,28 +1,35 @@
-import { listarProductosAPI } from "../../helpers/queries";
+import { listarProductosAPI, paginacion } from "../../helpers/queries";
 import CardProducto from "../Productos/CardProducto";
 import FiltroProductos from "./FiltroProductos";
 import Search from "./Search";
 import "./Tienda.css";
 import { useEffect, useState } from "react";
+import Paginado from "./Paginado";
 
 const Tienda = () => {
 
     const [productos, setProductos] = useState([]);
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [cantidadPagina, setCantidadPagina] = useState(1);
 
-    const obtenerProductos = async () => {
-        const respuesta = await listarProductosAPI();
+    const obtenerProductos = async (pagina = 1) => {
+        const respuesta = await paginacion(pagina);
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            setProductos(datos);
+            setProductos(datos.productos);
+            setCantidadPagina(datos.cantPaginas);
+            console.log(datos);
         }
     }
 
     useEffect(() => {
-        obtenerProductos();
-    }, [])
+        obtenerProductos(paginaActual);
+    }, [paginaActual]);
+
+
 
     return (
-        <section className='container-fluid fondo-tienda pb-5'>
+        <section className='container-fluid fondo-tienda pb-2'>
             <div className="row">
                 <h4 className='titulo text-center mt-4'>Tienda</h4>
                 <div className="col-12 d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-between">
@@ -39,6 +46,11 @@ const Tienda = () => {
                     </div>
                 ))}
             </div>
+            <Paginado
+                totalPaginas={cantidadPagina}
+                paginaActiva={paginaActual}
+                setPaginaActiva={setPaginaActual}
+            ></Paginado>
         </section>
     );
 };

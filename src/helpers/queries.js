@@ -271,3 +271,15 @@ export const listarProductosInicioAPI = async () => {
     return null;
   }
 };
+
+export const paginacion = async (pagina = 1) => {
+  try {
+    const respuesta = await fetch(
+      `${productosBackend}/paginado?page=${pagina}&limit=8`,
+    );
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
