@@ -297,3 +297,13 @@ export const buscarProductoAPI = async (nombre, pagina = 1) => {
   );
   return respuesta;
 };
+
+export const obtenerProductosDestacadosAPI = async () => {
+  try {
+    const respuesta = await fetch(`${productosBackend}/destacados`);
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
