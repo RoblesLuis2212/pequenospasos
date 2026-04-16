@@ -4,7 +4,7 @@ import VisaLogo from "../../assets/visa-logo.jpg";
 import MPLogo from "../../assets/logo-mercadoPago.png";
 import masterCardLogo from "../../assets/logo-masterCard.png";
 
-const CardResumen = () => {
+const CardResumen = ({ detalleCarrito }) => {
     return (
         <Card className='shadow-sm'>
             <Card.Body>
@@ -13,7 +13,7 @@ const CardResumen = () => {
                 <hr />
                 <div className='d-flex justify-content-between'>
                     <p className='fw-bold'>Subtotal pedido: </p>
-                    <span>$60000</span>
+                    <span>${detalleCarrito.total}</span>
                 </div>
                 <div className='d-flex justify-content-between'>
                     <p className='fw-bold'>Retiro en:</p>

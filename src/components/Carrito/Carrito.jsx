@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 const Carrito = () => {
 
     const [productosCarrito, setProductosCarrito] = useState([]);
+    const [detalleCarrito, setDetalleCarrito] = useState([]);
 
     const obtenerCarrito = async () => {
         const respuesta = await obtenerCarritoUsuarioAPI();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setProductosCarrito(datos.carrito.detalleCarritos);
+            setDetalleCarrito(datos);
         }
     }
 
@@ -35,6 +37,10 @@ const Carrito = () => {
         setProductosCarrito(carritoActualizado);
     }
 
+    // const actualizarTotal = () => {
+    //     const totalActualizado = 
+    // }
+
     return (
         <>
             <section className='container mt-3'>
@@ -44,7 +50,7 @@ const Carrito = () => {
                         <TablaProductos productosCarrito={productosCarrito} actualizarCantidad={actualizarCantidad}></TablaProductos>
                     </div>
                     <div className="col-12 col-md-4 col-lg-4">
-                        <CardResumen></CardResumen>
+                        <CardResumen detalleCarrito={detalleCarrito}></CardResumen>
                     </div>
                 </div>
             </section>
