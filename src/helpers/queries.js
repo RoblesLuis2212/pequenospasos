@@ -290,3 +290,10 @@ export const filtrarProductosAPI = async (categoria = "", pagina = 1) => {
   );
   return respuesta;
 };
+
+export const buscarProductoAPI = async (nombre, pagina = 1) => {
+  const respuesta = await fetch(
+    `${productosBackend}/buscar?nombre=${nombre}&page=${pagina}&limit=8`,
+  );
+  return respuesta;
+};

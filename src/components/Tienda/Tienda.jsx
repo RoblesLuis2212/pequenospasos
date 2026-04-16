@@ -1,4 +1,4 @@
-import { filtrarProductosAPI, listarProductosAPI, paginacion } from "../../helpers/queries";
+import { buscarProductoAPI, filtrarProductosAPI, listarProductosAPI, paginacion } from "../../helpers/queries";
 import CardProducto from "../Productos/CardProducto";
 import FiltroProductos from "./FiltroProductos";
 import Search from "./Search";
@@ -12,9 +12,17 @@ const Tienda = () => {
     const [paginaActual, setPaginaActual] = useState(1);
     const [cantidadPagina, setCantidadPagina] = useState(1);
     const [categoria, setCategoria] = useState("");
+    const [busqueda, setBusqueda] = useState("");
 
-    const obtenerProductos = async (pagina = 1) => {
-        const respuesta = categoria ? await filtrarProductosAPI(categoria, pagina) : await paginacion(pagina);
+    const obtenerProductos = async (pagina = 1, cat = categoria, bus = busqueda) => {
+        let respuesta;
+        if (bus) {
+            respuesta = await buscarProductoAPI(bus, pagina);
+        } else if (cat) {
+            respuesta = await filtrarProductosAPI(cat, pagina)
+        } else {
+            respuesta = await paginacion(pagina);
+        }
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setProductos(datos.productos);
@@ -23,8 +31,8 @@ const Tienda = () => {
     }
 
     useEffect(() => {
-        obtenerProductos(paginaActual);
-    }, [paginaActual, categoria]);
+        obtenerProductos(paginaActual, categoria, busqueda);
+    }, [paginaActual, categoria, busqueda]);
 
 
 
@@ -34,7 +42,7 @@ const Tienda = () => {
                 <h4 className='titulo text-center mt-4'>Tienda</h4>
                 <div className="col-12 d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-between">
                     <div style={{ maxWidth: "300px" }}>
-                        <Search></Search>
+                        <Search setBusqueda={setBusqueda}></Search>
                     </div>
                     <div className="me-end">
                         <FiltroProductos setCategoria={setCategoria}></FiltroProductos>
