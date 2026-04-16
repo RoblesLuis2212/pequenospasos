@@ -12,7 +12,6 @@ const ContainerProductosRecomendados = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setProductosDestacados(datos);
-            console.log(datos);
         }
     }
 

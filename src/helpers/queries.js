@@ -5,6 +5,7 @@ const usuariosBackend = import.meta.env.VITE_API_USUARIOS;
 const pacientesBackend = import.meta.env.VITE_API_PACIENTES;
 const turnosBackend = import.meta.env.VITE_API_TURNOS;
 const productosBackend = import.meta.env.VITE_API_PRODUCTOS;
+const carritoBackend = import.meta.env.VITE_API_CARRITO;
 
 export const login = async (usuario) => {
   try {
@@ -301,6 +302,21 @@ export const buscarProductoAPI = async (nombre, pagina = 1) => {
 export const obtenerProductosDestacadosAPI = async () => {
   try {
     const respuesta = await fetch(`${productosBackend}/destacados`);
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const obtenerCarritoUsuarioAPI = async () => {
+  try {
+    const respuesta = await fetch(`${carritoBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
     return respuesta;
   } catch (err) {
     console.error(err);
