@@ -1,4 +1,4 @@
-import { listarProductosAPI, paginacion } from "../../helpers/queries";
+import { filtrarProductosAPI, listarProductosAPI, paginacion } from "../../helpers/queries";
 import CardProducto from "../Productos/CardProducto";
 import FiltroProductos from "./FiltroProductos";
 import Search from "./Search";
@@ -11,20 +11,20 @@ const Tienda = () => {
     const [productos, setProductos] = useState([]);
     const [paginaActual, setPaginaActual] = useState(1);
     const [cantidadPagina, setCantidadPagina] = useState(1);
+    const [categoria, setCategoria] = useState("");
 
     const obtenerProductos = async (pagina = 1) => {
-        const respuesta = await paginacion(pagina);
+        const respuesta = categoria ? await filtrarProductosAPI(categoria, pagina) : await paginacion(pagina);
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setProductos(datos.productos);
             setCantidadPagina(datos.cantPaginas);
-            console.log(datos);
         }
     }
 
     useEffect(() => {
         obtenerProductos(paginaActual);
-    }, [paginaActual]);
+    }, [paginaActual, categoria]);
 
 
 
@@ -37,7 +37,7 @@ const Tienda = () => {
                         <Search></Search>
                     </div>
                     <div className="me-end">
-                        <FiltroProductos></FiltroProductos>
+                        <FiltroProductos setCategoria={setCategoria}></FiltroProductos>
                     </div>
                 </div>
                 {productos.map((itemProducto) => (

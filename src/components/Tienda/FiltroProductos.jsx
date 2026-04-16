@@ -1,8 +1,10 @@
 import Form from 'react-bootstrap/Form';
 
-const FiltroProductos = () => {
+const FiltroProductos = ({ setCategoria }) => {
     return (
-        <Form.Select className='filtro-select mt-0' aria-label="Default select example">
+        <Form.Select className='filtro-select mt-0' aria-label="Default select example"
+            onChange={(e) => setCategoria(e.target.value)}
+        >
             <option value="">Ordernar por</option>
             <option value="1">Juegos de mesa</option>
             <option value="2">Libros Infantiles</option>

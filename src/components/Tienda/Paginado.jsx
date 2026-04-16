@@ -19,7 +19,6 @@ const Paginado = ({ totalPaginas = 1, paginaActiva, setPaginaActiva }) => {
     return (
         <div className='d-flex justify-content-center align-items-center mt-4'>
             <Pagination>
-                <Pagination.First onClick={() => setPaginaActiva(1)} />
                 <Pagination.Prev
                     onClick={() => paginaActiva > 1 && setPaginaActiva(paginaActiva - 1)}
                 />
@@ -30,7 +29,6 @@ const Paginado = ({ totalPaginas = 1, paginaActiva, setPaginaActiva }) => {
                 <Pagination.Next
                     onClick={() => paginaActiva < totalPaginas && setPaginaActiva(paginaActiva + 1)}
                 />
-                <Pagination.Last onClick={() => setPaginaActiva(totalPaginas)} />
             </Pagination>
         </div>
     );

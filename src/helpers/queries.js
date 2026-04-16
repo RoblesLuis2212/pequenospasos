@@ -283,3 +283,10 @@ export const paginacion = async (pagina = 1) => {
     return null;
   }
 };
+
+export const filtrarProductosAPI = async (categoria = "", pagina = 1) => {
+  const respuesta = await fetch(
+    `${productosBackend}/filtro?categoria=${categoria}&page=${pagina}&limit=8`,
+  );
+  return respuesta;
+};
