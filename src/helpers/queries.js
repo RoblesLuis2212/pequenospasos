@@ -340,3 +340,18 @@ export const AgregarAlCarritoAPI = async (productoId, cantidad) => {
     return null;
   }
 };
+
+export const eliminarProductoCarrito = async (idDetalleCarrito) => {
+  try {
+    const respuesta = await fetch(`${carritoBackend}/${idDetalleCarrito}`, {
+      method: "DELETE",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

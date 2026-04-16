@@ -1,6 +1,15 @@
 import { Button } from "react-bootstrap";
+import { eliminarProductoCarrito } from "../../helpers/queries";
 
-const ItemProductos = ({ itemProductoCarrito, actualizarCantidad }) => {
+const ItemProductos = ({ itemProductoCarrito, actualizarCantidad, obtenerCarrito }) => {
+
+    const eliminarProducto = async (req, res) => {
+        const respuesta = await eliminarProductoCarrito(itemProductoCarrito.idDetalleCarrito);
+        if (respuesta.status === 200) {
+            obtenerCarrito();
+        }
+    }
+
     return (
         <tr>
             <td>
@@ -21,7 +30,7 @@ const ItemProductos = ({ itemProductoCarrito, actualizarCantidad }) => {
             </td>
             <td className='fw-bold'>${itemProductoCarrito.producto?.precio * itemProductoCarrito.cantidad}</td>
             <td>
-                <Button variant="danger"><i className="bi bi-trash3-fill"></i></Button>
+                <Button variant="danger"><i className="bi bi-trash3-fill" onClick={eliminarProducto}></i></Button>
             </td>
         </tr>
     );

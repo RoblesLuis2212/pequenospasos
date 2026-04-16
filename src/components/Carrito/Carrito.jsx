@@ -41,7 +41,7 @@ const Carrito = () => {
                 <h4 className="titulo">Tu carrito de compras</h4>
                 <div className="row g-4">
                     <div className="col-12 col-md-8 col-md-8">
-                        <TablaProductos productosCarrito={productosCarrito} actualizarCantidad={actualizarCantidad}></TablaProductos>
+                        <TablaProductos productosCarrito={productosCarrito} actualizarCantidad={actualizarCantidad} obtenerCarrito={obtenerCarrito} ></TablaProductos>
                     </div>
                     <div className="col-12 col-md-4 col-lg-4">
                         <CardResumen detalleCarrito={detalleCarrito}></CardResumen>
