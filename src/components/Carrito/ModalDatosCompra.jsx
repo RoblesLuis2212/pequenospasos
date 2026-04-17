@@ -42,6 +42,10 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
                 <p><strong>Estado del pedido: </strong>PENDIENTE</p>
                 <p><strong>Total Pedido: </strong>${detalleCarrito.total}</p>
             </Modal.Body>
+            <div className="opciones d-flex justify-content-around">
+                <Button className='btn-secundario mb-3'><i className="bi bi-filetype-pdf me-2"></i>Descargar PDF</Button>
+                <Button className='btn-principal mb-3' onClick={cerrarModalCompra}><i className="bi bi-patch-check-fill me-2"></i>Aceptar</Button>
+            </div>
         </Modal>
     );
 };
