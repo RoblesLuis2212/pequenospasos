@@ -9,15 +9,16 @@ import ModalDatosCompra from './ModalDatosCompra';
 import { useState } from 'react';
 
 const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
-    const [showModalCompra, setShowModalCompra] = useState(false);
+    console.log("detalle del carrito: ", detalleCarrito);
+    const [showModalCompra, setShowModalCompra] = useState(true);
 
     const cerrarModalCompra = () => setShowModalCompra(false);
     const abrirModalCompra = () => setShowModalCompra(true);
 
     const finalizarCompra = async () => {
-        const respuesta = await finalizarCompraUsuario(detalleCarrito.carrito.idCarrito, "PENDIENTE");
-        if (respuesta.status === 200) {
-            abrirModalCompra();
+        const respuesta = await finalizarCompraUsuario(detalleCarrito.carrito?.idCarrito);
+        if (respuesta.status === 201) {
+            alert("Compra reservada correctamente");
         }
     }
 
@@ -50,7 +51,7 @@ const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
                     </div>
                 </Card.Body >
             </Card >
-            <ModalDatosCompra showModalCompra={showModalCompra} cerrarModalCompra={cerrarModalCompra}></ModalDatosCompra>
+            {/* <ModalDatosCompra showModalCompra={showModalCompra} cerrarModalCompra={cerrarModalCompra} detalleCarrito={detalleCarrito}></ModalDatosCompra> */}
         </>
     );
 };

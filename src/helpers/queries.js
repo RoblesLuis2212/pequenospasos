@@ -6,6 +6,7 @@ const pacientesBackend = import.meta.env.VITE_API_PACIENTES;
 const turnosBackend = import.meta.env.VITE_API_TURNOS;
 const productosBackend = import.meta.env.VITE_API_PRODUCTOS;
 const carritoBackend = import.meta.env.VITE_API_CARRITO;
+const ventasBackend = import.meta.env.VITE_API_VENTAS;
 
 export const login = async (usuario) => {
   try {
@@ -356,15 +357,14 @@ export const eliminarProductoCarrito = async (idDetalleCarrito) => {
   }
 };
 
-export const finalizarCompraUsuario = async (id, estadoNuevo) => {
+export const finalizarCompraUsuario = async (id) => {
   try {
-    const respuesta = await fetch(`${carritoBackend}/${id}`, {
-      method: "PATCH",
+    const respuesta = await fetch(`${ventasBackend}/${id}`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
       },
-      body: JSON.stringify({ estado: estadoNuevo }),
     });
     return respuesta;
   } catch (err) {
