@@ -23,7 +23,7 @@ const TablaProductos = ({ productosCarrito, actualizarCantidad, obtenerCarrito }
                     ) : (
                         <tr>
                             <td colSpan="4" className="text-center">
-                                <p className="mb-0">No hay productos en el carrito.</p>
+                                <p className="mb-0">No hay productos en tu carrito.</p>
                             </td>
                         </tr>
                     )

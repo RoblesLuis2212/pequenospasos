@@ -40,12 +40,27 @@ const Carrito = () => {
             <section className='container mt-3'>
                 <h4 className="titulo">Tu carrito de compras</h4>
                 <div className="row g-4">
-                    <div className="col-12 col-md-8 col-md-8">
-                        <TablaProductos productosCarrito={productosCarrito} actualizarCantidad={actualizarCantidad} obtenerCarrito={obtenerCarrito} ></TablaProductos>
-                    </div>
-                    <div className="col-12 col-md-4 col-lg-4">
-                        <CardResumen detalleCarrito={detalleCarrito}></CardResumen>
-                    </div>
+                    {productosCarrito.length > 0 ? (
+                        <div className="col-12 col-md-8 col-md-8">
+                            <TablaProductos productosCarrito={productosCarrito} actualizarCantidad={actualizarCantidad} obtenerCarrito={obtenerCarrito} ></TablaProductos>
+                        </div>
+                    ) : (
+                        <div className="col-12">
+                            <TablaProductos productosCarrito={productosCarrito} actualizarCantidad={actualizarCantidad} obtenerCarrito={obtenerCarrito} ></TablaProductos>
+                        </div>
+                    )
+                    }
+
+                    {productosCarrito.length > 0 ? (
+                        <div className="col-12 col-md-4 col-lg-4">
+                            <CardResumen detalleCarrito={detalleCarrito}></CardResumen>
+                        </div>
+                    ) : (
+                        <div className="col-12 col-md-4 col-lg-4 d-none">
+                            <CardResumen detalleCarrito={detalleCarrito}></CardResumen>
+                        </div>
+                    )
+                    }
                 </div>
             </section>
             <ContainerProductosRecomendados></ContainerProductosRecomendados>

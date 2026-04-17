@@ -355,3 +355,20 @@ export const eliminarProductoCarrito = async (idDetalleCarrito) => {
     return null;
   }
 };
+
+export const finalizarCompraUsuario = async (id, estadoNuevo) => {
+  try {
+    const respuesta = await fetch(`${carritoBackend}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify({ estado: estadoNuevo }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
