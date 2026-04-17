@@ -34,6 +34,7 @@ const Tienda = () => {
         obtenerProductos(paginaActual, categoria, busqueda);
     }, [paginaActual, categoria, busqueda]);
 
+    console.log("datos productos: ", productos);
 
 
     return (
