@@ -53,7 +53,7 @@ const Carrito = () => {
 
                     {productosCarrito.length > 0 ? (
                         <div className="col-12 col-md-4 col-lg-4">
-                            <CardResumen detalleCarrito={detalleCarrito}></CardResumen>
+                            <CardResumen detalleCarrito={detalleCarrito} obtenerCarrito={obtenerCarrito}></CardResumen>
                         </div>
                     ) : (
                         <div className="col-12 col-md-4 col-lg-4 d-none">
