@@ -372,3 +372,18 @@ export const finalizarCompraUsuario = async (id) => {
     return null;
   }
 };
+
+export const listarComprasUsuario = async () => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
