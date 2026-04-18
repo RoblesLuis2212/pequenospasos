@@ -1,4 +1,6 @@
 import { Button, Badge } from "react-bootstrap";
+import ModalDatosCompra from "../Carrito/ModalDatosCompra";
+import { useState } from "react";
 
 
 const ItemCompras = ({ itemCompra }) => {
@@ -28,20 +30,27 @@ const ItemCompras = ({ itemCompra }) => {
         return <Badge bg={colores[estado] ?? 'secondary'}>{estado}</Badge>;
     }
 
+    const [showModalCompra, setShowModalCompra] = useState(true);
+
+    const cerrarModalCompra = () => setShowModalCompra(false);
+    const abrirModalCompra = () => setShowModalCompra(true);
+
     return (
-        <tr>
-            <td className="text-center">{itemCompra.idVenta}</td>
-            <td className="text-center">{fechaFinal}</td>
-            <td className="text-center">{itemCompra.detalles.reduce((total, detalle) => total + detalle.cantidad, 0)}</td>
-            <td className="text-center">{getBadge(itemCompra.estado)}</td>
-            <td className="text-center">${itemCompra.monto}</td>
-            <td>
-                <div className="d-flex justify-content-center">
-                    <Button variant="success me-2"><i className="bi bi-eye-fill"></i></Button>
-                    <Button variant="danger me-2"><i className="bi bi-trash3-fill"></i></Button>
-                </div>
-            </td>
-        </tr>
+        <>
+            <tr>
+                <td className="text-center">{itemCompra.idVenta}</td>
+                <td className="text-center">{fechaFinal}</td>
+                <td className="text-center">{itemCompra.detalles.reduce((total, detalle) => total + detalle.cantidad, 0)}</td>
+                <td className="text-center">{getBadge(itemCompra.estado)}</td>
+                <td className="text-center">${itemCompra.monto}</td>
+                <td>
+                    <div className="d-flex justify-content-center">
+                        <Button variant="success me-2"><i className="bi bi-filetype-pdf"></i></Button>
+                        <Button variant="danger me-2"><i className="bi bi-x-circle-fill"></i></Button>
+                    </div>
+                </td>
+            </tr>
+        </>
     );
 };
 

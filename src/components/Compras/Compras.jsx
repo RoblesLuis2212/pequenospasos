@@ -11,7 +11,6 @@ const Compras = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setCompras(datos);
-            console.log(datos);
         }
     }
 
@@ -22,7 +21,7 @@ const Compras = () => {
     return (
         <section className='container py-2'>
             <div className="row d-flex justify-content-center">
-                <h4 className='titulo text-center mt-3'>Mis Compras</h4>
+                <h4 className='titulo text-center mt-2 mb-3'>Mis Compras</h4>
                 <div className="col-12 tabla-container">
                     <TablaCompras compras={compras}></TablaCompras>
                 </div>
