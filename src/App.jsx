@@ -17,6 +17,7 @@ import CambiarContrasena from "./components/Usuario/CambiarContrasena"
 import Carrito from "./components/Carrito/Carrito"
 import { listarProductosAPI, listarProductosInicioAPI } from "./helpers/queries"
 import Tienda from "./components/Tienda/Tienda"
+import Compras from "./components/Compras/Compras"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -125,6 +126,11 @@ function App() {
           <Route
             path="/tienda"
             element={<Tienda></Tienda>}
+          >
+          </Route>
+          <Route
+            path="/mis-compras"
+            element={<Compras></Compras>}
           >
           </Route>
         </Routes>
