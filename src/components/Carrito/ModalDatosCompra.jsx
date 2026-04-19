@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import jsPDF from 'jspdf';
 
 const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, venta }) => {
 
@@ -21,6 +22,92 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
     const minutos = fecha.getMinutes().toString().padStart(2, "0");
 
     const fechaFinal = `${texto} ${hora}:${minutos} hs`;
+
+    console.log(venta);
+
+    const descargarPDF = () => {
+        const doc = new jsPDF();
+
+        const margenIzquierdo = 14;
+        let y = 25;
+
+        // Título
+        doc.setFontSize(18);
+        doc.text("Detalle de Compra", margenIzquierdo, y);
+
+        y += 10;
+
+        // ID
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("ID:", margenIzquierdo, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${venta.idVenta}`, 30, y);
+
+        y += 8;
+
+        // Nombre
+        doc.setFont("helvetica", "bold");
+        doc.text("Cliente:", margenIzquierdo, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${usuario}`, 35, y);
+
+        y += 8;
+
+        // Fecha
+        doc.setFont("helvetica", "bold");
+        doc.text("Fecha:", margenIzquierdo, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${fechaFinal}`, 35, y);
+
+        y += 8;
+
+        // Lugar de retiro
+        doc.setFont("helvetica", "bold");
+        doc.text("Retiro en:", margenIzquierdo, y);
+        doc.setFont("helvetica", "normal");
+        doc.text("Belgrano 625 Monteros", 40, y);
+
+        y += 8;
+
+        // Estado
+        doc.setFont("helvetica", "bold");
+        doc.text("Estado:", margenIzquierdo, y);
+        doc.setFont("helvetica", "normal");
+        doc.text("PENDIENTE", 35, y);
+
+        y += 12;
+
+        // Productos
+        doc.setFont("helvetica", "bold");
+        doc.text("Productos:", margenIzquierdo, y);
+
+        doc.setFont("helvetica", "normal");
+        y += 8;
+
+        detalleCarrito.carrito?.detalleCarritos?.forEach((item) => {
+            const nombre = item.producto?.nombre || "Sin nombre";
+            const cantidad = item.cantidad;
+            const precio = Number(item.producto?.precio || 0);
+            const subtotal = cantidad * precio;
+
+            const texto = `• ${nombre} x ${cantidad} = $${subtotal}`;
+
+            const lineas = doc.splitTextToSize(texto, 180);
+            doc.text(lineas, margenIzquierdo, y);
+
+            y += lineas.length * 8;
+        });
+
+        // Total
+        y += 10;
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text(`Total: $${detalleCarrito.total}`, margenIzquierdo, y);
+
+        // Descargar
+        doc.save(`compra_${venta.idVenta}.pdf`);
+    };
 
 
     return (
@@ -43,7 +130,7 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
                 <p><strong>Total Pedido: </strong>${detalleCarrito.total}</p>
             </Modal.Body>
             <div className="opciones d-flex justify-content-around">
-                <Button className='btn-secundario mb-3'><i className="bi bi-filetype-pdf me-2"></i>Descargar PDF</Button>
+                <Button className='btn-secundario mb-3' onClick={descargarPDF}><i className="bi bi-filetype-pdf me-2"></i>Descargar PDF</Button>
                 <Button className='btn-principal mb-3' onClick={cerrarModalCompra}><i className="bi bi-patch-check-fill me-2"></i>Aceptar</Button>
             </div>
         </Modal>

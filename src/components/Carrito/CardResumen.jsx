@@ -9,7 +9,7 @@ import ModalDatosCompra from './ModalDatosCompra';
 import { useState } from 'react';
 
 const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
-    const [showModalCompra, setShowModalCompra] = useState(true);
+    const [showModalCompra, setShowModalCompra] = useState(false);
 
     const cerrarModalCompra = () => setShowModalCompra(false);
     const abrirModalCompra = () => setShowModalCompra(true);
@@ -26,6 +26,7 @@ const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
         }
     }
 
+    console.log(venta);
 
     return (
         <>
