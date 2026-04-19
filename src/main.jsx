@@ -5,11 +5,14 @@ import "bootstrap-icons/font/bootstrap-icons.min.css";
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
+import { CarritoProvider } from './Context/ContextCarrito.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <StrictMode>
-      <App />
+      <CarritoProvider>
+        <App />
+      </CarritoProvider>
     </StrictMode>,
   </BrowserRouter>
 )
