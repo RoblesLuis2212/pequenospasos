@@ -81,6 +81,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                 }}>Mis turnos</NavDropdown.Item>
                                 <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
                                 <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
+                                <NavDropdown.Item className='nav-link' as={Link} to={"/mis-compras"}>Mis Compras</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>
