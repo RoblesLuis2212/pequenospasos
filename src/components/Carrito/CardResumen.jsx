@@ -20,13 +20,10 @@ const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
         const respuesta = await finalizarCompraUsuario(detalleCarrito.carrito?.idCarrito);
         if (respuesta.status === 201) {
             const datos = await respuesta.json();
-            console.log("datos de la venta: ", datos);
             setVenta(datos);
             abrirModalCompra();
         }
     }
-
-    console.log(venta);
 
     return (
         <>

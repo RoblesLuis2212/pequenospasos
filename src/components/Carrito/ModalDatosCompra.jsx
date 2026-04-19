@@ -2,11 +2,12 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import jsPDF from 'jspdf';
+import { useNavigate } from 'react-router-dom';
 
 const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, venta }) => {
 
     const usuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.nombre;
-    console.log(usuario);
+    const navigate = useNavigate();
 
     const fecha = new Date(venta.fechaCompra);
 
@@ -22,8 +23,6 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
     const minutos = fecha.getMinutes().toString().padStart(2, "0");
 
     const fechaFinal = `${texto} ${hora}:${minutos} hs`;
-
-    console.log(venta);
 
     const descargarPDF = () => {
         const doc = new jsPDF();
@@ -131,7 +130,10 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
             </Modal.Body>
             <div className="opciones d-flex justify-content-around">
                 <Button className='btn-secundario mb-3' onClick={descargarPDF}><i className="bi bi-filetype-pdf me-2"></i>Descargar PDF</Button>
-                <Button className='btn-principal mb-3' onClick={cerrarModalCompra}><i className="bi bi-patch-check-fill me-2"></i>Aceptar</Button>
+                <Button className='btn-principal mb-3' onClick={() => {
+                    navigate("/mis-compras");
+                    cerrarModalCompra();
+                }}><i className="bi bi-patch-check-fill me-2"></i>Aceptar</Button>
             </div>
         </Modal>
     );
