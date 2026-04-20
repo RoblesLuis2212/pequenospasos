@@ -1,5 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import ItemCompras from './ItemCompras';
+import { useEffect } from 'react';
+import { listarComprasUsuario } from '../../helpers/queries';
 
 const TablaCompras = ({ compras }) => {
     return (
