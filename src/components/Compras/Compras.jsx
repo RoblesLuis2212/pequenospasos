@@ -23,7 +23,7 @@ const Compras = () => {
             <div className="row d-flex justify-content-center">
                 <h4 className='titulo text-center mt-2 mb-3'>Mis Compras</h4>
                 <div className="col-12 tabla-container">
-                    <TablaCompras compras={compras}></TablaCompras>
+                    <TablaCompras compras={compras} obtenerComprasUsuario={obtenerComprasUsuario}></TablaCompras>
                 </div>
             </div>
         </section>

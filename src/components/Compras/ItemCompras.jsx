@@ -1,12 +1,12 @@
 import { Button, Badge } from "react-bootstrap";
 import ModalDatosCompra from "../Carrito/ModalDatosCompra";
 import { useEffect, useState } from "react";
-import { listarComprasUsuario } from "../../helpers/queries";
+import { cancelarCompraUsuario, listarComprasUsuario } from "../../helpers/queries";
 import jsPDF from "jspdf";
 import Compras from "./Compras";
 
 
-const ItemCompras = ({ itemCompra }) => {
+const ItemCompras = ({ itemCompra, obtenerComprasUsuario }) => {
     //Formateo de la hora a un formato mas legible
     const fecha = new Date(itemCompra.fechaCompra);
 
@@ -124,6 +124,14 @@ const ItemCompras = ({ itemCompra }) => {
         doc.save(`compra_${itemCompra.idVenta}.pdf`);
     };
 
+    const cancelarCompra = async () => {
+        const respuesta = await cancelarCompraUsuario(itemCompra.idVenta);
+        if (respuesta.status === 200) {
+            alert("Compra cancelada exitosamente");
+            obtenerComprasUsuario();
+        }
+    }
+
     return (
         <>
             <tr>
@@ -137,7 +145,7 @@ const ItemCompras = ({ itemCompra }) => {
                         <Button variant="success me-2" onClick={descargarPDF}><i className="bi bi-filetype-pdf"></i></Button>
 
                         {itemCompra.estado !== "CANCELADO" && (
-                            <Button variant="danger me-2"><i className="bi bi-x-circle-fill"></i></Button>
+                            <Button variant="danger me-2" onClick={cancelarCompra}><i className="bi bi-x-circle-fill"></i></Button>
                         )}
                     </div>
                 </td>

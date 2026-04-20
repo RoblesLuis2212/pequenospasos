@@ -387,3 +387,18 @@ export const listarComprasUsuario = async () => {
     return null;
   }
 };
+
+export const cancelarCompraUsuario = async (id) => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

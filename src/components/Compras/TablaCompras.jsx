@@ -3,7 +3,7 @@ import ItemCompras from './ItemCompras';
 import { useEffect } from 'react';
 import { listarComprasUsuario } from '../../helpers/queries';
 
-const TablaCompras = ({ compras }) => {
+const TablaCompras = ({ compras, obtenerComprasUsuario }) => {
     return (
         <Table responsive>
             <thead className='tabla-encabezado'>
@@ -18,7 +18,7 @@ const TablaCompras = ({ compras }) => {
             </thead>
             <tbody>
                 {compras.map((itemCompra) => (
-                    <ItemCompras itemCompra={itemCompra} key={itemCompra.idVenta}></ItemCompras>
+                    <ItemCompras itemCompra={itemCompra} key={itemCompra.idVenta} obtenerComprasUsuario={obtenerComprasUsuario}></ItemCompras>
                 ))}
             </tbody>
         </Table>
