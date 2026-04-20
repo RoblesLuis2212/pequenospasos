@@ -89,7 +89,7 @@ const ItemCompras = ({ itemCompra }) => {
         doc.setFont("helvetica", "bold");
         doc.text("Estado:", margenIzquierdo, y);
         doc.setFont("helvetica", "normal");
-        doc.text("PENDIENTE", 35, y);
+        doc.text(`${itemCompra.estado}`, 35, y);
 
         y += 12;
 
@@ -135,7 +135,10 @@ const ItemCompras = ({ itemCompra }) => {
                 <td>
                     <div className="d-flex justify-content-center">
                         <Button variant="success me-2" onClick={descargarPDF}><i className="bi bi-filetype-pdf"></i></Button>
-                        <Button variant="danger me-2"><i className="bi bi-x-circle-fill"></i></Button>
+
+                        {itemCompra.estado !== "CANCELADO" && (
+                            <Button variant="danger me-2"><i className="bi bi-x-circle-fill"></i></Button>
+                        )}
                     </div>
                 </td>
             </tr>
