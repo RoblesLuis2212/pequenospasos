@@ -4,7 +4,7 @@ const Administrador = () => {
     return (
         <section className='container-fluid'>
             <div className="row mt-1 g-3">
-                <div className="col-12 col-md-6 col-lg-4">
+                <div className="col-12 col-lg-4">
                     <Card className="shadow-lg h-100" >
                         <Card.Body>
                             <Card.Title>Turnos</Card.Title>
@@ -15,7 +15,7 @@ const Administrador = () => {
                         </Card.Body>
                     </Card>
                 </div>
-                <div className="col-12 col-md-6 col-lg-4">
+                <div className="col-12 col-lg-4">
                     <Card className="shadow-lg h-100" >
                         <Card.Body>
                             <Card.Title>Pedidos</Card.Title>
@@ -26,7 +26,7 @@ const Administrador = () => {
                         </Card.Body>
                     </Card>
                 </div>
-                <div className="col-12 col-md-6 col-lg-4">
+                <div className="col-12 col-lg-4">
                     <Card className="shadow-lg h-100" >
                         <Card.Body>
                             <Card.Title>Productos totales</Card.Title>
