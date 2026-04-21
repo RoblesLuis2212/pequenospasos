@@ -21,8 +21,7 @@ const PedidosTabs = () => {
                         <tr>
                             <th>#</th>
                             <th>Cliente</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
+                            <th>Productos</th>
                             <th>Total</th>
                             <th>Estado</th>
                             <th>Acciones</th>

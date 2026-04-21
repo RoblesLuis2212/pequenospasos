@@ -21,7 +21,7 @@ const TurnosTabs = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Cliente</th>
+                            <th>Paciente</th>
                             <th>Fecha</th>
                             <th>Hora</th>
                             <th>Estado</th>
