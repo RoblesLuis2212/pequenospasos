@@ -4,6 +4,9 @@ import { data } from "react-router-dom";
 const usuariosBackend = import.meta.env.VITE_API_USUARIOS;
 const pacientesBackend = import.meta.env.VITE_API_PACIENTES;
 const turnosBackend = import.meta.env.VITE_API_TURNOS;
+const productosBackend = import.meta.env.VITE_API_PRODUCTOS;
+const carritoBackend = import.meta.env.VITE_API_CARRITO;
+const ventasBackend = import.meta.env.VITE_API_VENTAS;
 
 export const login = async (usuario) => {
   try {
@@ -243,6 +246,155 @@ export const actualizarDatosUsuario = async (id, datos) => {
         "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
       },
       body: JSON.stringify(datos),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const listarProductosAPI = async () => {
+  try {
+    const respuesta = await fetch(productosBackend);
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const listarProductosInicioAPI = async () => {
+  try {
+    const respuesta = await fetch(`${productosBackend}/inicio`);
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const paginacion = async (pagina = 1) => {
+  try {
+    const respuesta = await fetch(
+      `${productosBackend}/paginado?page=${pagina}&limit=8`,
+    );
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const filtrarProductosAPI = async (categoria = "", pagina = 1) => {
+  const respuesta = await fetch(
+    `${productosBackend}/filtro?categoria=${categoria}&page=${pagina}&limit=8`,
+  );
+  return respuesta;
+};
+
+export const buscarProductoAPI = async (nombre, pagina = 1) => {
+  const respuesta = await fetch(
+    `${productosBackend}/buscar?nombre=${nombre}&page=${pagina}&limit=8`,
+  );
+  return respuesta;
+};
+
+export const obtenerProductosDestacadosAPI = async () => {
+  try {
+    const respuesta = await fetch(`${productosBackend}/destacados`);
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const obtenerCarritoUsuarioAPI = async () => {
+  try {
+    const respuesta = await fetch(`${carritoBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const AgregarAlCarritoAPI = async (productoId, cantidad) => {
+  try {
+    const respuesta = await fetch(`${carritoBackend}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify({ productoId, cantidad }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const eliminarProductoCarrito = async (idDetalleCarrito) => {
+  try {
+    const respuesta = await fetch(`${carritoBackend}/${idDetalleCarrito}`, {
+      method: "DELETE",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const finalizarCompraUsuario = async (id) => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const listarComprasUsuario = async () => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const cancelarCompraUsuario = async (id) => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
     });
     return respuesta;
   } catch (err) {

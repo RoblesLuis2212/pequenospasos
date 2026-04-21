@@ -66,7 +66,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                         <Nav className="mx-auto align-items-center mt-1 mt-md-0">
                             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
                             <Nav.Link>Tratamientos</Nav.Link>
-                            <Nav.Link>Tienda</Nav.Link>
+                            <Nav.Link as={Link} to="/tienda">Tienda</Nav.Link>
                             <NavDropdown title="Niños">
                                 <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Turnos</NavDropdown.Item>
                                 <NavDropdown.Item className='nav-link' onClick={() => {
@@ -81,6 +81,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                 }}>Mis turnos</NavDropdown.Item>
                                 <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
                                 <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
+                                <NavDropdown.Item className='nav-link' as={Link} to={"/mis-compras"}>Mis Compras</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav className='align-items-center me-4'>

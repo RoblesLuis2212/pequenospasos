@@ -15,6 +15,9 @@ import ConfirmacionCorreo from "./components/Usuario/ConfirmacionCorreo"
 import RestablecerContrasena from "./components/Usuario/RestablecerContrasena"
 import CambiarContrasena from "./components/Usuario/CambiarContrasena"
 import Carrito from "./components/Carrito/Carrito"
+import { listarProductosAPI, listarProductosInicioAPI } from "./helpers/queries"
+import Tienda from "./components/Tienda/Tienda"
+import Compras from "./components/Compras/Compras"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -25,6 +28,20 @@ function App() {
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado])
+
+  const [productos, setProductos] = useState([]);
+
+  const obtenerProductosInicio = async () => {
+    const respuesta = await listarProductosInicioAPI();
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
+      setProductos(datos);
+    }
+  }
+
+  useEffect(() => {
+    obtenerProductosInicio();
+  }, [])
 
   //Aqui se realiza la configuracion de las diferentes rutas a las que se podra acceder en la pagina
   return (
@@ -41,7 +58,7 @@ function App() {
               <>
                 <HeroSection></HeroSection>
                 <Tratamientos></Tratamientos>
-                <ContainerProductos></ContainerProductos>
+                <ContainerProductos productos={productos}></ContainerProductos>
                 <FormularioContacto></FormularioContacto>
               </>
             }
@@ -104,6 +121,16 @@ function App() {
           <Route
             path="/carrito"
             element={<Carrito></Carrito>}
+          >
+          </Route>
+          <Route
+            path="/tienda"
+            element={<Tienda></Tienda>}
+          >
+          </Route>
+          <Route
+            path="/mis-compras"
+            element={<Compras></Compras>}
           >
           </Route>
         </Routes>

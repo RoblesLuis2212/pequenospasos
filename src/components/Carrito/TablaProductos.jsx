@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import ItemProductos from './ItemProductos';
 
-const TablaProductos = () => {
+const TablaProductos = ({ productosCarrito, actualizarCantidad, obtenerCarrito }) => {
     return (
         <>
             <Table responsive>
@@ -15,8 +15,19 @@ const TablaProductos = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <ItemProductos></ItemProductos>
-                    <ItemProductos></ItemProductos>
+                    {productosCarrito.length > 0 ? (
+                        productosCarrito.map((itemProductoCarrito) => (
+                            <ItemProductos itemProductoCarrito={itemProductoCarrito} actualizarCantidad={actualizarCantidad} key={itemProductoCarrito.idDetalleCarrito} obtenerCarrito={obtenerCarrito} ></ItemProductos>
+                        ))
+
+                    ) : (
+                        <tr>
+                            <td colSpan="4" className="text-center">
+                                <p className="mb-0">No hay productos en tu carrito.</p>
+                            </td>
+                        </tr>
+                    )
+                    }
                 </tbody>
             </Table>
         </>
