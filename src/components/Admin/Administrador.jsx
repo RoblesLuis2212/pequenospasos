@@ -5,7 +5,7 @@ const Administrador = () => {
         <section className='container-fluid'>
             <div className="row mt-1 g-3">
                 <div className="col-12 col-lg-4">
-                    <Card className="shadow-lg h-100" >
+                    <Card className="shadow-sm h-100" >
                         <Card.Body>
                             <Card.Title>Turnos</Card.Title>
                             <Card.Text className="fs-3 fw-bold text-warning">30</Card.Text>
@@ -16,7 +16,7 @@ const Administrador = () => {
                     </Card>
                 </div>
                 <div className="col-12 col-lg-4">
-                    <Card className="shadow-lg h-100" >
+                    <Card className="shadow-sm h-100" >
                         <Card.Body>
                             <Card.Title>Pedidos</Card.Title>
                             <Card.Text className="fs-3 fw-bold text-success">100</Card.Text>
@@ -27,7 +27,7 @@ const Administrador = () => {
                     </Card>
                 </div>
                 <div className="col-12 col-lg-4">
-                    <Card className="shadow-lg h-100" >
+                    <Card className="shadow-sm h-100" >
                         <Card.Body>
                             <Card.Title>Productos totales</Card.Title>
                             <Card.Text className="fs-3 fw-bold text-primary">50</Card.Text>
