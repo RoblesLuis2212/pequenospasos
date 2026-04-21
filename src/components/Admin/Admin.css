@@ -21,3 +21,109 @@
   background: rgba(109, 40, 217, 0.1) !important;
   color: #5b21b6 !important;
 }
+/* Tablas compartidas */
+.admin-wrapper {
+    padding: 16px 0;
+}
+
+.admin-toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.admin-search {
+    flex: 1;
+}
+
+.admin-titulo {
+    color: #4f46e5;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.tabla-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.admin-table thead tr {
+    background: #dbeafe;
+}
+
+.admin-table thead th {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #1e3a5f;
+    padding: 12px 14px;
+    border: none;
+}
+
+.admin-table tbody td {
+    vertical-align: middle;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.btn-agregar {
+    background: #3730a3 !important;
+    border: none !important;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 10px 20px;
+}
+
+.btn-buscar {
+    background: #3730a3 !important;
+    border: none !important;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+.badge-stock { background: #16a34a !important; font-size: 0.8rem; padding: 5px 10px; }
+.badge-activo { background: #16a34a !important; font-size: 0.8rem; padding: 5px 10px; }
+.badge-inactivo { background: #f59e0b !important; font-size: 0.8rem; padding: 5px 10px; }
+
+.acciones-cell {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.btn-editar {
+    background: transparent !important;
+    border: 1px solid #6366f1 !important;
+    color: #6366f1 !important;
+    font-size: 0.78rem;
+}
+
+.btn-activar {
+    background: transparent !important;
+    border: 1px solid #16a34a !important;
+    color: #16a34a !important;
+    font-size: 0.78rem;
+}
+
+.btn-eliminar {
+    background: transparent !important;
+    border: 1px solid #ef4444 !important;
+    color: #ef4444 !important;
+    font-size: 0.78rem;
+}
+
+.btn-editar:hover { background: #6366f1 !important; color: #fff !important; }
+.btn-activar:hover { background: #16a34a !important; color: #fff !important; }
+.btn-eliminar:hover { background: #ef4444 !important; color: #fff !important; }
+
+.admin-wrapper {
+    padding: 16px;
+    background: #f8f7ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 12px;
+    margin-top: 8px;
+    box-shadow: 0 2px 12px rgba(109, 40, 217, 0.06);
+}
