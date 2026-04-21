@@ -5,7 +5,6 @@ const PedidosTabs = () => {
     return (
         <div className="admin-wrapper">
             <div className="admin-toolbar">
-                <Button className="btn-agregar">+ Agregar pedido</Button>
                 <InputGroup className="pedidos-search">
                     <Form.Control
                         placeholder="Buscar por cliente, producto, estado..."
