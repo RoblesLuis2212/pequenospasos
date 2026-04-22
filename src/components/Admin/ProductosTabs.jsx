@@ -2,8 +2,9 @@ import { Table, Button, InputGroup, Form, Badge } from 'react-bootstrap';
 import './Productos.css';
 import ModalProductos from './ModalProductos';
 import { useState } from 'react';
+import ItemProducto from './ItemProducto';
 
-const ProductosTabs = () => {
+const ProductosTabs = ({ productos }) => {
     const [showModalProductos, setShowModalProductos] = useState(false);
 
     const cerrarModalProductos = () => setShowModalProductos(false);
@@ -41,11 +42,17 @@ const ProductosTabs = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colSpan={9} className="text-center py-4 text-muted">
-                                    No hay productos cargados
-                                </td>
-                            </tr>
+                            {productos.length > 0 ? (
+                                productos.map((itemProducto) => (
+                                    <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto}></ItemProducto>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={9} className="text-center py-4 text-muted">
+                                        No hay productos cargados
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </Table>
                 </div>

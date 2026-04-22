@@ -1,7 +1,24 @@
 import { Card, Badge } from "react-bootstrap";
 import AdminTabs from "./AdminTabs";
+import { useEffect, useState } from "react";
+import { listarProductosAPI } from "../../helpers/queries";
 
 const Administrador = () => {
+    const [productos, setProductos] = useState([]);
+
+    const obtenerProductos = async () => {
+        const respuesta = await listarProductosAPI();
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            setProductos(datos);
+            console.log(datos);
+        }
+    }
+
+    useEffect(() => {
+        obtenerProductos();
+    }, [])
+
     return (
         <>
             <section className='container-fluid'>
@@ -41,7 +58,7 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs></AdminTabs>
+            <AdminTabs productos={productos}></AdminTabs>
         </>
     );
 };
