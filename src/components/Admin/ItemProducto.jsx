@@ -1,6 +1,6 @@
 import { Badge, Button } from "react-bootstrap";
 
-const ItemProducto = ({ itemProducto }) => {
+const ItemProducto = ({ itemProducto, abrirModalProductosEditar }) => {
 
     const formatearFecha = (fechaISO) => {
         const fecha = new Date(fechaISO);
@@ -35,7 +35,7 @@ const ItemProducto = ({ itemProducto }) => {
             <td>
                 <div className="">
                     <Button variant="warning me-2"><i className="bi bi-exclamation-triangle-fill"></i></Button>
-                    <Button variant="info me-2"><i className="bi bi-pencil-square"></i></Button>
+                    <Button variant="info me-2" onClick={abrirModalProductosEditar}><i className="bi bi-pencil-square"></i></Button>
                 </div>
             </td>
         </tr>

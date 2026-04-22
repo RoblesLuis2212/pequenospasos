@@ -4,11 +4,20 @@ import ModalProductos from './ModalProductos';
 import { useState } from 'react';
 import ItemProducto from './ItemProducto';
 
-const ProductosTabs = ({ productos, setProductos }) => {
+const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModalProducto }) => {
+    //Estado para abrir modal de crear y editar productos.
     const [showModalProductos, setShowModalProductos] = useState(false);
 
     const cerrarModalProductos = () => setShowModalProductos(false);
-    const abrirModalProductos = () => setShowModalProductos(true);
+    const abrirModalProductos = () => {
+        setModoModalProducto("crear");
+        setShowModalProductos(true);
+    }
+
+    const abrirModalProductosEditar = () => {
+        setModoModalProducto("editar");
+        setShowModalProductos(true);
+    }
 
     return (
         <>
@@ -44,7 +53,7 @@ const ProductosTabs = ({ productos, setProductos }) => {
                         <tbody>
                             {productos.length > 0 ? (
                                 productos.map((itemProducto) => (
-                                    <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto}></ItemProducto>
+                                    <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto} abrirModalProductosEditar={abrirModalProductosEditar}></ItemProducto>
                                 ))
                             ) : (
                                 <tr>
@@ -57,7 +66,7 @@ const ProductosTabs = ({ productos, setProductos }) => {
                     </Table>
                 </div>
             </div>
-            <ModalProductos showModalProductos={showModalProductos} cerrarModalProductos={cerrarModalProductos} setProductos={setProductos}></ModalProductos>
+            <ModalProductos showModalProductos={showModalProductos} cerrarModalProductos={cerrarModalProductos} setProductos={setProductos} modoModalProductos={modoModalProducto}></ModalProductos>
         </>
     );
 };

@@ -7,29 +7,34 @@ import { FormLabel } from 'react-bootstrap';
 import { agregarProductosAPI, listarProductosAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 
-const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos }) => {
+const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos, modoModalProductos }) => {
     const { handleSubmit, register, formState: { errors }, reset, clearErrors } = useForm();
 
     const postValidaciones = async (data) => {
         //Se desestructura el objeto
         const productoForm = { ...data, imagen: data.imagen[0] }
-        //Mandamos los datos a la API para guardar el producto
-        const respuesta = await agregarProductosAPI(productoForm);
-        //Si la respuesta es favorable
-        if (respuesta.status === 201) {
-            //Consultamos a la API de nuevo para tener los datos actualizados con el producto nuevo
-            const respuestadatos = await listarProductosAPI();
-            if (respuestadatos.status === 200) {
-                const datos = await respuestadatos.json()
-                setProductos(datos);//Luego actualizamos el estado local con los datos obtenidos
+        //Evaluamos el estado recibido
+        if (modoModalProductos === "crear") {
+            //Mandamos los datos a la API para guardar el producto
+            const respuesta = await agregarProductosAPI(productoForm);
+            //Si la respuesta es favorable
+            if (respuesta.status === 201) {
+                //Consultamos a la API de nuevo para tener los datos actualizados con el producto nuevo
+                const respuestadatos = await listarProductosAPI();
+                if (respuestadatos.status === 200) {
+                    const datos = await respuestadatos.json()
+                    setProductos(datos);//Luego actualizamos el estado local con los datos obtenidos
+                }
+                //Mensaje de exito
+                Swal.fire({
+                    title: "Producto creado exitosamente!",
+                    icon: "success",
+                    draggable: true
+                });
+                cerrarModalProductos();
             }
-            //Mensaje de exito
-            Swal.fire({
-                title: "Producto creado exitosamente!",
-                icon: "success",
-                draggable: true
-            });
-            cerrarModalProductos();
+        } else if (modoModalProductos === "editar") {
+
         }
     }
 
@@ -37,7 +42,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos
     return (
         <Modal show={showModalProductos} onHide={cerrarModalProductos}>
             <Modal.Header className='d-flex justify-content-center'>
-                <Modal.Title className='titulo'>Agregar productos</Modal.Title>
+                <Modal.Title className='titulo'>{modoModalProductos === "crear" ? "Agregar producto" : "Editar producto"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit(postValidaciones)}>
