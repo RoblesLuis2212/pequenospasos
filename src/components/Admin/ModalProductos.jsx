@@ -4,12 +4,33 @@ import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import FormRange from 'react-bootstrap/esm/FormRange';
 import { FormLabel } from 'react-bootstrap';
+import { agregarProductosAPI, listarProductosAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
-const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
+const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos }) => {
     const { handleSubmit, register, formState: { errors }, reset, clearErrors } = useForm();
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const postValidaciones = async (data) => {
+        //Se desestructura el objeto
+        const productoForm = { ...data, imagen: data.imagen[0] }
+        //Mandamos los datos a la API para guardar el producto
+        const respuesta = await agregarProductosAPI(productoForm);
+        //Si la respuesta es favorable
+        if (respuesta.status === 201) {
+            //Consultamos a la API de nuevo para tener los datos actualizados con el producto nuevo
+            const respuestadatos = await listarProductosAPI();
+            if (respuestadatos.status === 200) {
+                const datos = await respuestadatos.json()
+                setProductos(datos);//Luego actualizamos el estado local con los datos obtenidos
+            }
+            //Mensaje de exito
+            Swal.fire({
+                title: "Producto creado exitosamente!",
+                icon: "success",
+                draggable: true
+            });
+            cerrarModalProductos();
+        }
     }
 
 
@@ -120,7 +141,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
                     <Form.Group className='mb-3'>
                         <Form.Label className='etiquetas'>Categoria</Form.Label>
                         <Form.Select className='custom-input input-form'
-                            {...register("categoria")}
+                            {...register("categoriaId")}
                         >
                             <option value="">Seleccione una categoria</option>
                             <option value="1">Juegos de mesa</option>
@@ -131,7 +152,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
                             <option value="7">Juguetes didacticos</option>
                         </Form.Select>
                         <Form.Text className="text-danger">
-                            {errors.categoria?.message}
+                            {errors.categoriaId?.message}
                         </Form.Text>
                     </Form.Group>
                     <Button className='btn-principal w-100' type="submit">

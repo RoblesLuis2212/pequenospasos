@@ -58,7 +58,7 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos}></AdminTabs>
+            <AdminTabs productos={productos} setProductos={setProductos}></AdminTabs>
         </>
     );
 };

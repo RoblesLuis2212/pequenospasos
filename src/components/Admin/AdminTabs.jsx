@@ -5,11 +5,11 @@ import TurnosTabs from './TurnosTabs';
 import "./Admin.css";
 import PacientesTabs from './PacientesTabs';
 
-const AdminTabs = ({ productos }) => {
+const AdminTabs = ({ productos, setProductos }) => {
     const tabs = [
         { key: 'turnos', label: 'Turnos', component: <TurnosTabs></TurnosTabs> },
         { key: 'paciente', label: "Pacientes", component: <PacientesTabs></PacientesTabs> },
-        { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos}></ProductosTabs> },
+        { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos}></ProductosTabs> },
         { key: 'pedidos', label: 'Pedidos', component: <PedidosTabs></PedidosTabs> },
     ];
 

@@ -402,3 +402,28 @@ export const cancelarCompraUsuario = async (id) => {
     return null;
   }
 };
+
+export const agregarProductosAPI = async (producto) => {
+  try {
+    const formData = new FormData();
+    formData.append("nombre", producto.nombre);
+    formData.append("precio", producto.precio);
+    formData.append("stock", producto.stock);
+    formData.append("descripcion", producto.descripcion);
+    formData.append("imagen", producto.imagen);
+    formData.append("codigoBarras", producto.codigoBarras);
+    formData.append("categoriaId", producto.categoriaId);
+
+    const respuesta = await fetch(productosBackend, {
+      method: "POST",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: formData,
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

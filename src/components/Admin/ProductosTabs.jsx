@@ -4,7 +4,7 @@ import ModalProductos from './ModalProductos';
 import { useState } from 'react';
 import ItemProducto from './ItemProducto';
 
-const ProductosTabs = ({ productos }) => {
+const ProductosTabs = ({ productos, setProductos }) => {
     const [showModalProductos, setShowModalProductos] = useState(false);
 
     const cerrarModalProductos = () => setShowModalProductos(false);
@@ -57,7 +57,7 @@ const ProductosTabs = ({ productos }) => {
                     </Table>
                 </div>
             </div>
-            <ModalProductos showModalProductos={showModalProductos} cerrarModalProductos={cerrarModalProductos}></ModalProductos>
+            <ModalProductos showModalProductos={showModalProductos} cerrarModalProductos={cerrarModalProductos} setProductos={setProductos}></ModalProductos>
         </>
     );
 };
