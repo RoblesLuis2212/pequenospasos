@@ -127,3 +127,8 @@
     margin-top: 8px;
     box-shadow: 0 2px 12px rgba(109, 40, 217, 0.06);
 }
+.img-producto-admin{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}

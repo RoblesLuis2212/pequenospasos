@@ -4,19 +4,87 @@ import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import FormRange from 'react-bootstrap/esm/FormRange';
 import { FormLabel } from 'react-bootstrap';
+import { agregarProductosAPI, editarProductoAPI, listarProductosAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
-const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
-    const { handleSubmit, register, formState: { errors }, reset, clearErrors } = useForm();
+const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos, modoModalProductos, productoSeleccionado }) => {
+    const { handleSubmit, register, formState: { errors }, reset, clearErrors, setValue } = useForm();
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const postValidaciones = async (data) => {
+        //Se desestructura el objeto
+        const productoForm = { ...data, imagen: data.imagen[0] }
+        //Evaluamos el estado recibido
+        if (modoModalProductos === "crear") {
+            //Mandamos los datos a la API para guardar el producto
+            const respuesta = await agregarProductosAPI(productoForm);
+            //Si la respuesta es favorable
+            if (respuesta.status === 201) {
+                //Consultamos a la API de nuevo para tener los datos actualizados con el producto nuevo
+                const respuestadatos = await listarProductosAPI();
+                if (respuestadatos.status === 200) {
+                    const datos = await respuestadatos.json()
+                    setProductos(datos);//Luego actualizamos el estado local con los datos obtenidos
+                }
+                //Mensaje de exito
+                Swal.fire({
+                    title: "Producto creado exitosamente!",
+                    icon: "success",
+                    draggable: true
+                });
+                cerrarModalProductos();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al crear el producto. Intentelo mas tarde.',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        } else {
+            const respuesta = await editarProductoAPI(productoSeleccionado.idProducto, productoForm);
+            if (respuesta.status === 200) {
+                Swal.fire({
+                    title: "Producto modificado",
+                    text: `El producto ${productoForm.nombre} se actualizo correctamente`,
+                    icon: "success",
+                });
+                const respuestaDatos = await listarProductosAPI();
+                if (respuestaDatos.status === 200) {
+                    const datos = await respuestaDatos.json();
+                    setProductos(datos)
+                }
+                cerrarModalProductos();
+            }
+        }
     }
 
+    useEffect(() => {
+        if (modoModalProductos === "editar" && productoSeleccionado) {
+            setValue("nombre", productoSeleccionado.nombre);
+            setValue("precio", productoSeleccionado.precio);
+            setValue("stock", productoSeleccionado.stock);
+            setValue("descripcion", productoSeleccionado.descripcion);
+            setValue("imagen", productoSeleccionado.imagen);
+            setValue("codigoBarras", productoSeleccionado.codigoBarras);
+            setValue("categoriaId", productoSeleccionado.categoriaId);
+
+        }
+        if (modoModalProductos === "crear") {
+            setValue("nombre", "");
+            setValue("precio", "");
+            setValue("stock", "");
+            setValue("descripcion", "");
+            setValue("imagen", "");
+            setValue("codigoBarras", "");
+            setValue("categoriaId", "");
+        }
+    }, [modoModalProductos, productoSeleccionado, setValue])
 
     return (
         <Modal show={showModalProductos} onHide={cerrarModalProductos}>
             <Modal.Header className='d-flex justify-content-center'>
-                <Modal.Title className='titulo'>Agregar productos</Modal.Title>
+                <Modal.Title className='titulo'>{modoModalProductos === "crear" ? "Agregar producto" : "Editar producto"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit(postValidaciones)}>
@@ -89,7 +157,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
                             accept='image/*'
                             className='custom-input input-form'
                             {...register("imagen", {
-                                required: "La imagen es un dato obligatorio"
+                                required: modoModalProductos === "crear" && "La imagen es un dato obligatorio",
                             })}
                         />
                         <Form.Text className="text-danger">
@@ -101,6 +169,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
                         <Form.Control type="text"
                             placeholder='7896541236547'
                             className='custom-input input-form'
+                            disabled={modoModalProductos === "editar"}
                             {...register("codigoBarras", {
                                 required: "El codigo de barras es un dato obligatorio",
                                 minLength: {
@@ -120,7 +189,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
                     <Form.Group className='mb-3'>
                         <Form.Label className='etiquetas'>Categoria</Form.Label>
                         <Form.Select className='custom-input input-form'
-                            {...register("categoria")}
+                            {...register("categoriaId")}
                         >
                             <option value="">Seleccione una categoria</option>
                             <option value="1">Juegos de mesa</option>
@@ -131,7 +200,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos }) => {
                             <option value="7">Juguetes didacticos</option>
                         </Form.Select>
                         <Form.Text className="text-danger">
-                            {errors.categoria?.message}
+                            {errors.categoriaId?.message}
                         </Form.Text>
                     </Form.Group>
                     <Button className='btn-principal w-100' type="submit">
