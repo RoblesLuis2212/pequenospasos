@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import { aprobarCompraAPI, listarPedidosAPI } from "../../helpers/queries";
+import { aprobarCompraAPI, cancelarCompraAdmin, listarPedidosAPI } from "../../helpers/queries";
 import Swal from "sweetalert2";
 
 const ItemPedidos = ({ itemPedido, setPedidos }) => {
@@ -28,6 +28,23 @@ const ItemPedidos = ({ itemPedido, setPedidos }) => {
         }
     }
 
+    const cancelarCompra = async () => {
+        const respuesta = await cancelarCompraAdmin(itemPedido.idVenta);
+        if (respuesta.status === 200) {
+            Swal.fire({
+                title: "La compra fue cancelada exitosamente!",
+                icon: "success",
+                draggable: true
+            });
+
+            const respuestaPedidos = await listarPedidosAPI();
+            if (respuestaPedidos.status === 200) {
+                const datosActualizados = await respuestaPedidos.json();
+                setPedidos(datosActualizados);
+            }
+        }
+    }
+
     return (
         <tr>
             <td>{itemPedido.idVenta}</td>
@@ -46,7 +63,7 @@ const ItemPedidos = ({ itemPedido, setPedidos }) => {
                         <Button variant="success" className="me-2" onClick={aprobarCompra}><i className="bi bi-check-circle-fill"></i></Button>
                     )}
                     {(itemPedido.estado === "PENDIENTE" || itemPedido.estado === "APROBADO") && (
-                        <Button variant="danger" className="me-2"><i className="bi bi-x-circle-fill"></i></Button>
+                        <Button variant="danger" className="me-2" onClick={cancelarCompra}><i className="bi bi-x-circle-fill"></i></Button>
                     )}
                 </div>
             </td>

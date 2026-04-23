@@ -500,3 +500,18 @@ export const aprobarCompraAPI = async (id) => {
     return null;
   }
 };
+
+export const cancelarCompraAdmin = async (id) => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/${id}/cancelar-admin`, {
+      method: "PATCH",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
