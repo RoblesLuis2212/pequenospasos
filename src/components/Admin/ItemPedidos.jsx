@@ -77,7 +77,7 @@ const ItemPedidos = ({ itemPedido, setPedidos }) => {
                     </div>
                 </td>
             </tr>
-            <ModalDetallePedido modalDetallePedido={modalDetallePedido} cerrarModalDetallePedido={cerrarModalDetallePedido}></ModalDetallePedido>
+            <ModalDetallePedido modalDetallePedido={modalDetallePedido} cerrarModalDetallePedido={cerrarModalDetallePedido} itemPedido={itemPedido}></ModalDetallePedido>
         </>
     );
 };
