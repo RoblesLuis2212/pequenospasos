@@ -6,9 +6,10 @@ import FormRange from 'react-bootstrap/esm/FormRange';
 import { FormLabel } from 'react-bootstrap';
 import { agregarProductosAPI, listarProductosAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
-const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos, modoModalProductos }) => {
-    const { handleSubmit, register, formState: { errors }, reset, clearErrors } = useForm();
+const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos, modoModalProductos, productoSeleccionado }) => {
+    const { handleSubmit, register, formState: { errors }, reset, clearErrors, setValue } = useForm();
 
     const postValidaciones = async (data) => {
         //Se desestructura el objeto
@@ -34,9 +35,30 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos
                 cerrarModalProductos();
             }
         } else if (modoModalProductos === "editar") {
-
         }
     }
+
+    useEffect(() => {
+        if (modoModalProductos === "editar" && productoSeleccionado) {
+            setValue("nombre", productoSeleccionado.nombre);
+            setValue("precio", productoSeleccionado.precio);
+            setValue("stock", productoSeleccionado.stock);
+            setValue("descripcion", productoSeleccionado.descripcion);
+            setValue("imagen", productoSeleccionado.imagen);
+            setValue("codigoBarras", productoSeleccionado.codigoBarras);
+            setValue("categoriaId", productoSeleccionado.categoriaId);
+
+        }
+        if (modoModalProductos === "crear") {
+            setValue("nombre", "");
+            setValue("precio", "");
+            setValue("stock", "");
+            setValue("descripcion", "");
+            setValue("imagen", "");
+            setValue("codigoBarras", "");
+            setValue("categoriaId", "");
+        }
+    }, [modoModalProductos, productoSeleccionado, setValue])
 
 
     return (
@@ -127,6 +149,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos
                         <Form.Control type="text"
                             placeholder='7896541236547'
                             className='custom-input input-form'
+                            disabled={modoModalProductos === "editar"}
                             {...register("codigoBarras", {
                                 required: "El codigo de barras es un dato obligatorio",
                                 minLength: {

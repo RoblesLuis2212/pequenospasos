@@ -9,14 +9,16 @@ import { useState } from 'react';
 const AdminTabs = ({ productos, setProductos }) => {
     //Este estado funcionara para saber que accion realizaremos al abrir el modal de productos.
     const [modoModalProducto, setModoModalProducto] = useState("crear");
-
+    //Se almacenara en un estado el producto que al administrador seleccione para editar
+    const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
     const tabs = [
         { key: 'turnos', label: 'Turnos', component: <TurnosTabs></TurnosTabs> },
         { key: 'paciente', label: "Pacientes", component: <PacientesTabs></PacientesTabs> },
-        { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos} setModoModalProducto={setModoModalProducto} modoModalProducto={modoModalProducto} modoModalProducto={modoModalProducto}></ProductosTabs> },
+        { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos} setModoModalProducto={setModoModalProducto} modoModalProducto={modoModalProducto} modoModalProducto={modoModalProducto} setProductoSeleccionado={setProductoSeleccionado} productoSeleccionado={productoSeleccionado} ></ProductosTabs> },
         { key: 'pedidos', label: 'Pedidos', component: <PedidosTabs></PedidosTabs> },
     ];
+
 
     return (
         <section className='container-fluid mt-4'>

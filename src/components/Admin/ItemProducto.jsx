@@ -35,7 +35,7 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar }) => {
             <td>
                 <div className="">
                     <Button variant="warning me-2"><i className="bi bi-exclamation-triangle-fill"></i></Button>
-                    <Button variant="info me-2" onClick={abrirModalProductosEditar}><i className="bi bi-pencil-square"></i></Button>
+                    <Button variant="info me-2" onClick={() => abrirModalProductosEditar(itemProducto)}><i className="bi bi-pencil-square"></i></Button>
                 </div>
             </td>
         </tr>
