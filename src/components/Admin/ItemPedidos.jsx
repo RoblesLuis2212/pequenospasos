@@ -42,8 +42,12 @@ const ItemPedidos = ({ itemPedido, setPedidos }) => {
             <td>
                 <div>
                     <Button variant="dark" className="me-2"><i className="bi bi-eye-fill"></i></Button>
-                    <Button variant="success" className="me-2" onClick={aprobarCompra}><i className="bi bi-check-circle-fill"></i></Button>
-                    <Button variant="danger"><i className="bi bi-x-circle-fill"></i></Button>
+                    {itemPedido.estado === "PENDIENTE" && (
+                        <Button variant="success" className="me-2" onClick={aprobarCompra}><i className="bi bi-check-circle-fill"></i></Button>
+                    )}
+                    {(itemPedido.estado === "PENDIENTE" || itemPedido.estado === "APROBADO") && (
+                        <Button variant="danger" className="me-2"><i className="bi bi-x-circle-fill"></i></Button>
+                    )}
                 </div>
             </td>
         </tr>
