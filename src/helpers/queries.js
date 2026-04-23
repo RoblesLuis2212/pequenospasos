@@ -427,3 +427,28 @@ export const agregarProductosAPI = async (producto) => {
     return null;
   }
 };
+
+export const editarProductoAPI = async (id, productoActualizado) => {
+  try {
+    const formData = new FormData();
+    formData.append("nombre", productoActualizado.nombre);
+    formData.append("precio", productoActualizado.precio);
+    formData.append("stock", productoActualizado.stock);
+    formData.append("descripcion", productoActualizado.descripcion);
+    formData.append("imagen", productoActualizado.imagen);
+    formData.append("codigoBarras", productoActualizado.codigoBarras);
+    formData.append("categoriaId", productoActualizado.categoriaId);
+
+    const respuesta = await fetch(`${productosBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: formData,
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

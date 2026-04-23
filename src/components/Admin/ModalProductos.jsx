@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import FormRange from 'react-bootstrap/esm/FormRange';
 import { FormLabel } from 'react-bootstrap';
-import { agregarProductosAPI, listarProductosAPI } from '../../helpers/queries';
+import { agregarProductosAPI, editarProductoAPI, listarProductosAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 
@@ -33,8 +33,29 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos
                     draggable: true
                 });
                 cerrarModalProductos();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al crear el producto. Intentelo mas tarde.',
+                    confirmButtonText: 'Aceptar'
+                });
             }
-        } else if (modoModalProductos === "editar") {
+        } else {
+            const respuesta = await editarProductoAPI(productoSeleccionado.idProducto, productoForm);
+            if (respuesta.status === 200) {
+                Swal.fire({
+                    title: "Producto modificado",
+                    text: `El producto ${productoForm.nombre} se actualizo correctamente`,
+                    icon: "success",
+                });
+                const respuestaDatos = await listarProductosAPI();
+                if (respuestaDatos.status === 200) {
+                    const datos = await respuestaDatos.json();
+                    setProductos(datos)
+                }
+                cerrarModalProductos();
+            }
         }
     }
 
@@ -137,7 +158,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos
                             accept='image/*'
                             className='custom-input input-form'
                             {...register("imagen", {
-                                required: "La imagen es un dato obligatorio"
+                                required: modoModalProductos === "crear" && "La imagen es un dato obligatorio",
                             })}
                         />
                         <Form.Text className="text-danger">
