@@ -20,6 +20,14 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
         setShowModalProductos(true);
     }
 
+    const [busqueda, setBusqueda] = useState("");
+
+    const productosFiltrados = productos.filter((p) =>
+        p.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        p.categoria.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        String(p.precio).includes(busqueda) || p.estado.toLowerCase().includes(busqueda.toLowerCase())
+    )
+
     return (
         <>
             <div className="productos-wrapper">
@@ -29,6 +37,8 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
                     <InputGroup className="productos-search">
                         <Form.Control
                             placeholder="Buscar por nombre, categoría, último control, precio o estado..."
+                            value={busqueda}
+                            onChange={(e) => setBusqueda(e.target.value)}
                         />
                         <Button className="btn-buscar">Buscar</Button>
                     </InputGroup>
@@ -52,8 +62,8 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
                             </tr>
                         </thead>
                         <tbody>
-                            {productos.length > 0 ? (
-                                productos.map((itemProducto) => (
+                            {productosFiltrados.length > 0 ? (
+                                productosFiltrados.map((itemProducto) => (
                                     <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto} abrirModalProductosEditar={abrirModalProductosEditar} setProductos={setProductos}></ItemProducto>
                                 ))
                             ) : (
