@@ -3,6 +3,8 @@ import './Productos.css';
 import ModalProductos from './ModalProductos';
 import { useState } from 'react';
 import ItemProducto from './ItemProducto';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModalProducto, setProductoSeleccionado, productoSeleccionado }) => {
     //Estado para abrir modal de crear y editar productos.
@@ -28,6 +30,30 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
         String(p.precio).includes(busqueda) || p.estado.toLowerCase().includes(busqueda.toLowerCase())
     )
 
+    const exportarPDF = () => {
+        const doc = new jsPDF();
+
+        doc.setFontSize(16);
+        doc.text("Listado de productos", 14, 15);
+
+        autoTable(doc, {
+            startY: 25,
+            head: [["#", "Nombre", "Categoría", "Stock", "Precio", "Estado"]],
+            body: productosFiltrados.map((p) => [
+                p.idProducto,
+                p.nombre,
+                p.categoria.nombre,
+                p.stock,
+                `$${p.precio}`,
+                p.estado,
+            ]),
+            styles: { fontSize: 9 },
+            headStyles: { fillColor: [109, 40, 217] }, // color violeta como tu UI
+        });
+
+        doc.save("productos.pdf");
+    };
+
     return (
         <>
             <div className="productos-wrapper">
@@ -45,7 +71,13 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
                 </div>
 
                 {/* Tabla */}
-                <h6 className="productos-titulo">Listado de productos</h6>
+                <div className='d-flex justify-content-between align-items-center mb-2'>
+                    <h6 className="productos-titulo">Listado de productos</h6>
+                    <div className='d-flex gap-2'>
+                        <Button variant='success'>Exportar Excel</Button>
+                        <Button variant='danger' onClick={exportarPDF}>Exportar PDF</Button>
+                    </div>
+                </div>
                 <div className="tabla-wrapper">
                     <Table hover className="productos-table">
                         <thead>
