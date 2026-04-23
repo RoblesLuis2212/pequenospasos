@@ -54,7 +54,7 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
                         <tbody>
                             {productos.length > 0 ? (
                                 productos.map((itemProducto) => (
-                                    <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto} abrirModalProductosEditar={abrirModalProductosEditar}></ItemProducto>
+                                    <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto} abrirModalProductosEditar={abrirModalProductosEditar} setProductos={setProductos}></ItemProducto>
                                 ))
                             ) : (
                                 <tr>

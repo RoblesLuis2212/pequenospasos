@@ -1,6 +1,8 @@
 import { Badge, Button } from "react-bootstrap";
+import { cambiarEstadoProductoAPI, listarProductosAPI } from "../../helpers/queries";
+import Swal from "sweetalert2";
 
-const ItemProducto = ({ itemProducto, abrirModalProductosEditar }) => {
+const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos }) => {
 
     const formatearFecha = (fechaISO) => {
         const fecha = new Date(fechaISO);
@@ -14,6 +16,44 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar }) => {
     const colorEstado = {
         "DISPONIBLE": "success",
         "INACTIVO": "danger"
+    }
+
+    const cambiarEstadoProducto = async () => {
+        const estado = itemProducto.estado;
+        if (estado === "DISPONIBLE") {
+            const estadoNuevo = "INACTIVO";
+            const respuesta = await cambiarEstadoProductoAPI(itemProducto.idProducto, estadoNuevo);
+            if (respuesta.status === 200) {
+                const datosNuevos = await listarProductosAPI();
+                if (respuesta.status === 200) {
+                    const productosActualizados = await datosNuevos.json();
+                    setProductos(productosActualizados);
+                }
+                Swal.fire({
+                    title: "Producto creado exitosamente!",
+                    icon: "success",
+                    draggable: true
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un error al actualizar el estado del producto. Intentelo mas tarde.',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+
+        } else {
+            const estadoNuevo = "DISPONIBLE";
+            const respuesta = await cambiarEstadoProductoAPI(itemProducto.idProducto, estadoNuevo);
+            if (respuesta.status === 200) {
+                const respuestaDatos = await listarProductosAPI();
+                if (respuestaDatos.status === 200) {
+                    const productosActualizados = await respuestaDatos.json();
+                    setProductos(productosActualizados);
+                }
+            }
+        }
     }
 
     return (
@@ -34,7 +74,7 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar }) => {
             </td>
             <td>
                 <div className="">
-                    <Button variant="warning me-2"><i className="bi bi-exclamation-triangle-fill"></i></Button>
+                    <Button variant="warning me-2" onClick={cambiarEstadoProducto}><i className="bi bi-exclamation-triangle-fill"></i></Button>
                     <Button variant="info me-2" onClick={() => abrirModalProductosEditar(itemProducto)}><i className="bi bi-pencil-square"></i></Button>
                 </div>
             </td>

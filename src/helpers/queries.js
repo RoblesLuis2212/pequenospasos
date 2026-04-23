@@ -452,3 +452,20 @@ export const editarProductoAPI = async (id, productoActualizado) => {
     return null;
   }
 };
+
+export const cambiarEstadoProductoAPI = async (id, nuevoEstado) => {
+  try {
+    const respuesta = await fetch(`${productosBackend}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify({ estado: nuevoEstado }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

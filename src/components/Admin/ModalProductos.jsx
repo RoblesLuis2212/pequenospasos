@@ -81,7 +81,6 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos
         }
     }, [modoModalProductos, productoSeleccionado, setValue])
 
-
     return (
         <Modal show={showModalProductos} onHide={cerrarModalProductos}>
             <Modal.Header className='d-flex justify-content-center'>
