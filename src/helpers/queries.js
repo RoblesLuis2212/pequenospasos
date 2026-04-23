@@ -485,3 +485,18 @@ export const listarPedidosAPI = async () => {
     return null;
   }
 };
+
+export const aprobarCompraAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/${id}/aprobar`, {
+      method: "PUT",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

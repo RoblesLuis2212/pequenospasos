@@ -2,7 +2,7 @@ import { Table, Button, InputGroup, Form } from 'react-bootstrap';
 import './Admin.css';
 import ItemPedidos from './ItemPedidos';
 
-const PedidosTabs = ({ pedidos }) => {
+const PedidosTabs = ({ pedidos, setPedidos }) => {
     return (
         <div className="admin-wrapper">
             <div className="admin-toolbar">
@@ -30,7 +30,7 @@ const PedidosTabs = ({ pedidos }) => {
                     <tbody>
                         {pedidos.length > 0 ? (
                             pedidos.map((itemPedido) => (
-                                <ItemPedidos itemPedido={itemPedido} key={itemPedido.idVenta}></ItemPedidos>
+                                <ItemPedidos itemPedido={itemPedido} key={itemPedido.idVenta} setPedidos={setPedidos}></ItemPedidos>
                             ))
                         ) : (
                             <tr>
