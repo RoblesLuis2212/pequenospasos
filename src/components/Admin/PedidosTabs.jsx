@@ -1,7 +1,8 @@
 import { Table, Button, InputGroup, Form } from 'react-bootstrap';
 import './Admin.css';
+import ItemPedidos from './ItemPedidos';
 
-const PedidosTabs = () => {
+const PedidosTabs = ({ pedidos }) => {
     return (
         <div className="admin-wrapper">
             <div className="admin-toolbar">
@@ -27,11 +28,17 @@ const PedidosTabs = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colSpan={7} className="text-center py-4 text-muted">
-                                No hay pedidos cargados
-                            </td>
-                        </tr>
+                        {pedidos.length > 0 ? (
+                            pedidos.map((itemPedido) => (
+                                <ItemPedidos itemPedido={itemPedido} key={itemPedido.idVenta}></ItemPedidos>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan={7} className="text-center py-4 text-muted">
+                                    No hay pedidos cargados
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
             </div>

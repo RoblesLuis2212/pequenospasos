@@ -1,3 +1,4 @@
+import { act } from "react";
 import { get } from "react-hook-form";
 import { data } from "react-router-dom";
 
@@ -462,6 +463,21 @@ export const cambiarEstadoProductoAPI = async (id, nuevoEstado) => {
         "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
       },
       body: JSON.stringify({ estado: nuevoEstado }),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const listarPedidosAPI = async () => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/ventas-admin`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
     });
     return respuesta;
   } catch (err) {
