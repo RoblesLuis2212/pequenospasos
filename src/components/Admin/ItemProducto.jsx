@@ -30,8 +30,8 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos })
                     setProductos(productosActualizados);
                 }
                 Swal.fire({
-                    title: "Producto creado exitosamente!",
-                    icon: "success",
+                    title: "Producto inhabilitado!",
+                    icon: "warning",
                     draggable: true
                 });
             } else {
@@ -51,6 +51,11 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos })
                 if (respuestaDatos.status === 200) {
                     const productosActualizados = await respuestaDatos.json();
                     setProductos(productosActualizados);
+                    Swal.fire({
+                        title: "Producto activado exitosamente!",
+                        icon: "success",
+                        draggable: true
+                    });
                 }
             }
         }
@@ -74,7 +79,12 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos })
             </td>
             <td>
                 <div className="">
-                    <Button variant="warning me-2" onClick={cambiarEstadoProducto}><i className="bi bi-exclamation-triangle-fill"></i></Button>
+                    {itemProducto.estado === "DISPONIBLE" ? (
+                        <Button variant="warning me-2" onClick={cambiarEstadoProducto}><i className="bi bi-exclamation-triangle-fill"></i></Button>
+
+                    ) : (
+                        <Button variant="success me-2" onClick={cambiarEstadoProducto}><i class="bi bi-check-circle-fill"></i></Button>
+                    )}
                     <Button variant="info me-2" onClick={() => abrirModalProductosEditar(itemProducto)}><i className="bi bi-pencil-square"></i></Button>
                 </div>
             </td>
