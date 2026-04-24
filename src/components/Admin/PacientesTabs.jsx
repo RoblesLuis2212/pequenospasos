@@ -3,12 +3,15 @@ import { InputGroup } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import ModalPaciente from "./ModalPaciente";
 import { useState } from "react";
+import ItemPaciente from "./ItemPaciente";
 
-const PacientesTabs = () => {
+const PacientesTabs = ({ pacientes, setPacientes }) => {
     const [showModalPacientes, setShowModalPacientes] = useState(false);
 
     const cerrarModalPacientes = () => setShowModalPacientes(false);
     const abrirModalPacientes = () => setShowModalPacientes(true);
+
+
 
     return (
         <>
@@ -17,7 +20,7 @@ const PacientesTabs = () => {
                     <Button className="btn-agregar" onClick={abrirModalPacientes}>+ Agregar Paciente</Button>
                     <InputGroup className="pedidos-search">
                         <Form.Control
-                            placeholder="Buscar por cliente, producto, estado..."
+                            placeholder="Buscar por nombre, dni, obra social..."
                         />
                         <Button className="btn-buscar">Buscar</Button>
                     </InputGroup>
@@ -32,17 +35,23 @@ const PacientesTabs = () => {
                                 <th>Nombre completo</th>
                                 <th>DNI</th>
                                 <th>Domicilio</th>
-                                <th>Fecha de Nacimiento</th>
+                                <th>Edad</th>
                                 <th>Obra Social</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colSpan={7} className="text-center py-4 text-muted">
-                                    No hay pedidos cargados
-                                </td>
-                            </tr>
+                            {pacientes.length > 0 ? (
+                                pacientes.map((itemPaciente) => (
+                                    <ItemPaciente itemPaciente={itemPaciente} key={itemPaciente.idPaciente}></ItemPaciente>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={7} className="text-center py-4 text-muted">
+                                        No hay pedidos cargados
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </Table>
                 </div>
