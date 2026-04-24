@@ -530,3 +530,18 @@ export const listarPacientesAPI = async () => {
     return null;
   }
 };
+
+export const listarPacientesPadresAPI = async () => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

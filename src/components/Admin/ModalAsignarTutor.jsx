@@ -1,8 +1,25 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form, ListGroup } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { listarPacientesAPI, listarPacientesPadresAPI } from '../../helpers/queries';
 
 const ModalAsignarTutor = ({ showModalTutor, cerrarModalTutor, itemPaciente }) => {
+
+    const [usuarios, setUsuarios] = useState([]);
+
+    const listarPacientes = async () => {
+        const respuesta = await listarPacientesPadresAPI();
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            console.log("Datos pacientes padres: ", datos);
+            setUsuarios(datos);
+        }
+    }
+
+    useEffect(() => {
+        listarPacientes();
+    }, [])
     return (
         <Modal show={showModalTutor} onHide={cerrarModalTutor}>
             <Modal.Header className='d-flex justify-content-center'>
