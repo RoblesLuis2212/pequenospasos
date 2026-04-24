@@ -1,14 +1,26 @@
 import { Table, Button, InputGroup, Form } from 'react-bootstrap';
 import './Admin.css';
 import ItemPedidos from './ItemPedidos';
+import { useState } from 'react';
 
 const PedidosTabs = ({ pedidos, setPedidos }) => {
+    const [busqueda, setBusqueda] = useState("");
+
+    const pedidosFiltrados = pedidos.filter((p) =>
+        p.nombreCompleto?.toLowerCase().includes(busqueda.toLowerCase()) ||
+        p.estado?.toLowerCase().includes(busqueda.toLowerCase()) ||
+        String(p.idVenta).includes(busqueda)
+    )
+
     return (
         <div className="admin-wrapper">
             <div className="admin-toolbar">
                 <InputGroup className="pedidos-search">
                     <Form.Control
-                        placeholder="Buscar por cliente, producto, estado..."
+                        placeholder="Buscar por ID,cliente, estado..."
+                        value={busqueda}
+                        onChange={(e) => setBusqueda(e.target.value)}
+
                     />
                     <Button className="btn-buscar">Buscar</Button>
                 </InputGroup>
@@ -29,8 +41,8 @@ const PedidosTabs = ({ pedidos, setPedidos }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {pedidos.length > 0 ? (
-                            pedidos.map((itemPedido) => (
+                        {pedidosFiltrados.length > 0 ? (
+                            pedidosFiltrados.map((itemPedido) => (
                                 <ItemPedidos itemPedido={itemPedido} key={itemPedido.idVenta} setPedidos={setPedidos}></ItemPedidos>
                             ))
                         ) : (
