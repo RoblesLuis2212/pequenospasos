@@ -2,23 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import jsPDF from 'jspdf';
 
-const ModalDetallePedido = ({ modalDetallePedido, cerrarModalDetallePedido, itemPedido }) => {
-
-    const fecha = new Date(itemPedido.fechaCompra);
-
-    const opciones = {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-    };
-
-    let texto = fecha.toLocaleDateString("es-AR", opciones).replace(",", "");
-
-    const hora = fecha.getHours().toString().padStart(2, "0");
-    const minutos = fecha.getMinutes().toString().padStart(2, "0");
-
-    const fechaFinal = `${texto} ${hora}:${minutos} hs`;
-
+const ModalDetallePedido = ({ modalDetallePedido, cerrarModalDetallePedido, itemPedido, fechaFinal }) => {
 
     const descargarPDF = () => {
         const doc = new jsPDF();

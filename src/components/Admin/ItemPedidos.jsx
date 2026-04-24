@@ -53,12 +53,28 @@ const ItemPedidos = ({ itemPedido, setPedidos }) => {
     const cerrarModalDetallePedido = () => setModalDetallePedido(false);
     const abrirModalDetallePedido = () => setModalDetallePedido(true);
 
+    const fecha = new Date(itemPedido.fechaCompra);
+
+    const opciones = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+    };
+
+    let texto = fecha.toLocaleDateString("es-AR", opciones).replace(",", "");
+
+    const hora = fecha.getHours().toString().padStart(2, "0");
+    const minutos = fecha.getMinutes().toString().padStart(2, "0");
+
+    const fechaFinal = `${texto} ${hora}:${minutos} hs`;
+
     return (
         <>
             <tr>
                 <td>{itemPedido.idVenta}</td>
                 <td>{itemPedido.usuario.nombreCompleto}</td>
                 <td>{totalCantidadProductos}</td>
+                <td>{fechaFinal}</td>
                 <td>${itemPedido.monto}</td>
                 <td>
                     <span className={`badge bg-${colorEstado[itemPedido.estado]}`}>
@@ -77,7 +93,7 @@ const ItemPedidos = ({ itemPedido, setPedidos }) => {
                     </div>
                 </td>
             </tr>
-            <ModalDetallePedido modalDetallePedido={modalDetallePedido} cerrarModalDetallePedido={cerrarModalDetallePedido} itemPedido={itemPedido}></ModalDetallePedido>
+            <ModalDetallePedido modalDetallePedido={modalDetallePedido} cerrarModalDetallePedido={cerrarModalDetallePedido} itemPedido={itemPedido} fechaFinal={fechaFinal}></ModalDetallePedido>
         </>
     );
 };

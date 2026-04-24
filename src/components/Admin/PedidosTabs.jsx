@@ -22,6 +22,7 @@ const PedidosTabs = ({ pedidos, setPedidos }) => {
                             <th>#</th>
                             <th>Cliente</th>
                             <th>Productos</th>
+                            <th>Fecha de compra</th>
                             <th>Total</th>
                             <th>Estado</th>
                             <th>Acciones</th>
