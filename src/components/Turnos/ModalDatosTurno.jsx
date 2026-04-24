@@ -88,7 +88,7 @@ const ModalDatosTurno = ({ handleClose, show, datosPaciente, fechaLegible, horaL
                 <p><strong>Paciente:</strong> {datosPaciente?.nombreCompleto}</p>
                 <p><strong>Edad:</strong> {calcularEdad(datosPaciente?.fechaNacimiento)} años</p>
                 <p><strong>DNI:</strong> {datosPaciente?.dni}</p>
-                <p><strong>Padre/tutor:</strong> {datosPaciente?.usuario.nombreCompleto}</p>
+                <p><strong>Padre/tutor:</strong> {datosPaciente?.usuario?.nombreCompleto ?? "Sin tutor"}</p>
                 <p><strong>Obra Social:</strong> {datosPaciente?.obraSocial?.nombre ?? 'Sin obra social'}</p>
                 <p><strong>Fecha:</strong> {fechaLegible}</p>
                 <p><strong>Horario:</strong> {horaLegible} hs</p>

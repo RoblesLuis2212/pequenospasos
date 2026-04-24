@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ItemPaciente = ({ itemPaciente }) => {
 
@@ -9,7 +10,6 @@ const ItemPaciente = ({ itemPaciente }) => {
         let edad = hoy.getFullYear() - nacimiento.getFullYear();
         const mes = hoy.getMonth() - nacimiento.getMonth();
 
-        // Si todavía no llegó el cumpleaños este año, restamos 1
         if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
             edad--;
         }
@@ -36,7 +36,7 @@ const ItemPaciente = ({ itemPaciente }) => {
                 <td>
                     <div>
                         <Button variant="secondary" className="me-2"><i className="bi bi-person-fill"></i></Button>
-                        <Button variant="primary"><i className="bi bi-calendar-check-fill"></i></Button>
+                        <Button variant="primary" as={Link} to={`/turnos/${itemPaciente.idPaciente}`}><i className="bi bi-calendar-check-fill"></i></Button>
                     </div>
                 </td>
             </tr>
