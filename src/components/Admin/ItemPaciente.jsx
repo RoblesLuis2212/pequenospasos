@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ModalAsignarTutor from "./ModalAsignarTutor";
 
-const ItemPaciente = ({ itemPaciente }) => {
+const ItemPaciente = ({ itemPaciente, setPaciente }) => {
 
     const calcularEdad = () => {
         const hoy = new Date();
@@ -41,7 +41,7 @@ const ItemPaciente = ({ itemPaciente }) => {
                     </div>
                 </td>
             </tr>
-            <ModalAsignarTutor showModalTutor={showModalTutor} cerrarModalTutor={cerrarModalTutor} itemPaciente={itemPaciente}></ModalAsignarTutor>
+            <ModalAsignarTutor showModalTutor={showModalTutor} cerrarModalTutor={cerrarModalTutor} itemPaciente={itemPaciente} setPaciente={setPaciente}></ModalAsignarTutor>
         </>
     );
 };

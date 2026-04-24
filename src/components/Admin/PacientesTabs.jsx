@@ -5,7 +5,7 @@ import ModalPaciente from "./ModalPaciente";
 import { useState } from "react";
 import ItemPaciente from "./ItemPaciente";
 
-const PacientesTabs = ({ pacientes, setPacientes }) => {
+const PacientesTabs = ({ pacientes, setPaciente }) => {
     const [showModalPacientes, setShowModalPacientes] = useState(false);
 
     const cerrarModalPacientes = () => setShowModalPacientes(false);
@@ -44,7 +44,7 @@ const PacientesTabs = ({ pacientes, setPacientes }) => {
                         <tbody>
                             {pacientes.length > 0 ? (
                                 pacientes.map((itemPaciente) => (
-                                    <ItemPaciente itemPaciente={itemPaciente} key={itemPaciente.idPaciente}></ItemPaciente>
+                                    <ItemPaciente itemPaciente={itemPaciente} key={itemPaciente.idPaciente} setPaciente={setPaciente}></ItemPaciente>
                                 ))
                             ) : (
                                 <tr>

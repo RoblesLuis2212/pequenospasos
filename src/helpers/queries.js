@@ -545,3 +545,23 @@ export const listarPacientesPadresAPI = async () => {
     return null;
   }
 };
+
+export const asignarTutorAPI = async (idPaciente, idUsuario) => {
+  try {
+    const respuesta = await fetch(
+      `${pacientesBackend}/${idPaciente}/asignar-tutor`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+        },
+        body: JSON.stringify({ usuarioId: idUsuario }),
+      },
+    );
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
