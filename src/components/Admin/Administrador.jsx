@@ -1,7 +1,7 @@
 import { Card, Badge } from "react-bootstrap";
 import AdminTabs from "./AdminTabs";
 import { useEffect, useState } from "react";
-import { listarPedidosAPI, listarProductosAPI } from "../../helpers/queries";
+import { listarPacientesAPI, listarPedidosAPI, listarProductosAPI } from "../../helpers/queries";
 
 const Administrador = () => {
     const [productos, setProductos] = useState([]);
@@ -32,6 +32,21 @@ const Administrador = () => {
 
     useEffect(() => {
         obtenerPedidos();
+    }, [])
+
+    const [pacientes, setPaciente] = useState([]);
+
+    const obtenerPacientes = async () => {
+        const respuesta = await listarPacientesAPI();
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            console.log(datos);
+            setPaciente(datos);
+        }
+    }
+
+    useEffect(() => {
+        obtenerPacientes();
     }, [])
 
     return (

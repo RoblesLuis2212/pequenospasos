@@ -2,14 +2,31 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
+import { registroPacientes } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
 
 const ModalPaciente = ({ showModalPacientes, cerrarModalPacientes }) => {
     const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
 
-    const postValidaciones = (data) => {
-        console.log(data);
-
+    const postValidaciones = async (data) => {
+        const respuesta = await registroPacientes(data);
+        if (respuesta.status === 201) {
+            Swal.fire({
+                title: "Paciente agregado exitosamente!",
+                icon: "success",
+                draggable: true
+            });
+            cerrarModalPacientes();
+            reset();
+        } else {
+            Swal.fire({
+                title: "Error al agregar el paciente. Intentelo mas tarde",
+                icon: "error",
+                draggable: true
+            });
+            reset();
+        }
     }
 
     return (

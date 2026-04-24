@@ -197,7 +197,7 @@ const ModalProductos = ({ cerrarModalProductos, showModalProductos, setProductos
                             <option value="3">Material creativo</option>
                             <option value="4">Rompecabezas</option>
                             <option value="5">Juegos sensoriales</option>
-                            <option value="7">Juguetes didacticos</option>
+                            <option value="6">Juguetes didacticos</option>
                         </Form.Select>
                         <Form.Text className="text-danger">
                             {errors.categoriaId?.message}

@@ -515,3 +515,18 @@ export const cancelarCompraAdmin = async (id) => {
     return null;
   }
 };
+
+export const listarPacientesAPI = async () => {
+  try {
+    const respuesta = await fetch(pacientesBackend, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
