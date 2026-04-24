@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ModalAsignarTutor from "./ModalAsignarTutor";
 
 const ItemPaciente = ({ itemPaciente }) => {
 
@@ -16,10 +17,10 @@ const ItemPaciente = ({ itemPaciente }) => {
         return edad;
     }
 
-    const [showModalDatosPaciente, setShowModalDatosPaciente] = useState(false);
+    const [showModalTutor, setShowModalTutor] = useState(false);
 
-    const cerrarModalDatosPaciente = () => setShowModalDatosPaciente(false);
-    const abrirModalDatosPaciente = () => setShowModalDatosPaciente(true);
+    const cerrarModalTutor = () => setShowModalTutor(false);
+    const abrirModalTutor = () => setShowModalTutor(true);
 
     return (
         <>
@@ -35,11 +36,12 @@ const ItemPaciente = ({ itemPaciente }) => {
                 <td>{itemPaciente.usuario?.nombreCompleto ? itemPaciente.usuario?.nombreCompleto : "Sin tutor"}</td>
                 <td>
                     <div>
-                        <Button variant="secondary" className="me-2"><i className="bi bi-person-fill"></i></Button>
+                        <Button variant="secondary" className="me-2" onClick={abrirModalTutor}><i className="bi bi-person-fill"></i></Button>
                         <Button variant="primary" as={Link} to={`/turnos/${itemPaciente.idPaciente}`}><i className="bi bi-calendar-check-fill"></i></Button>
                     </div>
                 </td>
             </tr>
+            <ModalAsignarTutor showModalTutor={showModalTutor} cerrarModalTutor={cerrarModalTutor} itemPaciente={itemPaciente}></ModalAsignarTutor>
         </>
     );
 };
