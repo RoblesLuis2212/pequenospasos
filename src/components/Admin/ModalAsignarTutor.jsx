@@ -40,21 +40,42 @@ const ModalAsignarTutor = ({ showModalTutor, cerrarModalTutor, itemPaciente, set
         : [];
 
     const asignarTutor = async () => {
+        //Si ya tiene un tutor asignado le avisamos que actualizando reemplazara al actual
+        if (itemPaciente.usuario) {
+            const confirmacion = await Swal.fire({
+                title: "¿Reemplazar tutor?",
+                text: `El paciente ya tiene asignado a ${itemPaciente.usuario.nombreCompleto} como tutor. ¿Desea reemplazarlo?`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, reemplazar",
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: "#d33",
+            });
+
+            if (!confirmacion.isConfirmed) return;
+        }
         const respuesta = await asignarTutorAPI(itemPaciente.idPaciente, usuarioSeleccionado.idUsuario);
         if (respuesta.status === 200) {
-            Swal.fire({
-                title: "Tutor asignado correctamente!",
-                icon: "success",
-                draggable: true
-            });
             const respuestaPacientes = await listarPacientesAPI();
             if (respuestaPacientes.status === 200) {
                 const datos = await respuestaPacientes.json();
+                console.log("Pacientes actualizados", datos);
                 setPaciente(datos);
                 cerrarModalTutor();
+                Swal.fire({
+                    title: "Tutor asignado correctamente!",
+                    icon: "success",
+                    draggable: true
+                });
             }
+        } else {
+            Swal.fire({
+                title: "Error al asignar un tutor al paciente. Intentelo mas tarde",
+                icon: "error",
+                draggable: true
+            })
+            cerrarModalTutor();
         }
-
     }
 
     return (
@@ -66,7 +87,7 @@ const ModalAsignarTutor = ({ showModalTutor, cerrarModalTutor, itemPaciente, set
                 {/* Info del paciente */}
                 <div className="p-2 mb-3 rounded" style={{ background: 'var(--bs-secondary-bg)' }}>
                     <p className="mb-0 fw-semibold">{itemPaciente.nombreCompleto}</p>
-                    <small className="text-muted">Sin tutor asignado</small>
+                    <small className="text-muted">{itemPaciente.usuario?.nombreCompleto ?? "Sin tutor asignado"}</small>
                 </div>
 
                 {/* Buscador */}
