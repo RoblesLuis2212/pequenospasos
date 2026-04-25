@@ -128,9 +128,10 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                             <i className="bi bi-printer-fill me-2"></i>Imprimir planilla
                         </Button>
                         <Form.Select
-                            style={{ width: '150px' }}
+                            style={{ width: '150px', border: '2px solid purple' }}
                             value={filtroFecha}
                             onChange={(e) => setFiltroFecha(e.target.value)}
+                            className='custom-input input-custom'
                         >
                             <option value="">Todos</option>
                             <option value="hoy">Hoy</option>
