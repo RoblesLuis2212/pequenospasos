@@ -64,6 +64,7 @@ const ItemTurnos = ({ itemTurno, setTurnos }) => {
         }
     }
 
+
     return (
         <tr>
             <td>{itemTurno.idTurno}</td>
