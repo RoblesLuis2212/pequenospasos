@@ -32,7 +32,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                         <tbody>
                             {turnos.length > 0 ? (
                                 turnos.map((itemTurno) => (
-                                    <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno}></ItemTurnos>
+                                    <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno} setTurnos={setTurnos}></ItemTurnos>
                                 ))
                             ) : (
                                 <tr>
