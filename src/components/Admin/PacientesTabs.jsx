@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import ModalPaciente from "./ModalPaciente";
 import { useState } from "react";
 import ItemPaciente from "./ItemPaciente";
+import { set } from "react-hook-form";
 
 const PacientesTabs = ({ pacientes, setPaciente }) => {
     const [showModalPacientes, setShowModalPacientes] = useState(false);
@@ -11,6 +12,14 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
     const cerrarModalPacientes = () => setShowModalPacientes(false);
     const abrirModalPacientes = () => setShowModalPacientes(true);
 
+    const [busqueda, setBusqeda] = useState("");
+
+    const pacientesFiltrados = pacientes.filter((p) =>
+        p.nombreCompleto.toLowerCase().includes(busqueda.toLocaleLowerCase()) ||
+        p.dni.toLowerCase().includes(busqueda.toLocaleLowerCase()) ||
+        p.obraSocial?.nombre.toLowerCase().includes(busqueda.toLocaleLowerCase()) ||
+        p.usuario?.nombreCompleto.toLowerCase().includes(busqueda.toLocaleLowerCase())
+    )
 
 
     return (
@@ -21,6 +30,8 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                     <InputGroup className="pedidos-search">
                         <Form.Control
                             placeholder="Buscar por nombre, dni, obra social..."
+                            value={busqueda}
+                            onChange={(e) => setBusqeda(e.target.value)}
                         />
                         <Button className="btn-buscar">Buscar</Button>
                     </InputGroup>
@@ -42,8 +53,8 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {pacientes.length > 0 ? (
-                                pacientes.map((itemPaciente) => (
+                            {pacientesFiltrados.length > 0 ? (
+                                pacientesFiltrados.map((itemPaciente) => (
                                     <ItemPaciente itemPaciente={itemPaciente} key={itemPaciente.idPaciente} setPaciente={setPaciente}></ItemPaciente>
                                 ))
                             ) : (
