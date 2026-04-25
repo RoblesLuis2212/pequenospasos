@@ -1,8 +1,9 @@
 import { Table, Button, InputGroup, Form } from 'react-bootstrap';
 import './Admin.css';
+import ItemTurnos from './ItemTurnos';
 
 
-const TurnosTabs = () => {
+const TurnosTabs = ({ turnos, setTurnos }) => {
     return (
         <>
             <div className="admin-wrapper">
@@ -29,11 +30,17 @@ const TurnosTabs = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colSpan={6} className="text-center py-4 text-muted">
-                                    No hay turnos cargados
-                                </td>
-                            </tr>
+                            {turnos.length > 0 ? (
+                                turnos.map((itemTurno) => (
+                                    <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno}></ItemTurnos>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={6} className="text-center py-4 text-muted">
+                                        No hay turnos cargados
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </Table>
                 </div>
