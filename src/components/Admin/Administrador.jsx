@@ -11,7 +11,6 @@ const Administrador = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setProductos(datos);
-            console.log(datos);
         }
     }
 
@@ -25,8 +24,6 @@ const Administrador = () => {
         const respuesta = await listarPedidosAPI();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            setPedidos(datos);
-            console.log(datos);
         }
     }
 
@@ -40,7 +37,6 @@ const Administrador = () => {
         const respuesta = await listarPacientesAPI();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            console.log(datos);
             setPaciente(datos);
         }
     }

@@ -15,7 +15,6 @@ const ModalAsignarTutor = ({ showModalTutor, cerrarModalTutor, itemPaciente, set
         const respuesta = await listarPacientesPadresAPI();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            console.log("Datos pacientes padres: ", datos);
             setUsuarios(datos);
         }
     }
@@ -59,7 +58,6 @@ const ModalAsignarTutor = ({ showModalTutor, cerrarModalTutor, itemPaciente, set
             const respuestaPacientes = await listarPacientesAPI();
             if (respuestaPacientes.status === 200) {
                 const datos = await respuestaPacientes.json();
-                console.log("Pacientes actualizados", datos);
                 setPaciente(datos);
                 cerrarModalTutor();
                 Swal.fire({
