@@ -93,7 +93,7 @@ const Calendario = () => {
             cancelButtonText: "Cancelar"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const data = { fecha: fecha.toISOString(), pacienteId: Number(id), idUsuario };
+                const data = { fecha: fecha.toISOString(), pacienteId: Number(id) };
                 const respuesta = await solicitarTurnoAPI(data);
                 if (respuesta.status === 201) {
                     Swal.fire({
@@ -102,6 +102,13 @@ const Calendario = () => {
                         draggable: true
                     });
                     obtenerTurnos();
+                    const rol = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.rol;
+                    if (rol !== "ADMIN") {
+                        navigate("/mis-turnos");
+                    } else {
+                        navigate("/admin")
+                    }
+
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -112,7 +119,6 @@ const Calendario = () => {
                 setFechaLegible(fechaLegible);
                 setHoraLegible(horaLegible);
                 setTurnoSeleccionado(fecha);
-                navigate("/mis-turnos");
             }
         });
     }

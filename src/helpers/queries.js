@@ -515,3 +515,53 @@ export const cancelarCompraAdmin = async (id) => {
     return null;
   }
 };
+
+export const listarPacientesAPI = async () => {
+  try {
+    const respuesta = await fetch(pacientesBackend, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const listarPacientesPadresAPI = async () => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const asignarTutorAPI = async (idPaciente, idUsuario) => {
+  try {
+    const respuesta = await fetch(
+      `${pacientesBackend}/${idPaciente}/asignar-tutor`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+        },
+        body: JSON.stringify({ usuarioId: idUsuario }),
+      },
+    );
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

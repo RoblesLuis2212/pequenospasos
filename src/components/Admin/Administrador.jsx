@@ -1,7 +1,7 @@
 import { Card, Badge } from "react-bootstrap";
 import AdminTabs from "./AdminTabs";
 import { useEffect, useState } from "react";
-import { listarPedidosAPI, listarProductosAPI } from "../../helpers/queries";
+import { listarPacientesAPI, listarPedidosAPI, listarProductosAPI } from "../../helpers/queries";
 
 const Administrador = () => {
     const [productos, setProductos] = useState([]);
@@ -11,7 +11,6 @@ const Administrador = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setProductos(datos);
-            console.log(datos);
         }
     }
 
@@ -25,13 +24,25 @@ const Administrador = () => {
         const respuesta = await listarPedidosAPI();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            setPedidos(datos);
-            console.log(datos);
         }
     }
 
     useEffect(() => {
         obtenerPedidos();
+    }, [])
+
+    const [pacientes, setPaciente] = useState([]);
+
+    const obtenerPacientes = async () => {
+        const respuesta = await listarPacientesAPI();
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            setPaciente(datos);
+        }
+    }
+
+    useEffect(() => {
+        obtenerPacientes();
     }, [])
 
     return (
@@ -73,7 +84,7 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos}></AdminTabs>
+            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente}></AdminTabs>
         </>
     );
 };

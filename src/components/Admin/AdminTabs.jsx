@@ -6,7 +6,7 @@ import "./Admin.css";
 import PacientesTabs from './PacientesTabs';
 import { useState } from 'react';
 
-const AdminTabs = ({ productos, setProductos, pedidos, setPedidos }) => {
+const AdminTabs = ({ productos, setProductos, pedidos, setPedidos, pacientes, setPaciente }) => {
     //Este estado funcionara para saber que accion realizaremos al abrir el modal de productos.
     const [modoModalProducto, setModoModalProducto] = useState("crear");
     //Se almacenara en un estado el producto que al administrador seleccione para editar
@@ -14,7 +14,7 @@ const AdminTabs = ({ productos, setProductos, pedidos, setPedidos }) => {
 
     const tabs = [
         { key: 'turnos', label: 'Turnos', component: <TurnosTabs></TurnosTabs> },
-        { key: 'paciente', label: "Pacientes", component: <PacientesTabs></PacientesTabs> },
+        { key: 'paciente', label: "Pacientes", component: <PacientesTabs pacientes={pacientes} setPaciente={setPaciente}></PacientesTabs> },
         { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos} setModoModalProducto={setModoModalProducto} modoModalProducto={modoModalProducto} modoModalProducto={modoModalProducto} setProductoSeleccionado={setProductoSeleccionado} productoSeleccionado={productoSeleccionado} ></ProductosTabs> },
         { key: 'pedidos', label: 'Pedidos', component: <PedidosTabs pedidos={pedidos} setPedidos={setPedidos}></PedidosTabs> },
     ];
