@@ -1,13 +1,15 @@
 import { Button } from "react-bootstrap";
 import ItemMovimiento from "./ItemMovimiento";
 
-const CajaTabs = () => {
+const CajaTabs = ({ caja, setCaja }) => {
     const movimientos = [
         { nombre: 'Luis Geremias Robles', hora: '10:30 hs', metodo: 'Transferencia', tipo: 'Producto', monto: '$9.000', estado: 'RETIRADO' },
         { nombre: 'Andrea Veronica Contreras', hora: '11:15 hs', metodo: 'Efectivo', tipo: 'Consulta', monto: '$5.500', estado: 'PAGADO' },
         { nombre: 'María González', hora: '14:00 hs', metodo: 'Transferencia', tipo: 'Producto', monto: '$12.000', estado: 'RETIRADO' },
         { nombre: 'Carlos Pérez', hora: '15:30 hs', metodo: 'Débito', tipo: 'Producto', monto: '$21.000', estado: 'CANCELADO' },
     ];
+
+
     return (
         <div className="admin-wrapper">
 
@@ -31,36 +33,36 @@ const CajaTabs = () => {
                 <div className="col">
                     <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
                         <p className="titulo" style={{ fontSize: '13px' }}>Total recaudado</p>
-                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$47.500</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>8 ventas</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${caja.metricas?.totalRecaudado}</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{caja.metricas?.cantidadVentas} transacciones</p>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
                         <p className="titulo" style={{ fontSize: '13px' }}>Transferencia</p>
-                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$32.000</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${caja.metricas?.porMetodoPago?.TRANSFERENCIA}</p>
                         <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>3 transacciones</p>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
                         <p className="titulo" style={{ fontSize: '13px' }}>Efectivo</p>
-                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$15.500</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>4 transacciones</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${caja.metricas?.porMetodoPago?.EFECTIVO || 0}</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{caja.metricas?.cantidadVentasEfectivo} transacciones</p>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
                         <p className="titulo" style={{ fontSize: '13px' }}>Débito</p>
-                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$0</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>0 transacciones</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${caja.metricas?.porMetodoPago?.DEBITO || 0}</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{caja.metricas?.cantidadVentasDebito} transacciones</p>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
                         <p className="titulo" style={{ fontSize: '13px' }}>Crédito</p>
-                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$0</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>0 transacciones</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${caja.metricas?.porMetodoPago?.CREDITO || 0}</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{caja.metricas?.cantidadVentasCredito} transacciones</p>
                     </div>
                 </div>
             </div>

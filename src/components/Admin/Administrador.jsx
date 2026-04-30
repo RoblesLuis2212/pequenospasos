@@ -67,8 +67,8 @@ const Administrador = () => {
         const respuesta = await obtenerCajaActivaAPI();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
+            setCaja(datos);
             console.log(datos);
-
         }
     }
 
@@ -115,7 +115,7 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos}></AdminTabs>
+            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={caja}></AdminTabs>
         </>
     );
 };
