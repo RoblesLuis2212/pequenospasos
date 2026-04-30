@@ -8,6 +8,7 @@ const turnosBackend = import.meta.env.VITE_API_TURNOS;
 const productosBackend = import.meta.env.VITE_API_PRODUCTOS;
 const carritoBackend = import.meta.env.VITE_API_CARRITO;
 const ventasBackend = import.meta.env.VITE_API_VENTAS;
+const cajaBackend = import.meta.env.VITE_API_CAJA;
 
 export const login = async (usuario) => {
   try {
@@ -559,6 +560,21 @@ export const asignarTutorAPI = async (idPaciente, idUsuario) => {
         body: JSON.stringify({ usuarioId: idUsuario }),
       },
     );
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const obtenerCajaActivaAPI = async () => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
     return respuesta;
   } catch (err) {
     console.error(err);
