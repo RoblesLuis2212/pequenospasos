@@ -5,6 +5,7 @@ import TurnosTabs from './TurnosTabs';
 import "./Admin.css";
 import PacientesTabs from './PacientesTabs';
 import { useState } from 'react';
+import CajaTabs from './CajaTabs';
 
 const AdminTabs = ({ productos, setProductos, pedidos, setPedidos, pacientes, setPaciente, turnos, setTurnos }) => {
     //Este estado funcionara para saber que accion realizaremos al abrir el modal de productos.
@@ -17,6 +18,7 @@ const AdminTabs = ({ productos, setProductos, pedidos, setPedidos, pacientes, se
         { key: 'paciente', label: "Pacientes", component: <PacientesTabs pacientes={pacientes} setPaciente={setPaciente}></PacientesTabs> },
         { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos} setModoModalProducto={setModoModalProducto} modoModalProducto={modoModalProducto} modoModalProducto={modoModalProducto} setProductoSeleccionado={setProductoSeleccionado} productoSeleccionado={productoSeleccionado} ></ProductosTabs> },
         { key: 'pedidos', label: 'Pedidos', component: <PedidosTabs pedidos={pedidos} setPedidos={setPedidos}></PedidosTabs> },
+        { key: 'caja', label: 'Caja', component: <CajaTabs></CajaTabs> }
     ];
 
 
