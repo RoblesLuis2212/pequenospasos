@@ -2,6 +2,7 @@ import { Card, Badge } from "react-bootstrap";
 import AdminTabs from "./AdminTabs";
 import { useEffect, useState } from "react";
 import { listarPacientesAPI, listarPedidosAPI, listarProductosAPI, listarTurnos, obtenerCajaActivaAPI } from "../../helpers/queries";
+import ModalNuevaVenta from "./ModalNuevaVenta";
 
 const Administrador = () => {
     const [productos, setProductos] = useState([]);
@@ -76,6 +77,12 @@ const Administrador = () => {
         obtenerCaja();
     }, [])
 
+    const [showModalVenta, setShowModalVenta] = useState(false);
+
+    const cerrarModalVenta = () => setShowModalVenta(false);
+    const abrirModalVenta = () => setShowModalVenta(true);
+
+
     return (
         <>
             <section className='container-fluid'>
@@ -115,7 +122,8 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={caja}></AdminTabs>
+            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={caja} abrirModalVenta={abrirModalVenta}></AdminTabs>
+            <ModalNuevaVenta showModalVenta={showModalVenta} cerrarModalVenta={cerrarModalVenta}></ModalNuevaVenta>
         </>
     );
 };

@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import ItemMovimiento from "./ItemMovimiento";
 
-const CajaTabs = ({ caja, setCaja }) => {
+const CajaTabs = ({ caja, setCaja, abrirModalVenta }) => {
 
     return (
         <div className="admin-wrapper">
@@ -16,6 +16,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                 </div>
                 <div className="d-flex align-items-center gap-2">
                     <span className="badge bg-success">Abierta</span>
+                    <Button className="btn-principal" onClick={abrirModalVenta}>Nueva venta<i className="bi bi-plus ms-1"></i></Button>
                     <Button variant="outline-secondary" size="sm">Abrir caja</Button>
                     <Button variant="outline-danger" size="sm">Cerrar caja</Button>
                 </div>
