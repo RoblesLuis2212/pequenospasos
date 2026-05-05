@@ -2,13 +2,6 @@ import { Button } from "react-bootstrap";
 import ItemMovimiento from "./ItemMovimiento";
 
 const CajaTabs = ({ caja, setCaja }) => {
-    const movimientos = [
-        { nombre: 'Luis Geremias Robles', hora: '10:30 hs', metodo: 'Transferencia', tipo: 'Producto', monto: '$9.000', estado: 'RETIRADO' },
-        { nombre: 'Andrea Veronica Contreras', hora: '11:15 hs', metodo: 'Efectivo', tipo: 'Consulta', monto: '$5.500', estado: 'PAGADO' },
-        { nombre: 'María González', hora: '14:00 hs', metodo: 'Transferencia', tipo: 'Producto', monto: '$12.000', estado: 'RETIRADO' },
-        { nombre: 'Carlos Pérez', hora: '15:30 hs', metodo: 'Débito', tipo: 'Producto', monto: '$21.000', estado: 'CANCELADO' },
-    ];
-
 
     return (
         <div className="admin-wrapper">
@@ -70,8 +63,8 @@ const CajaTabs = ({ caja, setCaja }) => {
             {/* Movimientos */}
             <div className="border rounded-3 p-3 shadow-lg">
                 <p className="titulo" style={{ fontSize: '15px' }}>Movimientos del día</p>
-                {movimientos.map((itemMovimiento, index) => (
-                    <ItemMovimiento key={index} itemMovimiento={itemMovimiento} isLast={index === movimientos.length - 1}></ItemMovimiento>
+                {caja?.caja?.ventas.map((itemMovimiento, index) => (
+                    <ItemMovimiento key={index} itemMovimiento={itemMovimiento} isLast={index === caja.length - 1}></ItemMovimiento>
 
                 ))
                 }
