@@ -78,7 +78,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                 </div>
 
             </div>
-            <ModalNuevaVenta showModalVenta={showModalVenta} cerrarModalVenta={cerrarModalVenta} caja={caja}></ModalNuevaVenta>
+            <ModalNuevaVenta showModalVenta={showModalVenta} cerrarModalVenta={cerrarModalVenta} caja={caja} setCaja={setCaja}></ModalNuevaVenta>
         </>
 
     );

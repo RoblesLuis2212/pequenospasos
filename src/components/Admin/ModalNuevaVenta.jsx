@@ -2,9 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { registrarPagoProductoAPI } from '../../helpers/queries';
+import { obtenerCajaActivaAPI, registrarPagoProductoAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
-const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja }) => {
+const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja, setCaja }) => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
 
@@ -16,9 +17,15 @@ const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja }) => {
             pagoCon: Number(data.pagoCon)
         });
         if (respuesta.status === 200) {
-
+            reset();
+            Swal.fire({ title: "Pago registrado exitosamente!", icon: "success" });
+            cerrarModalVenta();
+            const respuestaActualizada = await obtenerCajaActivaAPI();
+            if (respuesta.status === 200) {
+                const datos = await respuestaActualizada.json();
+                setCaja(datos);
+            }
         }
-        reset();
     }
 
 

@@ -116,7 +116,7 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={caja}></AdminTabs>
+            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={setCaja}></AdminTabs>
         </>
     );
 };
