@@ -9,6 +9,24 @@ const CajaTabs = ({ caja, setCaja }) => {
     const cerrarModalVenta = () => setShowModalVenta(false);
     const abrirModalVenta = () => setShowModalVenta(true);
 
+    const fecha = new Date(caja.caja?.fechaApertura);
+
+    const fechaFormateada = fecha.toLocaleDateString('es-AR', {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+    });
+
+    const horaFormateada = fecha.toLocaleTimeString('es-AR', {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+    });
+
+    const fechaHoraFinal = `${fechaFormateada}`;
+
+    const usuarioActual = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.nombre;
+
     return (
         <>
             <div className="admin-wrapper">
@@ -17,7 +35,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                     <div>
                         <p className="titulo" style={{ fontSize: '15px' }}>Caja del día</p>
                         <p className="mb-0 text-muted" style={{ fontSize: '13px' }}>
-                            lunes 28 de abril · Abierta por Geremias Robles · 08:00 hs
+                            {fechaHoraFinal} · Abierta por {usuarioActual} · {horaFormateada} hs
                         </p>
                     </div>
                     <div className="d-flex align-items-center gap-2">
