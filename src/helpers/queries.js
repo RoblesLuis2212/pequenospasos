@@ -581,3 +581,20 @@ export const obtenerCajaActivaAPI = async () => {
     return null;
   }
 };
+
+export const registrarPagoProductoAPI = async (id, datos) => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}/${id}/compra-pago`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(datos),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

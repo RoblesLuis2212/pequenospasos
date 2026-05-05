@@ -77,12 +77,6 @@ const Administrador = () => {
         obtenerCaja();
     }, [])
 
-    const [showModalVenta, setShowModalVenta] = useState(false);
-
-    const cerrarModalVenta = () => setShowModalVenta(false);
-    const abrirModalVenta = () => setShowModalVenta(true);
-
-
     return (
         <>
             <section className='container-fluid'>
@@ -122,8 +116,7 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={caja} abrirModalVenta={abrirModalVenta}></AdminTabs>
-            <ModalNuevaVenta showModalVenta={showModalVenta} cerrarModalVenta={cerrarModalVenta}></ModalNuevaVenta>
+            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={caja}></AdminTabs>
         </>
     );
 };
