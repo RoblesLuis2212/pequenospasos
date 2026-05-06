@@ -598,3 +598,33 @@ export const registrarPagoProductoAPI = async (id, datos) => {
     return null;
   }
 };
+
+export const abrirCajaAPI = async () => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}`, {
+      method: "POST",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const cerrarCajaAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}/${id}/cierre`, {
+      method: "PATCH",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
