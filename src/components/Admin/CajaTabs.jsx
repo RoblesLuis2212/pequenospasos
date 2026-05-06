@@ -75,7 +75,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                     </div>
                     <div className="d-flex align-items-center gap-2">
                         <span className={caja.caja?.estado === "ABIERTA" ? 'badge bg-success' : 'badge bg-danger'}>{caja?.caja?.estado === "ABIERTA" ? 'Abierta' : 'Cerrada'}</span>
-                        <Button className="btn-principal" onClick={abrirModalVenta}>Nueva venta<i className="bi bi-plus ms-1"></i></Button>
+                        <Button className={caja.caja?.estado === "ABIERTA" ? 'btn btn-primary-outline' : 'd-none'} size="sm" onClick={abrirModalVenta}>Nueva venta<i className="bi bi-plus ms-1"></i></Button>
                         <Button variant="outline-secondary" size="sm" onClick={abrirCaja}>Abrir caja</Button>
                         <Button variant="outline-danger" size="sm" onClick={cerrarCaja}>Cerrar caja</Button>
                     </div>
