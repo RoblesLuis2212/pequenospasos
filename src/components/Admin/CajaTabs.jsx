@@ -94,7 +94,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                         <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
                             <p className="titulo" style={{ fontSize: '13px' }}>Transferencia</p>
                             <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${caja.metricas?.porMetodoPago?.TRANSFERENCIA || 0}</p>
-                            <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>3 transacciones</p>
+                            <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{caja.metricas?.cantidadVentasTransferencia} transacciones</p>
                         </div>
                     </div>
                     <div className="col">
