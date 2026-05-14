@@ -109,9 +109,13 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
     };
 
     const [showPagoTurno, setShowPagoTurno] = useState(false);
+    const [turnoSeleccionado, setTurnoSeleccionado] = useState([]);
 
     const cerrarModalPagoTurno = () => setShowPagoTurno(false);
-    const abrirModalPagoTurno = () => setShowPagoTurno(true);
+    const abrirModalPagoTurno = (idTurno) => {
+        setTurnoSeleccionado(idTurno);
+        setShowPagoTurno(true);
+    }
 
     return (
         <>
@@ -173,7 +177,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                     </Table>
                 </div>
             </div>
-            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno}></ModalPagoTurno>
+            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno} turnoSeleccionado={turnoSeleccionado}></ModalPagoTurno>
         </>
 
 
