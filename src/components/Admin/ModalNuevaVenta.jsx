@@ -2,10 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { obtenerCajaActivaAPI, registrarPagoProductoAPI } from '../../helpers/queries';
+import { obtenerCajaActivaAPI, registrarPagoProductoAPI, registrarPagoTurnoAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 
-const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja, setCaja, titulo }) => {
+const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja, setCaja }) => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
 
@@ -32,7 +32,7 @@ const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja, setCaja, titu
     return (
         <Modal show={showModalVenta} onHide={cerrarModalVenta}>
             <Modal.Header className='d-flex justify-content-center'>
-                <Modal.Title className='titulo'>{titulo}</Modal.Title>
+                <Modal.Title className='titulo'>Nueva venta</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit(postValidaciones)}>

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { set } from 'react-hook-form';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import ModalNuevaVenta from './ModalNuevaVenta';
+import ModalPagoTurno from './ModalPagoTurno';
 
 const TurnosTabs = ({ turnos, setTurnos }) => {
 
@@ -108,10 +108,10 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
         doc.save("planilla-turnos.pdf");
     };
 
-    const [showModalVenta, setShowModalVenta] = useState(false);
+    const [showPagoTurno, setShowPagoTurno] = useState(false);
 
-    const cerrarModalVenta = () => setShowModalVenta(false);
-    const abrirModalVenta = () => setShowModalVenta(true);
+    const cerrarModalPagoTurno = () => setShowPagoTurno(false);
+    const abrirModalPagoTurno = () => setShowPagoTurno(true);
 
     return (
         <>
@@ -160,7 +160,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                         <tbody>
                             {turnosFiltrados.length > 0 ? (
                                 turnosFiltrados.map((itemTurno) => (
-                                    <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno} setTurnos={setTurnos} abrirModalVenta={abrirModalVenta}></ItemTurnos>
+                                    <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno} setTurnos={setTurnos} abrirModalPagoTurno={abrirModalPagoTurno}></ItemTurnos>
                                 ))
                             ) : (
                                 <tr>
@@ -173,7 +173,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                     </Table>
                 </div>
             </div>
-            <ModalNuevaVenta showModalVenta={showModalVenta} abrirModalVenta={abrirModalVenta} cerrarModalVenta={cerrarModalVenta} titulo="Registrar pago turno"></ModalNuevaVenta>
+            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno}></ModalPagoTurno>
         </>
 
 

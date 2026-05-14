@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { cambiarEstadoTurnoPaciente, listarTurnos, registrarPagoTurnoAPI } from "../../helpers/queries";
 import Swal from "sweetalert2";
 
-const ItemTurnos = ({ itemTurno, setTurnos, abrirModalVenta }) => {
+const ItemTurnos = ({ itemTurno, setTurnos, abrirModalPagoTurno }) => {
 
     const fecha = new Date(itemTurno.fecha);
 
@@ -64,40 +64,35 @@ const ItemTurnos = ({ itemTurno, setTurnos, abrirModalVenta }) => {
         }
     }
 
-    const registrarPagoTurno = async () => {
-        const respuesta = await registrarPagoTurnoAPI(itemTurno.idTurno);
-        if (respuesta.status === 200) {
-            alert("Pago del turno registrado correctamente");
-        }
-    }
-
     return (
-        <tr>
-            <td>{itemTurno.idTurno}</td>
-            <td>{itemTurno.paciente.nombreCompleto}</td>
-            <td>{texto}</td>
-            <td>{hora}:{minutos} hs</td>
-            <td>
-                <div>
-                    <span className={`badge bg-${colorEstado[itemTurno.estado]}`}>
-                        {itemTurno.estado}
-                    </span>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <Button variant="success" className="me-2" onClick={aprobarTurno} disabled={["APROBADO", "FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}><i className="bi bi-check-circle-fill"></i></Button>
-                    <Button variant="danger" onClick={cancelarTurno}
-                        disabled={["FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}
-                    ><i className="bi bi-x-circle-fill"></i></Button>
-                    {itemTurno.estado === "APROBADO" && (
-                        <Button variant="dark" className="ms-2" onClick={abrirModalVenta}>
-                            <i className="bi bi-cash-coin"></i>
-                        </Button>
-                    )}
-                </div>
-            </td>
-        </tr>
+        <>
+            <tr>
+                <td>{itemTurno.idTurno}</td>
+                <td>{itemTurno.paciente.nombreCompleto}</td>
+                <td>{texto}</td>
+                <td>{hora}:{minutos} hs</td>
+                <td>
+                    <div>
+                        <span className={`badge bg-${colorEstado[itemTurno.estado]}`}>
+                            {itemTurno.estado}
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <Button variant="success" className="me-2" onClick={aprobarTurno} disabled={["APROBADO", "FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}><i className="bi bi-check-circle-fill"></i></Button>
+                        <Button variant="danger" onClick={cancelarTurno}
+                            disabled={["FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}
+                        ><i className="bi bi-x-circle-fill"></i></Button>
+                        {itemTurno.estado === "APROBADO" && (
+                            <Button variant="dark" className="ms-2" onClick={abrirModalPagoTurno}>
+                                <i className="bi bi-cash-coin"></i>
+                            </Button>
+                        )}
+                    </div>
+                </td>
+            </tr>
+        </>
     );
 };
 
