@@ -4,13 +4,22 @@ import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { registrarPagoTurnoAPI } from '../../helpers/queries';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTurno, turnoSeleccionado }) => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors, setValue } = useForm();
 
     const postValidaciones = async (data) => {
-        const respuesta = await registrarPagoTurnoAPI();
+        const respuesta = await registrarPagoTurnoAPI(turnoSeleccionado, {
+            metodoPagoId: Number(data.metodoPagoId),
+            pagoCon: Number(data.pagoCon)
+        });
+        if (respuesta.status === 200) {
+            Swal.fire({ title: "Pago registrado exitosamente!", icon: "success" });
+        } else {
+            Swal.fire({ title: "Ocurrio un error al registrar el pago del turno. Intentelo mas tarde!", icon: "error" });
+        }
         reset();
     }
 
@@ -61,7 +70,7 @@ const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTur
                     <Form.Group>
                         <Form.Label className='etiquetas'>Metodo de pago</Form.Label>
                         <Form.Select className='custom-input input-form'
-                            {...register("metodoPago", {
+                            {...register("metodoPagoId", {
                                 required: "El metodo de pago es un dato obligatorio"
                             })}
                         >

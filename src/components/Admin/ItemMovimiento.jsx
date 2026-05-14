@@ -6,7 +6,7 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
         "PAGADO": "success",
         "CANCELADO": "danger",
         "PENDIENTE": "warning",
-        "APROBADO": "primary",
+        "APROBADO": "success",
     };
 
     const fecha = new Date(itemMovimiento.fechaRetiro);

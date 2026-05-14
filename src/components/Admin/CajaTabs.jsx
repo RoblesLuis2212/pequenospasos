@@ -57,8 +57,6 @@ const CajaTabs = ({ caja, setCaja }) => {
         }
     }
 
-    console.log("estado de la caja: ", caja.caja?.estado);
-
     return (
         <>
             <div className="admin-wrapper">
@@ -126,7 +124,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                 <div className="border rounded-3 p-3 shadow-lg">
                     <p className="titulo" style={{ fontSize: '15px' }}>Movimientos del día</p>
                     {
-                        caja?.caja?.ventas && caja.caja.ventas.legth > 0 ? (
+                        caja?.caja?.ventas && caja.caja.ventas.length > 0 ? (
                             caja?.caja?.ventas.map((itemMovimiento, index) => (
                                 <ItemMovimiento key={index} itemMovimiento={itemMovimiento} isLast={index === caja.length - 1}></ItemMovimiento>
                             ))

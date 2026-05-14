@@ -629,7 +629,7 @@ export const cerrarCajaAPI = async (id) => {
   }
 };
 
-export const registrarPagoTurnoAPI = async (id) => {
+export const registrarPagoTurnoAPI = async (id, data) => {
   try {
     const respuesta = await fetch(`${cajaBackend}/${id}/turno-pago`, {
       method: "PUT",
@@ -637,6 +637,7 @@ export const registrarPagoTurnoAPI = async (id) => {
         "Content-Type": "application/json",
         "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
       },
+      body: JSON.stringify(data),
     });
     return respuesta;
   } catch (err) {
