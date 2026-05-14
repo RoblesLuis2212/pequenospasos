@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { obtenerCajaActivaAPI, registrarPagoProductoAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 
-const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja, setCaja }) => {
+const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja, setCaja, titulo }) => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
 
@@ -32,7 +32,7 @@ const ModalNuevaVenta = ({ showModalVenta, cerrarModalVenta, caja, setCaja }) =>
     return (
         <Modal show={showModalVenta} onHide={cerrarModalVenta}>
             <Modal.Header className='d-flex justify-content-center'>
-                <Modal.Title className='titulo'>Nueva venta</Modal.Title>
+                <Modal.Title className='titulo'>{titulo}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit(postValidaciones)}>

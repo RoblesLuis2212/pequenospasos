@@ -57,6 +57,8 @@ const CajaTabs = ({ caja, setCaja }) => {
         }
     }
 
+    console.log("estado de la caja: ", caja.caja?.estado);
+
     return (
         <>
             <div className="admin-wrapper">
@@ -75,7 +77,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                     </div>
                     <div className="d-flex align-items-center gap-2">
                         <span className={caja.caja?.estado === "ABIERTA" ? 'badge bg-success' : 'badge bg-danger'}>{caja?.caja?.estado === "ABIERTA" ? 'Abierta' : 'Cerrada'}</span>
-                        <Button className={caja.caja?.estado === "ABIERTA" ? 'btn btn-primary-outline' : 'd-none'} size="sm" onClick={abrirModalVenta}>Nueva venta<i className="bi bi-plus ms-1"></i></Button>
+                        <Button className="btn btn-primary-outline" size="sm" onClick={abrirModalVenta} disabled={caja.caja?.estado !== "ABIERTA"}>Nueva venta<i className="bi bi-plus ms-1"></i></Button>
                         <Button variant="outline-secondary" size="sm" onClick={abrirCaja}>Abrir caja</Button>
                         <Button variant="outline-danger" size="sm" onClick={cerrarCaja}>Cerrar caja</Button>
                     </div>
@@ -135,7 +137,7 @@ const CajaTabs = ({ caja, setCaja }) => {
                 </div>
 
             </div>
-            <ModalNuevaVenta showModalVenta={showModalVenta} cerrarModalVenta={cerrarModalVenta} caja={caja} setCaja={setCaja}></ModalNuevaVenta>
+            <ModalNuevaVenta showModalVenta={showModalVenta} cerrarModalVenta={cerrarModalVenta} caja={caja} setCaja={setCaja} titulo="Nueva venta"></ModalNuevaVenta>
         </>
 
     );

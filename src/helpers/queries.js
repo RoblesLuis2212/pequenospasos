@@ -628,3 +628,19 @@ export const cerrarCajaAPI = async (id) => {
     return null;
   }
 };
+
+export const registrarPagoTurnoAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}/${id}/turno-pago`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
