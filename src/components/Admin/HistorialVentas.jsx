@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+import ItemMovimiento from './ItemMovimiento';
 
 const HistorialVentas = () => {
     return (
@@ -26,6 +27,60 @@ const HistorialVentas = () => {
                         <option value="3">Credito</option>
                         <option value="4">Debito</option>
                     </Form.Select>
+                </div>
+                <div className="col-12 col-md-6 col-lg-12 mt-2">
+                    <Form.Control className='input-custom custom-input' placeholder='buscar por paciente,padre'></Form.Control>
+                </div>
+            </div>
+            {/* Total de reacudacion por cada metodo de pago */}
+            <div className="row g-3 mb-4 mt-2">
+                <div className="col">
+                    <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
+                        <p className="titulo" style={{ fontSize: '13px' }}>Total recaudado</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$1200</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                    </div>
+                </div>
+                <div className="col">
+                    <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
+                        <p className="titulo" style={{ fontSize: '13px' }}>Efectivo</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$1500</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                    </div>
+                </div>
+                <div className="col">
+                    <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
+                        <p className="titulo" style={{ fontSize: '13px' }}>Transferencia</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$1500</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                    </div>
+                </div>
+                <div className="col">
+                    <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
+                        <p className="titulo" style={{ fontSize: '13px' }}>Debito</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$1500</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                    </div>
+                </div>
+                <div className="col">
+                    <div className="p-3 rounded-3" style={{ background: 'var(--bs-secondary-bg)' }}>
+                        <p className="titulo" style={{ fontSize: '13px' }}>Credito</p>
+                        <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>$1500</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                    </div>
+                </div>
+                {/* Historial de movimientos */}
+                <div className="border rounded-3 p-3 shadow-lg">
+                    <p className="titulo" style={{ fontSize: '15px' }}>Historial de ventas</p>
+                    <ItemMovimiento isLast={false}
+                        itemMovimiento={{
+                            fechaRetiro: "2026-05-15T16:30:00.000Z",
+                            monto: 25000,
+                            tipoVenta: "CONSULTA",
+                            estado: "PAGADO",
+                            usuario: { nombreCompleto: "Luis García" },
+                            metodopago: { nombre: "EFECTIVO" }
+                        }}></ItemMovimiento>
                 </div>
             </div>
         </section>
