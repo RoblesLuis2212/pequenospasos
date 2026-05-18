@@ -1,0 +1,117 @@
+.ev-wrapper {
+    padding: 1.5rem;
+}
+
+.ev-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3c2fa0;
+}
+
+.ev-subtitulo {
+    font-size: 13px;
+    color: #888;
+}
+
+.ev-select {
+    font-size: 13px;
+    border: 1px solid #e0dff5;
+    border-radius: 8px !important;
+    padding: 5px 10px;
+}
+
+.ev-select:focus {
+    border-color: #7f77dd;
+    box-shadow: 0 0 0 0.15rem rgba(127, 119, 221, 0.2);
+}
+
+/* Métricas */
+.ev-metric-card {
+    background: #f7f6fe;
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+}
+
+.ev-metric-label {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+.ev-metric-valor {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d2d2d;
+}
+
+.ev-metric-sub {
+    font-size: 11px;
+    color: #aaa;
+}
+
+.ev-color-purple { color: #534AB7; }
+.ev-color-teal   { color: #1D9E75; }
+
+/* Gráfico */
+.ev-chart-card {
+    background: #fff;
+    border: 1px solid #e8e7f8;
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.ev-chart-titulo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3c2fa0;
+    margin: 0 0 2px;
+}
+
+.ev-chart-sub {
+    font-size: 12px;
+    color: #888;
+    margin: 0 0 12px;
+}
+
+/* Leyenda */
+.ev-leyenda {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.ev-leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #888;
+}
+
+.ev-leyenda-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+/* Tooltip */
+.ev-tooltip {
+    background: #fff;
+    border: 1px solid #e8e7f8;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.ev-tooltip-label {
+    font-weight: 600;
+    color: #3c2fa0;
+    margin: 0 0 4px;
+    font-size: 12px;
+}
