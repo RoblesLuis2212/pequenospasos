@@ -51,6 +51,10 @@ const HistorialVentas = () => {
     const totalDebito = ventasFiltradas.filter(v => v.metodopago?.nombre === "DEBITO").reduce((acc, v) => acc + Number(v.monto), 0);
     const totalCredito = ventasFiltradas.filter(v => v.metodopago?.nombre === "CREDITO").reduce((acc, v) => acc + Number(v.monto), 0);
 
+    const cantidadEfectivo = ventasFiltradas.filter(v => v.metodopago?.nombre === "EFECTIVO").length;
+    const cantidadTransferencia = ventasFiltradas.filter(v => v.metodopago?.nombre === "TRANSFERENCIA").length;
+    const cantidadDebito = ventasFiltradas.filter(v => v.metodopago?.nombre === "DEBITO").length;
+    const cantidadCredito = ventasFiltradas.filter(v => v.metodoPago?.nombre === "CREDITO").length;
 
     const datosPorMes = Array.from({ length: 12 }, (_, i) => {
         const ventasDelMes = historial.filter(v =>
@@ -127,28 +131,28 @@ const HistorialVentas = () => {
                     <div className="p-3 rounded-3 bg-light">
                         <p className="titulo" style={{ fontSize: '13px' }}>Efectivo</p>
                         <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${totalEfectivo}</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{cantidadEfectivo} transacciones</p>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-3 rounded-3 bg-light">
                         <p className="titulo" style={{ fontSize: '13px' }}>Transferencia</p>
                         <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${totalTransferencia}</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{cantidadTransferencia} transacciones</p>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-3 rounded-3 bg-light">
                         <p className="titulo" style={{ fontSize: '13px' }}>Debito</p>
                         <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${totalDebito}</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{cantidadDebito} transacciones</p>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-3 rounded-3 bg-light">
                         <p className="titulo" style={{ fontSize: '13px' }}>Credito</p>
                         <p className="mb-0 fw-500" style={{ fontSize: '24px' }}>${totalCredito}</p>
-                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>10 transacciones</p>
+                        <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>{cantidadCredito} transacciones</p>
                     </div>
                 </div>
                 {/* Historial de movimientos */}
