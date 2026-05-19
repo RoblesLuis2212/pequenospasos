@@ -44,7 +44,7 @@ const HistorialVentas = () => {
         return coincideTipo && coincideMetodo && coincideFecha && coincideBusqueda;
     })
 
-    //Total reacudado por ventas
+    //Total recuadado por ventas
     const totalRecaudado = historial.reduce((acc, v) => acc + Number(v.monto), 0);
     const totalEfectivo = ventasFiltradas.filter(v => v.metodopago?.nombre === "EFECTIVO").reduce((acc, v) => acc + Number(v.monto), 0)
     const totalTransferencia = ventasFiltradas.filter(v => v.metodopago?.nombre === "TRANSFERENCIA").reduce((acc, v) => acc + Number(v.monto), 0)
@@ -52,7 +52,20 @@ const HistorialVentas = () => {
     const totalCredito = ventasFiltradas.filter(v => v.metodopago?.nombre === "CREDITO").reduce((acc, v) => acc + Number(v.monto), 0);
 
 
-    console.log("El total recaudado es: ", totalRecaudado);
+    const datosPorMes = Array.from({ length: 12 }, (_, i) => {
+        const ventasDelMes = historial.filter(v =>
+            new Date(v.fechaCompra).getMonth() === i
+        );
+        return {
+            mes: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][i],
+            consultas: ventasDelMes
+                .filter(v => v.tipoVenta === 'CONSULTA')
+                .reduce((acc, v) => acc + Number(v.monto), 0),
+            productos: ventasDelMes
+                .filter(v => v.tipoVenta === 'PRODUCTO')
+                .reduce((acc, v) => acc + Number(v.monto), 0),
+        };
+    });
 
 
     return (
@@ -149,7 +162,7 @@ const HistorialVentas = () => {
                 </div>
                 {/* Estadisticas de ventas de productos vs consultas */}
                 <div>
-                    <EstadisticasVentas></EstadisticasVentas>
+                    <EstadisticasVentas datos={datosPorMes}></EstadisticasVentas>
                 </div>
             </div>
         </section>

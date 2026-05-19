@@ -6,37 +6,6 @@ import {
 } from 'recharts';
 import './EstadisticasVentas.css';
 
-const datosMock = {
-    2026: [
-        { mes: 'Ene', consultas: 85000, productos: 32000 },
-        { mes: 'Feb', consultas: 92000, productos: 41000 },
-        { mes: 'Mar', consultas: 110000, productos: 76000 },
-        { mes: 'Abr', consultas: 78000, productos: 28000 },
-        { mes: 'May', consultas: 95000, productos: 58000 },
-        { mes: 'Jun', consultas: 0, productos: 0 },
-        { mes: 'Jul', consultas: 0, productos: 0 },
-        { mes: 'Ago', consultas: 0, productos: 0 },
-        { mes: 'Sep', consultas: 0, productos: 0 },
-        { mes: 'Oct', consultas: 0, productos: 0 },
-        { mes: 'Nov', consultas: 0, productos: 0 },
-        { mes: 'Dic', consultas: 0, productos: 0 },
-    ],
-    2025: [
-        { mes: 'Ene', consultas: 70000, productos: 25000 },
-        { mes: 'Feb', consultas: 80000, productos: 30000 },
-        { mes: 'Mar', consultas: 95000, productos: 60000 },
-        { mes: 'Abr', consultas: 65000, productos: 20000 },
-        { mes: 'May', consultas: 88000, productos: 45000 },
-        { mes: 'Jun', consultas: 91000, productos: 38000 },
-        { mes: 'Jul', consultas: 74000, productos: 29000 },
-        { mes: 'Ago', consultas: 82000, productos: 33000 },
-        { mes: 'Sep', consultas: 69000, productos: 27000 },
-        { mes: 'Oct', consultas: 93000, productos: 41000 },
-        { mes: 'Nov', consultas: 87000, productos: 36000 },
-        { mes: 'Dic', consultas: 105000, productos: 55000 },
-    ],
-};
-
 const ticksY = [0, 250000, 500000, 800000, 1000000];
 
 const formatearY = (v) => {
@@ -62,11 +31,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     );
 };
 
-const EstadisticasVentas = () => {
-    const [anio, setAnio] = useState(2026);
-
-    const datos = datosMock[anio];
-
+const EstadisticasVentas = ({ datos }) => {
     const totalConsultas = datos.reduce((acc, d) => acc + d.consultas, 0);
     const totalProductos = datos.reduce((acc, d) => acc + d.productos, 0);
     const totalAnual = totalConsultas + totalProductos;
