@@ -27,7 +27,12 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
                 style={{ borderBottom: !isLast ? '0.5px solid var(--bs-border-color)' : 'none' }}
             >
                 <div>
-                    <p className="mb-0 fw-500" style={{ fontSize: '14px' }}>{itemMovimiento.usuario?.nombreCompleto}</p>
+                    <div className="d-flex">
+                        <p className="mb-0 fw-500" style={{ fontSize: '14px' }}>{itemMovimiento.usuario?.nombreCompleto}
+                            {itemMovimiento.turno?.paciente?.nombreCompleto && ' ·'}
+                        </p>
+                        <p className="mb-0 fw-500 ms-1" style={{ fontSize: '14px' }}>{itemMovimiento.turno?.paciente?.nombreCompleto && `${itemMovimiento.turno.paciente.nombreCompleto} (Paciente)`} </p>
+                    </div>
                     <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>
                         {fechaFormateada} hs · {itemMovimiento.metodopago?.nombre} · {itemMovimiento.tipoVenta}
                     </p>

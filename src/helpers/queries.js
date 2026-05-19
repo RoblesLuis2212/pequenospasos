@@ -645,3 +645,14 @@ export const registrarPagoTurnoAPI = async (id, data) => {
     return null;
   }
 };
+
+export const HistorialVentasAPI = async () => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/historial-venta`);
+
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
