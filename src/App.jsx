@@ -19,6 +19,7 @@ import { listarProductosAPI, listarProductosInicioAPI } from "./helpers/queries"
 import Tienda from "./components/Tienda/Tienda"
 import Compras from "./components/Compras/Compras"
 import Administrador from "./components/Admin/Administrador"
+import HistorialVentas from "./components/Admin/HistorialVentas"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -137,6 +138,11 @@ function App() {
           <Route
             path="/admin"
             element={<Administrador></Administrador>}
+          >
+          </Route>
+          <Route
+            path="/historial-ventas"
+            element={<HistorialVentas></HistorialVentas>}
           >
           </Route>
         </Routes>

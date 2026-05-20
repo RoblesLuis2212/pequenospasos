@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
-import { cambiarEstadoTurnoPaciente, listarTurnos } from "../../helpers/queries";
+import { cambiarEstadoTurnoPaciente, listarTurnos, registrarPagoTurnoAPI } from "../../helpers/queries";
 import Swal from "sweetalert2";
 
-const ItemTurnos = ({ itemTurno, setTurnos }) => {
+const ItemTurnos = ({ itemTurno, setTurnos, abrirModalPagoTurno, turnoSeleccionado }) => {
 
     const fecha = new Date(itemTurno.fecha);
 
@@ -64,29 +64,35 @@ const ItemTurnos = ({ itemTurno, setTurnos }) => {
         }
     }
 
-
     return (
-        <tr>
-            <td>{itemTurno.idTurno}</td>
-            <td>{itemTurno.paciente.nombreCompleto}</td>
-            <td>{texto}</td>
-            <td>{hora}:{minutos} hs</td>
-            <td>
-                <div>
-                    <span className={`badge bg-${colorEstado[itemTurno.estado]}`}>
-                        {itemTurno.estado}
-                    </span>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <Button variant="success" className="me-2" onClick={aprobarTurno} disabled={["APROBADO", "FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}><i className="bi bi-check-circle-fill"></i></Button>
-                    <Button variant="danger" onClick={cancelarTurno}
-                        disabled={["FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}
-                    ><i className="bi bi-x-circle-fill"></i></Button>
-                </div>
-            </td>
-        </tr>
+        <>
+            <tr>
+                <td>{itemTurno.idTurno}</td>
+                <td>{itemTurno.paciente.nombreCompleto}</td>
+                <td>{texto}</td>
+                <td>{hora}:{minutos} hs</td>
+                <td>
+                    <div>
+                        <span className={`badge bg-${colorEstado[itemTurno.estado]}`}>
+                            {itemTurno.estado}
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <Button variant="success" className="me-2" onClick={aprobarTurno} disabled={["APROBADO", "FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}><i className="bi bi-check-circle-fill"></i></Button>
+                        <Button variant="danger" onClick={cancelarTurno}
+                            disabled={["FINALIZADO", "CANCELADO"].includes(itemTurno.estado)}
+                        ><i className="bi bi-x-circle-fill"></i></Button>
+                        {itemTurno.estado === "APROBADO" && (
+                            <Button variant="dark" className="ms-2" onClick={() => abrirModalPagoTurno(itemTurno.idTurno)}>
+                                <i className="bi bi-cash-coin"></i>
+                            </Button>
+                        )}
+                    </div>
+                </td>
+            </tr>
+        </>
     );
 };
 

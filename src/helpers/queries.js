@@ -8,6 +8,7 @@ const turnosBackend = import.meta.env.VITE_API_TURNOS;
 const productosBackend = import.meta.env.VITE_API_PRODUCTOS;
 const carritoBackend = import.meta.env.VITE_API_CARRITO;
 const ventasBackend = import.meta.env.VITE_API_VENTAS;
+const cajaBackend = import.meta.env.VITE_API_CAJA;
 
 export const login = async (usuario) => {
   try {
@@ -559,6 +560,96 @@ export const asignarTutorAPI = async (idPaciente, idUsuario) => {
         body: JSON.stringify({ usuarioId: idUsuario }),
       },
     );
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const obtenerCajaActivaAPI = async () => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const registrarPagoProductoAPI = async (id, datos) => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}/${id}/compra-pago`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(datos),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const abrirCajaAPI = async () => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}`, {
+      method: "POST",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const cerrarCajaAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}/${id}/cierre`, {
+      method: "PATCH",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const registrarPagoTurnoAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${cajaBackend}/${id}/turno-pago`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const HistorialVentasAPI = async () => {
+  try {
+    const respuesta = await fetch(`${ventasBackend}/historial-venta`);
+
     return respuesta;
   } catch (err) {
     console.error(err);

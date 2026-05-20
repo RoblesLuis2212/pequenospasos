@@ -1,7 +1,8 @@
 import { Card, Badge } from "react-bootstrap";
 import AdminTabs from "./AdminTabs";
 import { useEffect, useState } from "react";
-import { listarPacientesAPI, listarPedidosAPI, listarProductosAPI, listarTurnos } from "../../helpers/queries";
+import { listarPacientesAPI, listarPedidosAPI, listarProductosAPI, listarTurnos, obtenerCajaActivaAPI } from "../../helpers/queries";
+import ModalNuevaVenta from "./ModalNuevaVenta";
 
 const Administrador = () => {
     const [productos, setProductos] = useState([]);
@@ -61,6 +62,21 @@ const Administrador = () => {
         obtenerTurnos();
     }, [])
 
+    const [caja, setCaja] = useState([]);
+
+    const obtenerCaja = async () => {
+        const respuesta = await obtenerCajaActivaAPI();
+        if (respuesta.status === 200) {
+            const datos = await respuesta.json();
+            setCaja(datos);
+            console.log(datos);
+        }
+    }
+
+    useEffect(() => {
+        obtenerCaja();
+    }, [])
+
     return (
         <>
             <section className='container-fluid'>
@@ -100,7 +116,7 @@ const Administrador = () => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos}></AdminTabs>
+            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={setCaja}></AdminTabs>
         </>
     );
 };

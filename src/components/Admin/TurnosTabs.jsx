@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { set } from 'react-hook-form';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import ModalPagoTurno from './ModalPagoTurno';
 
 const TurnosTabs = ({ turnos, setTurnos }) => {
 
@@ -107,6 +108,14 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
         doc.save("planilla-turnos.pdf");
     };
 
+    const [showPagoTurno, setShowPagoTurno] = useState(false);
+    const [turnoSeleccionado, setTurnoSeleccionado] = useState([]);
+
+    const cerrarModalPagoTurno = () => setShowPagoTurno(false);
+    const abrirModalPagoTurno = (idTurno) => {
+        setTurnoSeleccionado(idTurno);
+        setShowPagoTurno(true);
+    }
 
     return (
         <>
@@ -155,7 +164,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                         <tbody>
                             {turnosFiltrados.length > 0 ? (
                                 turnosFiltrados.map((itemTurno) => (
-                                    <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno} setTurnos={setTurnos}></ItemTurnos>
+                                    <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno} setTurnos={setTurnos} abrirModalPagoTurno={abrirModalPagoTurno}></ItemTurnos>
                                 ))
                             ) : (
                                 <tr>
@@ -168,6 +177,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                     </Table>
                 </div>
             </div>
+            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno} turnoSeleccionado={turnoSeleccionado}></ModalPagoTurno>
         </>
 
 
