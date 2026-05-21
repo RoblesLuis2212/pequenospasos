@@ -1,15 +1,17 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
-import { crearFichaMedicaAPI } from '../../helpers/queries';
-import { useParams } from 'react-router-dom';
+import { crearFichaMedicaAPI, obtenerFichaMedicaPacienteAPI } from '../../helpers/queries';
+import { useLocation, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const FormularioFichaMedica = () => {
+const FormularioFichaMedica = ({ id }) => {
 
-    const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, reset, formState: { errors }, clearErrors, setValue } = useForm();
 
-    const { id } = useParams();
-    console.log("El id de la URl es: ", id);
+    const location = useLocation();
+    const esEdicion = location.pathname.includes("editar");
+
     const postValidaciones = async (data) => {
         const respuesta = await crearFichaMedicaAPI(id, data);
         if (respuesta.status === 201) {
@@ -17,6 +19,30 @@ const FormularioFichaMedica = () => {
         }
         console.log(data);
     }
+
+    console.log(id);
+
+    console.log("pathname:", location.pathname);
+    console.log("esEdicion:", esEdicion);
+
+    useEffect(() => {
+        if (esEdicion && id) {
+            console.log("id dentro del useEffect", id);
+            const cargarFicha = async () => {
+                const respuestas = await obtenerFichaMedicaPacienteAPI(id);
+                if (respuestas.status === 200) {
+                    const datos = await respuestas.json();
+                    setValue("edad_camino", datos.edad_camino);
+                    setValue("socializacion", datos.socializacion);
+                    setValue("derivacion", datos.derivacion);
+                    setValue("horarios_sueno", datos.horarios_sueno);
+                    setValue("contacto_visual", datos.contacto_visual);
+                    setValue("actividades", datos.actividades);
+                }
+            }
+            cargarFicha();
+        }
+    }, [id]);
 
     return (
         <Form onSubmit={handleSubmit(postValidaciones)}>

@@ -1,7 +1,8 @@
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ModalAsignarTutor from "./ModalAsignarTutor";
+import { obtenerFichaMedicaPacienteAPI } from "../../helpers/queries";
 
 const ItemPaciente = ({ itemPaciente, setPaciente }) => {
 
@@ -22,6 +23,19 @@ const ItemPaciente = ({ itemPaciente, setPaciente }) => {
     const cerrarModalTutor = () => setShowModalTutor(false);
     const abrirModalTutor = () => setShowModalTutor(true);
 
+    const navigate = useNavigate();
+
+    const abrirFicha = async () => {
+        const respuesta = await obtenerFichaMedicaPacienteAPI(itemPaciente.idPaciente);
+        if (respuesta.status === 200) {
+            navigate(`/ficha-medica/${itemPaciente.idPaciente}/editar`);
+        } else {
+            navigate(`/ficha-medica/${itemPaciente.idPaciente}/crear`);
+        }
+    }
+
+    console.log("id paciente:", itemPaciente.idPaciente);
+
     return (
         <>
             <tr>
@@ -38,7 +52,7 @@ const ItemPaciente = ({ itemPaciente, setPaciente }) => {
                     <div>
                         <Button variant="secondary" className="me-2" onClick={abrirModalTutor}><i className="bi bi-person-fill"></i></Button>
                         <Button variant="primary" as={Link} to={`/turnos/${itemPaciente.idPaciente}`}><i className="bi bi-calendar-check-fill"></i></Button>
-                        <Button variant="success" as={Link} to={`/ficha-medica/${itemPaciente.idPaciente}`} className="ms-2"><i class="bi bi-clipboard2-pulse-fill"></i></Button>
+                        <Button variant="success" onClick={abrirFicha} className="ms-2"><i className="bi bi-clipboard2-pulse-fill"></i></Button>
                     </div>
                 </td>
             </tr>
