@@ -1,52 +1,111 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useForm } from 'react-hook-form';
 
 const FormularioFichaMedica = () => {
+
+    const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
+
+
+    const postValidaciones = (data) => {
+        console.log(data);
+    }
+
     return (
-        <Form>
+        <Form onSubmit={handleSubmit(postValidaciones)}>
             <Form.Group className="mb-3">
                 <Form.Label className='etiquetas'>Edad que comenzo a caminar</Form.Label>
-                <Form.Control type="text" placeholder="ej: 2 años y medio" className='custom-input input-form' />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                <Form.Control type="text" placeholder="ej: 2 años y medio" className='custom-input input-form'
+                    {...register("edad_camino", {
+                        required: "Este dato es obligatorio",
+                        minLength: {
+                            value: 3,
+                            message: "El campo debe contener minimo 3 caracteres"
+                        },
+                        maxLength: {
+                            value: 60,
+                            message: "El campo debe contener maximo 60 caracteres"
+                        }
+                    })}
+                    onChange={() => clearErrors("edad_camino")}
+                />
+                <Form.Text className="text-danger">
+                    {errors.edad_camino?.message}
                 </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label className='etiquetas'>Socializacion</Form.Label>
-                <Form.Control type="text" placeholder="ej: juega con los niños en su escuela" className='custom-input' />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                <Form.Control type="text" placeholder="ej: juega con los niños en su escuela" className='custom-input input-form'
+                    {...register("socializacion", {
+                        required: "Este campo es obligatorio",
+                        minLength: {
+                            value: 10,
+                            message: "El campo debe contener minimo 10 caracteres"
+                        },
+                        maxLength: {
+                            value: "60",
+                            message: "El campo debe contener minimo 60 caracteres"
+                        }
+                    })}
+                    onChange={() => clearErrors("socializacion")}
+                />
+                <Form.Text className="text-danger">
+                    {errors.socializacion?.message}
                 </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label className='etiquetas'>Derivacion</Form.Label>
-                <Form.Control type="text" placeholder="ej: derivado por Neurologo" className='custom-input' />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
+                <Form.Control type="text" placeholder="ej: derivado por Neurologo" className='custom-input input-form'
+                    {...register("derivacion")}
+                />
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label className='etiquetas'>Horarios de Sueño</Form.Label>
-                <Form.Control type="text" placeholder="ej: duerme a la noche apartir de las 22hs" className='custom-input' />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                <Form.Control type="text" placeholder="ej: duerme a la noche apartir de las 22hs" className='custom-input input-form'
+                    {...register("horarios_sueno", {
+                        required: "Este campo es obligatorio",
+                        minLength: {
+                            value: 10,
+                            message: "El campo debe contener minimo 10 caracteres"
+                        },
+                        maxLength: {
+                            value: 80,
+                            message: "El campo debe contener maximo 80 caracteres"
+                        }
+                    })}
+                    onChange={() => clearErrors("horarios_sueno")}
+                />
+                <Form.Text className="text-danger">
+                    {errors.horarios_sueno?.message}
                 </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label className='etiquetas'>Contacto visual</Form.Label>
-                <Form.Control type="text" placeholder="ej: solo con su madre" className='custom-input' />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
+                <Form.Control type="text" placeholder="ej: solo con su madre" className='custom-input input-form'
+                    {...register("contacto_visual", {
+                    })}
+                />
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label className='etiquetas'>Actividades</Form.Label>
-                <Form.Control type="text" placeholder="ej: asiste a hockey los dias Lunes y Miercoles" className='custom-input' />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                <Form.Control type="text" placeholder="ej: asiste a hockey los dias Lunes y Miercoles" className='custom-input input-form'
+                    {...register("actividades", {
+                        required: "Este campo es obligatorio",
+                        minLength: {
+                            value: 5,
+                            message: "Este campo debe contener minimo 5 caracteres"
+                        },
+                        maxLength: {
+                            value: 150,
+                            message: "Este campo debe contener maximo 150 caracteres"
+                        }
+                    })}
+                    onChange={() => clearErrors("actividades")}
+                />
+                <Form.Text className="text-danger">
+                    {errors.actividades?.message}
                 </Form.Text>
             </Form.Group>
-
             <Button className='btn-principal' type="submit">
                 Guardar datos
             </Button>
