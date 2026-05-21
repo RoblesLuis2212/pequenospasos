@@ -20,6 +20,7 @@ import Tienda from "./components/Tienda/Tienda"
 import Compras from "./components/Compras/Compras"
 import Administrador from "./components/Admin/Administrador"
 import HistorialVentas from "./components/Admin/HistorialVentas"
+import FichaMedicaPaciente from "./components/Admin/FichaMedicaPaciente"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -143,6 +144,11 @@ function App() {
           <Route
             path="/historial-ventas"
             element={<HistorialVentas></HistorialVentas>}
+          >
+          </Route>
+          <Route
+            path="/ficha-medica"
+            element={<FichaMedicaPaciente></FichaMedicaPaciente>}
           >
           </Route>
         </Routes>
