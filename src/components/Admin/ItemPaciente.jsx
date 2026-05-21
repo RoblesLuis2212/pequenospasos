@@ -38,6 +38,7 @@ const ItemPaciente = ({ itemPaciente, setPaciente }) => {
                     <div>
                         <Button variant="secondary" className="me-2" onClick={abrirModalTutor}><i className="bi bi-person-fill"></i></Button>
                         <Button variant="primary" as={Link} to={`/turnos/${itemPaciente.idPaciente}`}><i className="bi bi-calendar-check-fill"></i></Button>
+                        <Button variant="success" as={Link} to={`/ficha-medica/${itemPaciente.idPaciente}`} className="ms-2"><i class="bi bi-clipboard2-pulse-fill"></i></Button>
                     </div>
                 </td>
             </tr>

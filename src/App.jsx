@@ -147,7 +147,7 @@ function App() {
           >
           </Route>
           <Route
-            path="/ficha-medica"
+            path="/ficha-medica/:id"
             element={<FichaMedicaPaciente></FichaMedicaPaciente>}
           >
           </Route>
