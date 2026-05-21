@@ -1,15 +1,59 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
+import { crearFichaMedicaAPI, editarFichaMedicaAPI, obtenerFichaMedicaPacienteAPI } from '../../helpers/queries';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
-const FormularioFichaMedica = () => {
+const FormularioFichaMedica = ({ id }) => {
 
-    const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, reset, formState: { errors }, clearErrors, setValue } = useForm();
 
+    const location = useLocation();
+    const esEdicion = location.pathname.includes("editar");
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const navigate = useNavigate();
+
+    const postValidaciones = async (data) => {
+        if (esEdicion) {
+            const respuesta = await editarFichaMedicaAPI(id, data);
+            if (respuesta.status === 200) {
+                Swal.fire({ title: "Ficha médica actualizada correctamente!", icon: "success" });
+                navigate("/admin");
+                reset();
+            } else {
+                Swal.fire({ title: "Ocurrio un error al actualizar la ficha medica. Intentelo nuevamente!", icon: "error" });
+            }
+        } else {
+            const respuesta = await crearFichaMedicaAPI(id);
+            if (respuesta.status === 201) {
+                Swal.fire({ title: "Ficha medica creada correctamente", icon: "success" });
+                navigate("/admin");
+                reset();
+            } else {
+                Swal.fire({ title: "Ocurrio un error al crear la ficha medica. Intentelo nuevamente!", icon: "error" })
+            }
+        }
     }
+
+    useEffect(() => {
+        if (esEdicion && id) {
+            const cargarFicha = async () => {
+                const respuestas = await obtenerFichaMedicaPacienteAPI(id);
+                if (respuestas.status === 200) {
+                    const datos = await respuestas.json();
+                    setValue("edad_camino", datos.edad_camino);
+                    setValue("socializacion", datos.socializacion);
+                    setValue("derivacion", datos.derivacion);
+                    setValue("horarios_sueno", datos.horarios_sueno);
+                    setValue("contacto_visual", datos.contacto_visual);
+                    setValue("actividades", datos.actividades);
+                }
+            }
+            cargarFicha();
+        }
+    }, [id]);
 
     return (
         <Form onSubmit={handleSubmit(postValidaciones)}>
@@ -69,8 +113,8 @@ const FormularioFichaMedica = () => {
                             message: "El campo debe contener minimo 10 caracteres"
                         },
                         maxLength: {
-                            value: 80,
-                            message: "El campo debe contener maximo 80 caracteres"
+                            value: 200,
+                            message: "El campo debe contener maximo 200 caracteres"
                         }
                     })}
                     onChange={() => clearErrors("horarios_sueno")}
