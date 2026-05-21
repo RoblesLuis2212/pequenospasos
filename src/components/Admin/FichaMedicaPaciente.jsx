@@ -3,15 +3,14 @@ import FormularioFichaMedica from './FormularioFichaMedica';
 
 const FichaMedicaPaciente = () => {
     return (
-        <section className='container'>
+        <section className='container-fluid recuperar-container'>
             <div className="row">
-                <div className="col-12">
-                    <h4 className='text-center titulo'>Ficha Medica</h4>
+                <div className="d-flex justify-content-center">
+                    <div className="col-12 col-md-8 bg-white p-4 border rounded-3 mt-4 mb-3">
+                        <h4 className='text-center titulo'>Ficha Medica</h4>
+                        <FormularioFichaMedica></FormularioFichaMedica>
+                    </div>
                 </div>
-                <div className="col-12">
-                    <FormularioFichaMedica></FormularioFichaMedica>
-                </div>
-                <div className="col-12 col-md-6">1234</div>
             </div>
         </section>
     );
