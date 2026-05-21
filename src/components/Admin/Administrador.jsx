@@ -53,7 +53,6 @@ const Administrador = () => {
         const respuesta = await listarTurnos();
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
-            console.log("datos turnos: ", datos);
             setTurnos(datos);
         }
     }
@@ -69,7 +68,6 @@ const Administrador = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setCaja(datos);
-            console.log(datos);
         }
     }
 

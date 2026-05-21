@@ -34,7 +34,6 @@ const ItemPaciente = ({ itemPaciente, setPaciente }) => {
         }
     }
 
-    console.log("id paciente:", itemPaciente.idPaciente);
 
     return (
         <>
