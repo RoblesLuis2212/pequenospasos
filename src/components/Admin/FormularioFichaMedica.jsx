@@ -1,9 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
-import { crearFichaMedicaAPI, obtenerFichaMedicaPacienteAPI } from '../../helpers/queries';
-import { useLocation, useParams } from 'react-router-dom';
+import { crearFichaMedicaAPI, editarFichaMedicaAPI, obtenerFichaMedicaPacienteAPI } from '../../helpers/queries';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const FormularioFichaMedica = ({ id }) => {
 
@@ -12,22 +13,32 @@ const FormularioFichaMedica = ({ id }) => {
     const location = useLocation();
     const esEdicion = location.pathname.includes("editar");
 
+    const navigate = useNavigate();
+
     const postValidaciones = async (data) => {
-        const respuesta = await crearFichaMedicaAPI(id, data);
-        if (respuesta.status === 201) {
-            alert("Ficha medica del paciente creada correctamente");
+        if (esEdicion) {
+            const respuesta = await editarFichaMedicaAPI(id, data);
+            if (respuesta.status === 200) {
+                Swal.fire({ title: "Ficha médica actualizada correctamente!", icon: "success" });
+                navigate("/admin");
+                reset();
+            } else {
+                Swal.fire({ title: "Ocurrio un error al actualizar la ficha medica. Intentelo nuevamente!", icon: "error" });
+            }
+        } else {
+            const respuesta = await crearFichaMedicaAPI(id);
+            if (respuesta.status === 201) {
+                Swal.fire({ title: "Ficha medica creada correctamente", icon: "success" });
+                navigate("/admin");
+                reset();
+            } else {
+                Swal.fire({ title: "Ocurrio un error al crear la ficha medica. Intentelo nuevamente!", icon: "error" })
+            }
         }
-        console.log(data);
     }
-
-    console.log(id);
-
-    console.log("pathname:", location.pathname);
-    console.log("esEdicion:", esEdicion);
 
     useEffect(() => {
         if (esEdicion && id) {
-            console.log("id dentro del useEffect", id);
             const cargarFicha = async () => {
                 const respuestas = await obtenerFichaMedicaPacienteAPI(id);
                 if (respuestas.status === 200) {
@@ -102,8 +113,8 @@ const FormularioFichaMedica = ({ id }) => {
                             message: "El campo debe contener minimo 10 caracteres"
                         },
                         maxLength: {
-                            value: 80,
-                            message: "El campo debe contener maximo 80 caracteres"
+                            value: 200,
+                            message: "El campo debe contener maximo 200 caracteres"
                         }
                     })}
                     onChange={() => clearErrors("horarios_sueno")}

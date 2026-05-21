@@ -689,3 +689,20 @@ export const obtenerFichaMedicaPacienteAPI = async (id) => {
     return null;
   }
 };
+
+export const editarFichaMedicaAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${fichaMedicaBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
