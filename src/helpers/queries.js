@@ -9,6 +9,7 @@ const productosBackend = import.meta.env.VITE_API_PRODUCTOS;
 const carritoBackend = import.meta.env.VITE_API_CARRITO;
 const ventasBackend = import.meta.env.VITE_API_VENTAS;
 const cajaBackend = import.meta.env.VITE_API_CAJA;
+const fichaMedicaBackend = import.meta.env.VITE_API_FICHAMEDICA;
 
 export const login = async (usuario) => {
   try {
@@ -650,6 +651,23 @@ export const HistorialVentasAPI = async () => {
   try {
     const respuesta = await fetch(`${ventasBackend}/historial-venta`);
 
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const crearFichaMedicaAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${fichaMedicaBackend}/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
     return respuesta;
   } catch (err) {
     console.error(err);

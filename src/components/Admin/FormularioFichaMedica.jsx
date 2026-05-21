@@ -1,13 +1,20 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
+import { crearFichaMedicaAPI } from '../../helpers/queries';
+import { useParams } from 'react-router-dom';
 
 const FormularioFichaMedica = () => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm();
 
-
-    const postValidaciones = (data) => {
+    const { id } = useParams();
+    console.log("El id de la URl es: ", id);
+    const postValidaciones = async (data) => {
+        const respuesta = await crearFichaMedicaAPI(id, data);
+        if (respuesta.status === 201) {
+            alert("Ficha medica del paciente creada correctamente");
+        }
         console.log(data);
     }
 
