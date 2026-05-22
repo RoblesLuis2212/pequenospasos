@@ -63,7 +63,7 @@ const ItemPaciente = ({ itemPaciente, setPaciente }) => {
                 </td>
             </tr>
             <ModalAsignarTutor showModalTutor={showModalTutor} cerrarModalTutor={cerrarModalTutor} itemPaciente={itemPaciente} setPaciente={setPaciente}></ModalAsignarTutor>
-            <ModalDatosEscolares cerrarModalEscolar={cerrarModalEscolar} showModalEscolar={showModalEscolar}></ModalDatosEscolares>
+            <ModalDatosEscolares cerrarModalEscolar={cerrarModalEscolar} showModalEscolar={showModalEscolar} idPaciente={itemPaciente.idPaciente}></ModalDatosEscolares>
         </>
     );
 };
