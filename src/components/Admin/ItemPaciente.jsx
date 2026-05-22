@@ -5,7 +5,7 @@ import ModalAsignarTutor from "./ModalAsignarTutor";
 import { obtenerFichaMedicaPacienteAPI } from "../../helpers/queries";
 import ModalDatosEscolares from "./ModalDatosEscolares";
 
-const ItemPaciente = ({ itemPaciente, setPaciente }) => {
+const ItemPaciente = ({ itemPaciente, setPaciente, abrirModalEscolar }) => {
 
     const calcularEdad = () => {
         const hoy = new Date();
@@ -35,12 +35,6 @@ const ItemPaciente = ({ itemPaciente, setPaciente }) => {
         }
     }
 
-    const [showModalEscolar, setModalEscolar] = useState(false);
-
-    const cerrarModalEscolar = () => setModalEscolar(false);
-    const abrirModalEscolar = () => setModalEscolar(true);
-
-
     return (
         <>
             <tr>
@@ -58,12 +52,11 @@ const ItemPaciente = ({ itemPaciente, setPaciente }) => {
                         <Button variant="secondary" className="me-2" onClick={abrirModalTutor}><i className="bi bi-person-fill"></i></Button>
                         <Button variant="primary" as={Link} to={`/turnos/${itemPaciente.idPaciente}`}><i className="bi bi-calendar-check-fill"></i></Button>
                         <Button variant="success" onClick={abrirFicha} className="ms-2"><i className="bi bi-clipboard2-pulse-fill"></i></Button>
-                        <Button variant="dark" className="ms-2" onClick={abrirModalEscolar}><i className="bi bi-backpack-fill"></i></Button>
+                        <Button variant="dark" className="ms-2" onClick={() => abrirModalEscolar(itemPaciente.idPaciente)}><i className="bi bi-backpack-fill"></i></Button>
                     </div>
                 </td>
             </tr>
             <ModalAsignarTutor showModalTutor={showModalTutor} cerrarModalTutor={cerrarModalTutor} itemPaciente={itemPaciente} setPaciente={setPaciente}></ModalAsignarTutor>
-            <ModalDatosEscolares cerrarModalEscolar={cerrarModalEscolar} showModalEscolar={showModalEscolar} idPaciente={itemPaciente.idPaciente}></ModalDatosEscolares>
         </>
     );
 };

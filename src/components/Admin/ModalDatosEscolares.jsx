@@ -2,30 +2,29 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { agregarDatosEscolaresAPI } from '../../helpers/queries';
+import { agregarDatosEscolaresAPI, obtenerDatosEscolaresAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
+import { useEffect, useState } from 'react';
 
-const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar, idPaciente }) => {
+const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar }) => {
 
     const { register, handleSubmit, formState: { errors }, clearErrors, reset } = useForm();
 
-    console.log("El id del paciente es: ", idPaciente)
-
     const postValidaciones = async (data) => {
-        const respuesta = await agregarDatosEscolaresAPI(idPaciente, data);
-        if (respuesta.status === 201) {
-            Swal.fire({
-                title: "Datos escolares agregados exitosamente!",
-                icon: "success",
-                draggable: true
-            });
-        } else {
-            Swal.fire({
-                title: "Ocurrio un error al agregar los datos escolares. Intentelo nuevamente!",
-                icon: "error",
-                draggable: true
-            });
-        }
+        // const respuesta = await agregarDatosEscolaresAPI(idPaciente, data);
+        // if (respuesta.status === 201) {
+        //     Swal.fire({
+        //         title: "Datos escolares agregados exitosamente!",
+        //         icon: "success",
+        //         draggable: true
+        //     });
+        // } else {
+        //     Swal.fire({
+        //         title: "Ocurrio un error al agregar los datos escolares. Intentelo nuevamente!",
+        //         icon: "error",
+        //         draggable: true
+        //     });
+        // }
     }
 
 

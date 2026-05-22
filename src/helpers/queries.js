@@ -724,3 +724,18 @@ export const agregarDatosEscolaresAPI = async (id, data) => {
     return null;
   }
 };
+
+export const obtenerDatosEscolaresAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${datosEscolaresBackend}/${id}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
