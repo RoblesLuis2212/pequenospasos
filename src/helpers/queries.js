@@ -1,6 +1,6 @@
 import { act } from "react";
 import { get } from "react-hook-form";
-import { data } from "react-router-dom";
+import { Await, data } from "react-router-dom";
 
 const usuariosBackend = import.meta.env.VITE_API_USUARIOS;
 const pacientesBackend = import.meta.env.VITE_API_PACIENTES;
@@ -10,6 +10,7 @@ const carritoBackend = import.meta.env.VITE_API_CARRITO;
 const ventasBackend = import.meta.env.VITE_API_VENTAS;
 const cajaBackend = import.meta.env.VITE_API_CAJA;
 const fichaMedicaBackend = import.meta.env.VITE_API_FICHAMEDICA;
+const datosEscolaresBackend = import.meta.env.VITE_API_DATOSESCOLARES;
 
 export const login = async (usuario) => {
   try {
@@ -693,6 +694,55 @@ export const obtenerFichaMedicaPacienteAPI = async (id) => {
 export const editarFichaMedicaAPI = async (id, data) => {
   try {
     const respuesta = await fetch(`${fichaMedicaBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const agregarDatosEscolaresAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${datosEscolaresBackend}/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const obtenerDatosEscolaresAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${datosEscolaresBackend}/${id}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const editarDatosEscolaresAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${datosEscolaresBackend}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

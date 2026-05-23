@@ -5,6 +5,7 @@ import ModalPaciente from "./ModalPaciente";
 import { useState } from "react";
 import ItemPaciente from "./ItemPaciente";
 import { set } from "react-hook-form";
+import ModalDatosEscolares from "./ModalDatosEscolares";
 
 const PacientesTabs = ({ pacientes, setPaciente }) => {
     const [showModalPacientes, setShowModalPacientes] = useState(false);
@@ -20,6 +21,15 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
         p.obraSocial?.nombre.toLowerCase().includes(busqueda.toLocaleLowerCase()) ||
         p.usuario?.nombreCompleto.toLowerCase().includes(busqueda.toLocaleLowerCase())
     )
+
+    const [showModalEscolar, setModalEscolar] = useState(false);
+    const [pacienteSeleccionado, setPacienteSeleccionado] = useState([]);
+
+    const cerrarModalEscolar = () => setModalEscolar(false);
+    const abrirModalEscolar = (paciente) => {
+        setPacienteSeleccionado(paciente);
+        setModalEscolar(true);
+    }
 
 
     return (
@@ -49,13 +59,15 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                                 <th>Edad</th>
                                 <th>Obra Social</th>
                                 <th>Padre/Tutor</th>
+                                <th>Escuela</th>
+                                <th>Turno</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {pacientesFiltrados.length > 0 ? (
                                 pacientesFiltrados.map((itemPaciente) => (
-                                    <ItemPaciente itemPaciente={itemPaciente} key={itemPaciente.idPaciente} setPaciente={setPaciente}></ItemPaciente>
+                                    <ItemPaciente itemPaciente={itemPaciente} key={itemPaciente.idPaciente} setPaciente={setPaciente} abrirModalEscolar={abrirModalEscolar}></ItemPaciente>
                                 ))
                             ) : (
                                 <tr>
@@ -69,6 +81,7 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                 </div>
             </div>
             <ModalPaciente showModalPacientes={showModalPacientes} cerrarModalPacientes={cerrarModalPacientes}></ModalPaciente>
+            <ModalDatosEscolares cerrarModalEscolar={cerrarModalEscolar} showModalEscolar={showModalEscolar} pacienteSeleccionado={pacienteSeleccionado}></ModalDatosEscolares>
         </>
     );
 };

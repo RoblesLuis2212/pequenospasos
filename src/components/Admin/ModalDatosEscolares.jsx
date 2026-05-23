@@ -1,15 +1,61 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
+import { agregarDatosEscolaresAPI, editarDatosEscolaresAPI, obtenerDatosEscolaresAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
+import { use, useEffect, useState } from 'react';
 
-const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar }) => {
+const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar, pacienteSeleccionado }) => {
 
-    const { register, handleSubmit, formState: { errors }, clearErrors, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, clearErrors, reset, setValue } = useForm();
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const postValidaciones = async (data) => {
+        if (Edicion !== true) {
+            const respuesta = await agregarDatosEscolaresAPI(pacienteSeleccionado, data);
+            if (respuesta.status === 201) {
+                Swal.fire({
+                    title: "Datos escolares agregados exitosamente!",
+                    icon: "success",
+                    draggable: true
+                });
+                cerrarModalEscolar();
+            } else {
+                Swal.fire({
+                    title: "Ocurrio un error al agregar los datos escolares. Intentelo nuevamente!",
+                    icon: "error",
+                    draggable: true
+                });
+            }
+        } else {
+            const respuesta = await editarDatosEscolaresAPI(pacienteSeleccionado, data);
+            if (respuesta.status === 200) {
+                Swal.fire({ title: "Datos escolares actualizados exitosamente", icon: "success", draggable: true });
+                cerrarModalEscolar();
+            }
+        }
     }
+
+    const [Edicion, setEdicion] = useState(false);
+
+    useEffect(() => {
+        //Si el modal no esta abierto no se ejecuta
+        if (!showModalEscolar) return;
+
+        const verificar = async () => {
+            const respuesta = await obtenerDatosEscolaresAPI(pacienteSeleccionado);
+            if (respuesta.status === 200) {
+                setEdicion(true);
+                const datos = await respuesta.json();
+                setValue("escuela", datos.escuela);
+                setValue("turno", datos.turno);
+            } else {
+                setEdicion(false);
+                reset();
+            }
+        }
+        verificar();
+    }, [showModalEscolar, pacienteSeleccionado]);
 
 
     return (
