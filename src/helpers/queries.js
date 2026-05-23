@@ -739,3 +739,20 @@ export const obtenerDatosEscolaresAPI = async (id) => {
     return null;
   }
 };
+
+export const editarDatosEscolaresAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${datosEscolaresBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
