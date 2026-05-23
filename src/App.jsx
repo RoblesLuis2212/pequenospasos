@@ -21,6 +21,7 @@ import Compras from "./components/Compras/Compras"
 import Administrador from "./components/Admin/Administrador"
 import HistorialVentas from "./components/Admin/HistorialVentas"
 import FichaMedicaPaciente from "./components/Admin/FichaMedicaPaciente"
+import EvolucionPaciente from "./components/Admin/EvolucionPaciente"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -155,6 +156,12 @@ function App() {
             path="/ficha-medica/:id/editar"
             element={<FichaMedicaPaciente></FichaMedicaPaciente>}
           >
+          </Route>
+          <Route
+            path="/evolucion/:id"
+            element={<EvolucionPaciente></EvolucionPaciente>}
+          >
+
           </Route>
         </Routes>
         <Footer />

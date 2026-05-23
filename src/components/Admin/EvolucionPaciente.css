@@ -1,0 +1,94 @@
+.bg-container-evolucion{
+    background-color: #FF9EBC;
+    padding: 20px;
+}
+.ep-wrapper {
+    padding: 2rem 1rem;
+    background: #f3f2fd !important;
+    min-height: 100vh;
+}
+
+.ep-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.ep-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.ep-subtitulo {
+    font-size: 13px;
+    color: #fff;
+    margin: 2px 0 0;
+}
+
+.ep-btn-agregar {
+    display: flex;
+    align-items: center;
+    background: #eeedfe;
+    color: #3c3489;
+    border: 1px solid #afa9ec;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 14px;
+    border-radius: 8px;
+}
+
+.ep-btn-agregar:hover {
+    background: #CECBF6;
+    color: #3c3489;
+    border-color: #afa9ec;
+}
+
+.ep-card {
+    background: #fff;
+    border: 1px solid #e8e7f8;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+}
+
+.ep-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.ep-fecha-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ep-icon {
+    font-size: 15px;
+    color: #534AB7;
+}
+
+.ep-card-fecha {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3c3489;
+    margin: 0;
+}
+
+.ep-descripcion {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.ep-btn-editar {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+}

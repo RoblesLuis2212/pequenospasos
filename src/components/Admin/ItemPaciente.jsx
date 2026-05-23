@@ -54,7 +54,8 @@ const ItemPaciente = ({ itemPaciente, setPaciente, abrirModalEscolar }) => {
                         <Button variant="secondary" className="me-2" onClick={abrirModalTutor}><i className="bi bi-person-fill"></i></Button>
                         <Button variant="primary" as={Link} to={`/turnos/${itemPaciente.idPaciente}`}><i className="bi bi-calendar-check-fill"></i></Button>
                         <Button variant="success" onClick={abrirFicha} className="ms-2"><i className="bi bi-clipboard2-pulse-fill"></i></Button>
-                        <Button variant="dark" className="mt-2" onClick={() => abrirModalEscolar(itemPaciente.idPaciente)}><i className="bi bi-backpack-fill"></i></Button>
+                        <Button variant="warning" className="mt-2 me-2" onClick={() => abrirModalEscolar(itemPaciente.idPaciente)}><i className="bi bi-backpack-fill"></i></Button>
+                        <Button variant="dark" className="mt-2"><i className="bi bi-arrow-clockwise"></i></Button>
                     </div>
                 </td>
             </tr>
