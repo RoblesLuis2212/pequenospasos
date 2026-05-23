@@ -59,6 +59,8 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                                 <th>Edad</th>
                                 <th>Obra Social</th>
                                 <th>Padre/Tutor</th>
+                                <th>Escuela</th>
+                                <th>Turno</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>

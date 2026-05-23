@@ -40,6 +40,7 @@ const Administrador = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setPaciente(datos);
+            console.log("Datos paciente: ", datos);
         }
     }
 

@@ -47,12 +47,14 @@ const ItemPaciente = ({ itemPaciente, setPaciente, abrirModalEscolar }) => {
                     ? itemPaciente.obraSocial.nombre
                     : "Sin obra social"}</td>
                 <td>{itemPaciente.usuario?.nombreCompleto ? itemPaciente.usuario?.nombreCompleto : "Sin tutor"}</td>
+                <td>{itemPaciente.datosEscolares[0]?.escuela || "Sin datos escolares"}</td>
+                <td>{itemPaciente.datosEscolares[0]?.turno || "Sin datos escolares"} </td>
                 <td>
                     <div>
                         <Button variant="secondary" className="me-2" onClick={abrirModalTutor}><i className="bi bi-person-fill"></i></Button>
                         <Button variant="primary" as={Link} to={`/turnos/${itemPaciente.idPaciente}`}><i className="bi bi-calendar-check-fill"></i></Button>
                         <Button variant="success" onClick={abrirFicha} className="ms-2"><i className="bi bi-clipboard2-pulse-fill"></i></Button>
-                        <Button variant="dark" className="ms-2" onClick={() => abrirModalEscolar(itemPaciente.idPaciente)}><i className="bi bi-backpack-fill"></i></Button>
+                        <Button variant="dark" className="mt-2" onClick={() => abrirModalEscolar(itemPaciente.idPaciente)}><i className="bi bi-backpack-fill"></i></Button>
                     </div>
                 </td>
             </tr>
