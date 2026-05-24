@@ -67,7 +67,7 @@ const EvolucionPaciente = () => {
                     </div>
                 </div>
             </section>
-            <ModalEvolucion showModalEvolucion={showModalEvolucion} cerrarModalEvolucion={cerrarModalEvolucion}></ModalEvolucion>
+            <ModalEvolucion showModalEvolucion={showModalEvolucion} cerrarModalEvolucion={cerrarModalEvolucion} id={id} setDatosEvolucion={setDatosEvolucion}></ModalEvolucion>
         </>
     );
 };

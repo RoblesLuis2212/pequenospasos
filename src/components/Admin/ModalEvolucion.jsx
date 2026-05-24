@@ -1,13 +1,37 @@
 import { Button, Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
+import { agregarEvolucionPacienteAPI, obtenerRegistrosEvolucionAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
-const ModalEvolucion = ({ showModalEvolucion, cerrarModalEvolucion }) => {
+const ModalEvolucion = ({ showModalEvolucion, cerrarModalEvolucion, id, setDatosEvolucion }) => {
     const { register, handleSubmit, reset, clearErrors, formState: { errors } } = useForm();
 
-    const postValidaciones = (data) => {
-        console.log(data);
-        reset();
+
+
+
+    const postValidaciones = async (data) => {
+        const respuesta = await agregarEvolucionPacienteAPI(id, data);
+        if (respuesta.status === 201) {
+            Swal.fire({
+                title: "Evolucion del paciente registrada exitosamente!",
+                icon: "success",
+                draggable: true
+            });
+            const respuestaActualizada = await obtenerRegistrosEvolucionAPI(id);
+            if (respuestaActualizada.status === 200) {
+                const datos = await respuestaActualizada.json();
+                setDatosEvolucion(datos);
+            }
+            cerrarModalEvolucion();
+            reset();
+        } else {
+            Swal.fire({
+                title: "Ocurrio un error al registrar la evolucion del paciente. Intentelo mas tarde!",
+                icon: "error",
+                draggable: true
+            });
+        }
     }
 
 
