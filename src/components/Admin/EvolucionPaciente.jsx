@@ -27,9 +27,20 @@ const EvolucionPaciente = () => {
 
 
     const [showModalEvolucion, setShowModalEvolucion] = useState(false);
+    const [registroSeleccionado, setRegistroSeleccionado] = useState("");
+    const [modo, setModo] = useState("crear");
 
     const cerrarModalEvolucion = () => setShowModalEvolucion(false);
-    const abrirModalEvolucion = () => setShowModalEvolucion(true);
+    const abrirModalEvolucion = () => {
+        setModo("crear");
+        setShowModalEvolucion(true);
+    }
+
+    const abrirModalEvolucionEditar = (registro) => {
+        setModo("editar");
+        setRegistroSeleccionado(registro);
+        setShowModalEvolucion(true);
+    }
 
 
     return (
@@ -52,7 +63,8 @@ const EvolucionPaciente = () => {
                         <div className="d-flex flex-column gap-3">
                             {datosEvolucion.length > 0 ? (
                                 datosEvolucion.map((itemEvolucion) => (
-                                    <CardEvolucion key={itemEvolucion.idEvolucion} itemEvolucion={itemEvolucion}></CardEvolucion>
+                                    <CardEvolucion key={itemEvolucion.idEvolucion} itemEvolucion={itemEvolucion} abrirModalEvolucionEditar={abrirModalEvolucionEditar}
+                                    ></CardEvolucion>
                                 ))
                             ) : (
                                 <>
@@ -67,7 +79,7 @@ const EvolucionPaciente = () => {
                     </div>
                 </div>
             </section>
-            <ModalEvolucion showModalEvolucion={showModalEvolucion} cerrarModalEvolucion={cerrarModalEvolucion} id={id} setDatosEvolucion={setDatosEvolucion}></ModalEvolucion>
+            <ModalEvolucion showModalEvolucion={showModalEvolucion} cerrarModalEvolucion={cerrarModalEvolucion} id={id} setDatosEvolucion={setDatosEvolucion} modo={modo} registroSeleccionado={registroSeleccionado}></ModalEvolucion>
         </>
     );
 };

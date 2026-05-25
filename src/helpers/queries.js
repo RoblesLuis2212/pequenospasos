@@ -789,3 +789,20 @@ export const agregarEvolucionPacienteAPI = async (id, data) => {
     return null;
   }
 };
+
+export const editarEvolucionPacienteAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${EvolucionPacienteBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};

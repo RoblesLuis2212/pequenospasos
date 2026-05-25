@@ -1,44 +1,73 @@
 import { Button, Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
-import { agregarEvolucionPacienteAPI, obtenerRegistrosEvolucionAPI } from '../../helpers/queries';
+import { agregarEvolucionPacienteAPI, editarEvolucionPacienteAPI, obtenerRegistrosEvolucionAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
-const ModalEvolucion = ({ showModalEvolucion, cerrarModalEvolucion, id, setDatosEvolucion }) => {
-    const { register, handleSubmit, reset, clearErrors, formState: { errors } } = useForm();
-
-
+const ModalEvolucion = ({ showModalEvolucion, cerrarModalEvolucion, id, setDatosEvolucion, modo, datosEvolucion, registroSeleccionado }) => {
+    const { register, handleSubmit, reset, clearErrors, formState: { errors }, setValue } = useForm();
 
 
     const postValidaciones = async (data) => {
-        const respuesta = await agregarEvolucionPacienteAPI(id, data);
-        if (respuesta.status === 201) {
-            Swal.fire({
-                title: "Evolucion del paciente registrada exitosamente!",
-                icon: "success",
-                draggable: true
-            });
-            const respuestaActualizada = await obtenerRegistrosEvolucionAPI(id);
-            if (respuestaActualizada.status === 200) {
-                const datos = await respuestaActualizada.json();
-                setDatosEvolucion(datos);
+        if (modo === "crear") {
+            const respuesta = await agregarEvolucionPacienteAPI(id, data);
+            if (respuesta.status === 201) {
+                Swal.fire({
+                    title: "Evolucion del paciente registrada exitosamente!",
+                    icon: "success",
+                    draggable: true
+                });
+                const respuestaActualizada = await obtenerRegistrosEvolucionAPI(id);
+                if (respuestaActualizada.status === 200) {
+                    const datos = await respuestaActualizada.json();
+                    setDatosEvolucion(datos);
+                }
+                cerrarModalEvolucion();
+                reset();
+            } else {
+                Swal.fire({
+                    title: "Ocurrio un error al registrar la evolucion del paciente. Intentelo mas tarde!",
+                    icon: "error",
+                    draggable: true
+                });
             }
-            cerrarModalEvolucion();
-            reset();
         } else {
-            Swal.fire({
-                title: "Ocurrio un error al registrar la evolucion del paciente. Intentelo mas tarde!",
-                icon: "error",
-                draggable: true
-            });
+            const respuesta = await editarEvolucionPacienteAPI(registroSeleccionado.idEvolucion, data);
+            if (respuesta.status === 200) {
+                Swal.fire({
+                    title: "Registro de evolucion actualizado exitosamente!",
+                    icon: "success",
+                    draggable: true
+                });
+                cerrarModalEvolucion();
+                reset();
+                const respuestaActualizada = await obtenerRegistrosEvolucionAPI(id);
+                if (respuestaActualizada.status === 200) {
+                    const datos = await respuestaActualizada.json();
+                    setDatosEvolucion(datos);
+                }
+            } else {
+                Swal.fire({
+                    title: "Ocurrio un error al actualizar el registro del paciente!",
+                    icon: "error",
+                    draggable: true
+                });
+            }
         }
     }
+
+    useEffect(() => {
+        if (modo === "editar" && registroSeleccionado) {
+            setValue("descripcion", registroSeleccionado.descripcion);
+        }
+    }, [modo, registroSeleccionado])
 
 
     return (
         <Modal show={showModalEvolucion} onHide={cerrarModalEvolucion}>
             <Modal.Header className='d-flex justify-content-center'>
-                <h4 className='titulo'>Registrar Evolucion</h4>
+                <h4 className='titulo'>{modo === "editar" ? "Editar registro" : "Registrar Evolucion"}</h4>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit(postValidaciones)}>

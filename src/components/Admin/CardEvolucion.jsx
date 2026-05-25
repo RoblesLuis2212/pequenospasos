@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 
 
-const CardEvolucion = ({ itemEvolucion }) => {
+const CardEvolucion = ({ itemEvolucion, abrirModalEvolucionEditar }) => {
     const fecha = new Date(itemEvolucion.fecha);
 
     const opciones = {
@@ -24,7 +24,7 @@ const CardEvolucion = ({ itemEvolucion }) => {
                     <i className="bi bi-calendar3 ep-icon"></i>
                     <p className="ep-card-fecha">{fechaFinal}</p>
                 </div>
-                <Button variant="outline-secondary" size="sm" className="ep-btn-editar">
+                <Button variant="outline-secondary" size="sm" className="ep-btn-editar" onClick={() => abrirModalEvolucionEditar(itemEvolucion)}>
                     <i className="bi bi-pencil me-1"></i> Editar
                 </Button>
             </div>
