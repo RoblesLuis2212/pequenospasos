@@ -11,6 +11,7 @@ const ventasBackend = import.meta.env.VITE_API_VENTAS;
 const cajaBackend = import.meta.env.VITE_API_CAJA;
 const fichaMedicaBackend = import.meta.env.VITE_API_FICHAMEDICA;
 const datosEscolaresBackend = import.meta.env.VITE_API_DATOSESCOLARES;
+const EvolucionPacienteBackend = import.meta.env.VITE_API_EVOLUCIONPACIENTE;
 
 export const login = async (usuario) => {
   try {
@@ -743,6 +744,55 @@ export const obtenerDatosEscolaresAPI = async (id) => {
 export const editarDatosEscolaresAPI = async (id, data) => {
   try {
     const respuesta = await fetch(`${datosEscolaresBackend}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const obtenerRegistrosEvolucionAPI = async (id) => {
+  try {
+    const respuesta = await fetch(`${EvolucionPacienteBackend}/${id}`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const agregarEvolucionPacienteAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${EvolucionPacienteBackend}/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const editarEvolucionPacienteAPI = async (id, data) => {
+  try {
+    const respuesta = await fetch(`${EvolucionPacienteBackend}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
