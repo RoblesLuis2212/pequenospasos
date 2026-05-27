@@ -15,16 +15,16 @@ const Tratamientos = () => {
                 <div className="col-12 col-lg-6 py-3 d-flex justify-content-center">
                 </div>
                 <div className="row g-3 g-md-2">
-                    <div className="col-12 col-md-6 col-lg-3">
+                    <div className="col-12 col-md-6 col-lg-3 ms-2 ms-md-0">
                         <CardTratamiento icono={"bi-ear fs-2 ms-2"} titulo={"Terapia Auditiva"} descripcion={"Implementamos programas especializados para fortalecer el procesamiento auditivo y la escucha activa en niños. Trabajamos en la interpretación de sonidos y el desarrollo de estrategias comunicativas."} className="mt-2"></CardTratamiento>
                     </div>
-                    <div className="col-12 col-md-6 col-lg-3">
+                    <div className="col-12 col-md-6 col-lg-3 ms-2 ms-md-0">
                         <CardTratamiento icono={"bi bi-chat-text-fill fs-2 ms-2"} titulo={"Motricidad Orofacial"} descripcion={"Nos enfocamos en la prevención y rehabilitación de alteraciones en las funciones musculares de la boca y la cara. A través de ejercicios específicos, optimizamos la respiración y deglución."}></CardTratamiento>
                     </div>
-                    <div className="col-12 col-md-6 col-lg-3">
+                    <div className="col-12 col-md-6 col-lg-3 ms-2 ms-md-0">
                         <CardTratamiento icono={"bi-mic-fill fs-2 ms-2"} titulo={"Lenguaje y Comunicacion"} descripcion={"Desarrollo y fortalecimiento de las habilidades comunicativas, favoreciendo la comprension y expresion del lenguaje en todas las edades."}></CardTratamiento>
                     </div>
-                    <div className="col-12 col-md-6 col-lg-3">
+                    <div className="col-12 col-md-6 col-lg-3 ms-2 ms-md-0">
                         <CardTratamiento icono={"bi bi-dice-6-fill fs-2 ms-2"} titulo={"Estimulacion temprana mediante el juego"} descripcion={"Intervencion temprana mediante el juego para potenciar el desarrollo del lenguaje, la atencion y la interaccion social en niños."}></CardTratamiento>
                     </div>
                 </div>
