@@ -23,6 +23,7 @@ import HistorialVentas from "./components/Admin/HistorialVentas"
 import FichaMedicaPaciente from "./components/Admin/FichaMedicaPaciente"
 import EvolucionPaciente from "./components/Admin/EvolucionPaciente"
 import Error404 from "./components/Error404/Error404"
+import ProtectAdmin from "./routes/ProtectAdmin"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -140,34 +141,54 @@ function App() {
           </Route>
           <Route
             path="/admin"
-            element={<Administrador></Administrador>}
+            element={
+              <ProtectAdmin usuarioLogueado={usuarioLogueado}>
+                <Administrador></Administrador>
+              </ProtectAdmin>
+            }
           >
+
           </Route>
           <Route
             path="/historial-ventas"
-            element={<HistorialVentas></HistorialVentas>}
+            element=
+            {<ProtectAdmin usuarioLogueado={usuarioLogueado}>
+              <HistorialVentas></HistorialVentas>
+            </ProtectAdmin>
+
+            }
           >
           </Route>
           <Route
             path="/ficha-medica/:id/crear"
-            element={<FichaMedicaPaciente></FichaMedicaPaciente>}
-          >
+            element={
+              <ProtectAdmin usuarioLogueado={usuarioLogueado}>
+                <FichaMedicaPaciente></FichaMedicaPaciente>
+              </ProtectAdmin>
+            }>
           </Route>
           <Route
             path="/ficha-medica/:id/editar"
-            element={<FichaMedicaPaciente></FichaMedicaPaciente>}
-          >
+            element={
+              <ProtectAdmin usuarioLogueado={usuarioLogueado}>
+                <FichaMedicaPaciente></FichaMedicaPaciente>
+              </ProtectAdmin>
+            }>
           </Route>
           <Route
             path="/evolucion/:id"
-            element={<EvolucionPaciente></EvolucionPaciente>}
+            element={
+              <ProtectAdmin>
+                <EvolucionPaciente></EvolucionPaciente>
+              </ProtectAdmin>
+            }
           >
 
           </Route>
           <Route path="*" element={<Error404></Error404>}></Route>
         </Routes>
         <Footer />
-      </main>
+      </main >
     </>
   )
 }
