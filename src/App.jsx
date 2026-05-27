@@ -140,27 +140,6 @@ function App() {
           >
           </Route>
           <Route
-            path="/historial-ventas"
-            element={<HistorialVentas></HistorialVentas>}
-          >
-          </Route>
-          <Route
-            path="/ficha-medica/:id/crear"
-            element={<FichaMedicaPaciente></FichaMedicaPaciente>}
-          >
-          </Route>
-          <Route
-            path="/ficha-medica/:id/editar"
-            element={<FichaMedicaPaciente></FichaMedicaPaciente>}
-          >
-          </Route>
-          <Route
-            path="/evolucion/:id"
-            element={<EvolucionPaciente></EvolucionPaciente>}
-          >
-
-          </Route>
-          <Route
             path="/admin"
             element={
               <ProtectAdmin usuarioLogueado={usuarioLogueado}>
@@ -170,10 +149,46 @@ function App() {
           >
 
           </Route>
+          <Route
+            path="/historial-ventas"
+            element=
+            {<ProtectAdmin usuarioLogueado={usuarioLogueado}>
+              <HistorialVentas></HistorialVentas>
+            </ProtectAdmin>
+
+            }
+          >
+          </Route>
+          <Route
+            path="/ficha-medica/:id/crear"
+            element={
+              <ProtectAdmin usuarioLogueado={usuarioLogueado}>
+                <FichaMedicaPaciente></FichaMedicaPaciente>
+              </ProtectAdmin>
+            }>
+          </Route>
+          <Route
+            path="/ficha-medica/:id/editar"
+            element={
+              <ProtectAdmin usuarioLogueado={usuarioLogueado}>
+                <FichaMedicaPaciente></FichaMedicaPaciente>
+              </ProtectAdmin>
+            }>
+          </Route>
+          <Route
+            path="/evolucion/:id"
+            element={
+              <ProtectAdmin>
+                <EvolucionPaciente></EvolucionPaciente>
+              </ProtectAdmin>
+            }
+          >
+
+          </Route>
           <Route path="*" element={<Error404></Error404>}></Route>
         </Routes>
         <Footer />
-      </main>
+      </main >
     </>
   )
 }
