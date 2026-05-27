@@ -40,7 +40,6 @@ const Administrador = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setPaciente(datos);
-            console.log("Datos paciente: ", datos);
         }
     }
 
@@ -74,7 +73,11 @@ const Administrador = () => {
 
     useEffect(() => {
         obtenerCaja();
-    }, [])
+    }, []);
+
+    const turnosPendientes = turnos.filter(t => t.estado === "PENDIENTE").length;
+    const pedidosPendientes = pedidos.filter(p => p.estado === "PENDIENTE").length;
+    const cantidadProductos = productos.length;
 
     return (
         <>
@@ -84,7 +87,7 @@ const Administrador = () => {
                         <Card className="shadow-sm h-100" >
                             <Card.Body>
                                 <Card.Title>Turnos</Card.Title>
-                                <Card.Text className="fs-3 fw-bold text-warning">30</Card.Text>
+                                <Card.Text className="fs-3 fw-bold text-warning">{turnosPendientes}</Card.Text>
                                 <Badge bg="warning" text="white" className="align-self-start">
                                     Pendientes
                                 </Badge>
@@ -95,7 +98,7 @@ const Administrador = () => {
                         <Card className="shadow-sm h-100" >
                             <Card.Body>
                                 <Card.Title>Pedidos</Card.Title>
-                                <Card.Text className="fs-3 fw-bold text-success">100</Card.Text>
+                                <Card.Text className="fs-3 fw-bold text-success">{pedidosPendientes}</Card.Text>
                                 <Badge bg="success" text="white" className="align-self-start">
                                     Pendientes
                                 </Badge>
@@ -106,7 +109,7 @@ const Administrador = () => {
                         <Card className="shadow-sm h-100" >
                             <Card.Body>
                                 <Card.Title>Productos totales</Card.Title>
-                                <Card.Text className="fs-3 fw-bold text-primary">50</Card.Text>
+                                <Card.Text className="fs-3 fw-bold text-primary">{cantidadProductos}</Card.Text>
                                 <Badge bg="info" text="dark" className="align-self-start">
                                     Incluye sin stock
                                 </Badge>
