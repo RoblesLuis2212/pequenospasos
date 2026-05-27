@@ -80,9 +80,14 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                             navigate("/mis-turnos")
                                         }
                                     }}>Mis turnos</NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' as={Link} to={"/mis-compras"}>Mis Compras</NavDropdown.Item>
+                                    {usuarioLogueado?.usuario && (
+                                        <>
+                                            <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
+                                            <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
+                                            <NavDropdown.Item className='nav-link' as={Link} to={"/mis-compras"}>Mis Compras</NavDropdown.Item>
+                                        </>
+
+                                    )}
                                 </NavDropdown>
                             )}
                         </Nav>
