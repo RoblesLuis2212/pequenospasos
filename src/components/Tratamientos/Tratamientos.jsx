@@ -13,7 +13,6 @@ const Tratamientos = () => {
                     <p className='text-muted fs-5 ms-2'>Especialidades diseñadas para transformar dificultades en fortalezas mediante el juego.</p>
                 </div>
                 <div className="col-12 col-lg-6 py-3 d-flex justify-content-center">
-                    <Link className='link-opacity-100-hover links fs-5'>Ver todas las terapias<i className="bi bi-arrow-bar-right"></i></Link>
                 </div>
                 <div className="row g-3 g-md-2">
                     <div className="col-12 col-md-6 col-lg-3">
