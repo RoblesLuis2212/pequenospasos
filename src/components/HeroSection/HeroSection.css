@@ -46,7 +46,11 @@
 /* Media query para dispositivos mobiles */
 @media(max-width: 768px){
     .img-hero-section{
-        margin: 50px 0 0 40px;
+        margin: 50px 0 0 0;
         transform: rotate(3deg);
+        width: 380px;
+    }
+    .texto-resaltado{
+        font-size: 50px;
     }
 }
