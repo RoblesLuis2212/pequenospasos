@@ -22,6 +22,7 @@ import Administrador from "./components/Admin/Administrador"
 import HistorialVentas from "./components/Admin/HistorialVentas"
 import FichaMedicaPaciente from "./components/Admin/FichaMedicaPaciente"
 import EvolucionPaciente from "./components/Admin/EvolucionPaciente"
+import Error404 from "./components/Error404/Error404"
 
 function App() {
   //verificamos si hay datos de usuario guardados en el session storage
@@ -163,6 +164,7 @@ function App() {
           >
 
           </Route>
+          <Route path="*" element={<Error404></Error404>}></Route>
         </Routes>
         <Footer />
       </main>

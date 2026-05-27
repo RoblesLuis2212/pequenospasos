@@ -1,0 +1,98 @@
+.error404-container {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 6%;
+    background: #f8f5f8;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.error404-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.error404-badge {
+    background: #ece7ef;
+    color: #6a3fa0;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.error404-title {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #5b1c5f;
+    margin-bottom: 1rem;
+}
+
+.error404-title span {
+    color: #e57aa0;
+}
+
+.error404-text {
+    font-size: 1.2rem;
+    color: #4d5d70;
+    max-width: 550px;
+    margin-bottom: 2rem;
+}
+
+.error404-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.error404-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 300px;
+}
+
+.error404-card {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(
+        135deg,
+        #e9d7ef,
+        #f3d9e7
+    );
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(3deg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.error404-card i {
+    font-size: 8rem;
+    color: #b25f8f;
+}
+
+@media (max-width: 768px) {
+    .error404-container {
+        text-align: center;
+        padding: 3rem 1.5rem;
+    }
+
+    .error404-buttons {
+        justify-content: center;
+    }
+
+    .error404-title {
+        font-size: 4rem;
+    }
+
+    .error404-card {
+        width: 260px;
+        height: 260px;
+    }
+}
