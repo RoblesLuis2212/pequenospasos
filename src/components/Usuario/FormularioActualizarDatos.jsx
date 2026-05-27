@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 const FormularioActualizarDatos = ({ usuarioLogueado, cerrarModalPadre }) => {
     const { handleSubmit, register, formState: { errors }, reset, clearErrors, setValue } = useForm();
 
-    const idUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.id;
+    const idUsuario = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario?.id;
 
     const obtenerDatosUsuario = async () => {
         const respuesta = await obtenerUsuarioIDApi(idUsuario);
