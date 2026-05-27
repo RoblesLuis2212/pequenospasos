@@ -37,11 +37,6 @@ main{
     text-transform: uppercase;
 }
 
-.nav-link.active{
-    color: var(--color-link-activo);
-    border-bottom: 3px solid var(--color-linea-linkActivo);
-}
-
 .nav-link:hover:not(.active) {
     color: var(--color-btn-primario) !important;
     opacity: 0.8;
