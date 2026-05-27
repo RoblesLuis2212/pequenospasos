@@ -27,7 +27,7 @@ const CajaTabs = ({ caja, setCaja }) => {
 
     const fechaHoraFinal = `${fechaFormateada}`;
 
-    const usuarioActual = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario.nombre;
+    const usuarioActual = JSON.parse(sessionStorage.getItem("usuarioKey")).usuario?.nombre;
 
     const abrirCaja = async () => {
         const respuesta = await abrirCajaAPI();
