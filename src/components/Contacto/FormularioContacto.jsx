@@ -2,13 +2,20 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./Contacto.css";
 import { useForm } from 'react-hook-form';
+import { enviarCorreoAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
 const FormularioContacto = () => {
 
     const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
 
-    const postValidaciones = (data) => {
-        console.log(data);
+    const postValidaciones = async (data) => {
+        const respuesta = await enviarCorreoAPI(data);
+        if (respuesta.status === 200) {
+            Swal.fire({ title: "Correo enviado correctamente!", icon: "success" });
+        } else {
+            Swal.fire({ title: "Ocurrio un error al enviar el correo. Intentelo más tarde!", icon: "error" });
+        }
         reset();
     }
     return (
@@ -23,7 +30,7 @@ const FormularioContacto = () => {
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label className='etiquetas'>Nombre completo</Form.Label>
                             <Form.Control type="text" placeholder="ej: Juan Perez" className='custom-input'
-                                {...register("nombreCompleto", {
+                                {...register("nombre", {
                                     required: "El nombre es un dato obligatorio",
                                     minLength: {
                                         value: 5,
@@ -35,7 +42,7 @@ const FormularioContacto = () => {
 
                                     }
                                 })}
-                                onChange={() => clearErrors("nombreCompleto")}
+                                onChange={() => clearErrors("nombre")}
                             />
                             <Form.Text className="text-danger">
                                 {errors.nombreCompleto?.message}
@@ -65,7 +72,7 @@ const FormularioContacto = () => {
                                 as="textarea"
                                 placeholder="deja tu comentario aqui"
                                 style={{ height: '100px' }}
-                                {...register("consulta", {
+                                {...register("mensaje", {
                                     required: "Este campo es obligatorio",
                                     minLength: {
                                         value: 20,
@@ -76,10 +83,10 @@ const FormularioContacto = () => {
                                         message: "La consulta debe contener maximo 200 caracteres"
                                     }
                                 })}
-                                onChange={() => clearErrors("consulta")}
+                                onChange={() => clearErrors("mensaje")}
                             />
                             <Form.Text className='text-danger'>
-                                {errors.consulta?.message}
+                                {errors.mensaje?.message}
                             </Form.Text>
                         </Form.Group>
                         <Button className="btn-principal" type="submit">

@@ -806,3 +806,19 @@ export const editarEvolucionPacienteAPI = async (id, data) => {
     return null;
   }
 };
+
+export const enviarCorreoAPI = async (data) => {
+  try {
+    const respuesta = await fetch(`${usuariosBackend}/contacto`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return respuesta;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
