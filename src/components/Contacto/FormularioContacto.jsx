@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import "./Contacto.css";
 import { useForm } from 'react-hook-form';
 import { enviarCorreoAPI } from '../../helpers/queries';
+import Swal from 'sweetalert2';
 
 const FormularioContacto = () => {
 
@@ -11,7 +12,9 @@ const FormularioContacto = () => {
     const postValidaciones = async (data) => {
         const respuesta = await enviarCorreoAPI(data);
         if (respuesta.status === 200) {
-            alert("Correo enviado correctamente");
+            Swal.fire({ title: "Correo enviado correctamente!", icon: "success" });
+        } else {
+            Swal.fire({ title: "Ocurrio un error al enviar el correo. Intentelo más tarde!", icon: "error" });
         }
         reset();
     }
