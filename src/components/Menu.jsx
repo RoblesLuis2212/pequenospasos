@@ -65,29 +65,36 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mx-auto align-items-center mt-1 mt-md-0">
                             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-                            <Nav.Link>Tratamientos</Nav.Link>
+                            <Nav.Link href='#tratamientos'>Tratamientos</Nav.Link>
                             <Nav.Link as={Link} to="/tienda">Tienda</Nav.Link>
-                            <NavDropdown title="Niños">
-                                <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Turnos</NavDropdown.Item>
-                                <NavDropdown.Item className='nav-link' onClick={() => {
-                                    if (verificarSesion()) {
-                                        navigate("/registro-pacientes");
-                                    }
-                                }}>Registrar Paciente</NavDropdown.Item>
-                                <NavDropdown.Item className='nav-link' onClick={() => {
-                                    if (verificarSesion()) {
-                                        navigate("/mis-turnos")
-                                    }
-                                }}>Mis turnos</NavDropdown.Item>
-                                <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
-                                <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
-                                <NavDropdown.Item className='nav-link' as={Link} to={"/mis-compras"}>Mis Compras</NavDropdown.Item>
-                            </NavDropdown>
+                            {usuarioLogueado.usuario?.rol !== "ADMIN" && (
+                                <NavDropdown title="Niños">
+                                    <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Turnos</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-link' onClick={() => {
+                                        if (verificarSesion()) {
+                                            navigate("/registro-pacientes");
+                                        }
+                                    }}>Registrar Paciente</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-link' onClick={() => {
+                                        if (verificarSesion()) {
+                                            navigate("/mis-turnos")
+                                        }
+                                    }}>Mis turnos</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-link' as={Link} to={"/mis-compras"}>Mis Compras</NavDropdown.Item>
+                                </NavDropdown>
+                            )}
                         </Nav>
                         <Nav className='align-items-center me-4'>
                             {usuarioLogueado.usuario ? (
                                 <>
-                                    <Button className='btn-secundario' as={Link} to="/carrito"><i className="bi bi-cart-fill"></i></Button>
+                                    {usuarioLogueado.usuario.rol === "ADMIN" ? (
+                                        <Button className='btn-secundario' as={Link} to="/admin"><i class="bi bi-person-square"></i></Button>
+                                    ) : (
+                                        <Button className='btn-secundario' as={Link} to="/carrito"><i className="bi bi-cart-fill"></i></Button>
+                                    )
+                                    }
                                     <Button className='btn-principal ms-4 ms-md-2' onClick={cerrarSesion}><i className="bi bi-box-arrow-left me-2"></i>Cerrar Sesion</Button>
                                 </>
                             ) : (

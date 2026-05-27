@@ -6,7 +6,7 @@ import CardTratamiento from './CardTratamiento';
 
 const Tratamientos = () => {
     return (
-        <section className='container-fluid mt-5 bg-fondo py-5'>
+        <section className='container-fluid mt-5 bg-fondo py-5' id='tratamientos'>
             <div className="row">
                 <div className="col-12 col-lg-6 d-flex d-lg-block flex-column justify-content-center align-items-center">
                     <h2 className='titulo-tratamientos ms-2'>Nuestros Tratamientos</h2>
