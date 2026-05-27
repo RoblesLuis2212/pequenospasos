@@ -35,7 +35,7 @@ const Footer = () => {
                         <Link className="text-decoration-none link-footer mt-2" onClick={handleShow}>Iniciar Sesion</Link>
                         <Link className="text-decoration-none link-footer mt-2" to="/registro">Crear Cuenta</Link>
                         <Link className="text-decoration-none link-footer mt-2" onClick={abrirModalPacientes}>Turnos Online</Link>
-                        <Link className="text-decoration-none link-footer mt-2">Ayuda con mi cuenta</Link>
+                        <Link className="text-decoration-none link-footer mt-2" to="/error404">Ayuda con mi cuenta</Link>
                     </div>
                     <div className="col-12 col-md-4 col-lg-3 d-flex flex-column align-items-center align-items-md-start order-3 order-md-4 order-lg-4">
                         {/* Columna de contacto */}
