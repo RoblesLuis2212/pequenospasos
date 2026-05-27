@@ -62,7 +62,7 @@ function App() {
             path="/"
             element={
               <>
-                <HeroSection></HeroSection>
+                <HeroSection usuarioLogueado={usuarioLogueado}></HeroSection>
                 <Tratamientos></Tratamientos>
                 <ContainerProductos productos={productos}></ContainerProductos>
                 <FormularioContacto></FormularioContacto>
