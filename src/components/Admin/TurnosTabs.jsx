@@ -150,7 +150,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                     </div>
                 </div>
                 <div className="tabla-wrapper">
-                    <Table hover className="admin-table">
+                    <Table hover responsive className="admin-table">
                         <thead>
                             <tr>
                                 <th>#</th>
