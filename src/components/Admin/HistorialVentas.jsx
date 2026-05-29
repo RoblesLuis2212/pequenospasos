@@ -13,7 +13,6 @@ const HistorialVentas = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setHistorial(datos);
-            console.log("Ventas: ", datos);
         }
     }
 
