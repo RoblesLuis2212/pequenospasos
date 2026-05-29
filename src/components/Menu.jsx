@@ -67,7 +67,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
                             <Nav.Link href='#tratamientos'>Tratamientos</Nav.Link>
                             <Nav.Link as={Link} to="/tienda">Tienda</Nav.Link>
-                            {usuarioLogueado.usuario?.rol !== "ADMIN" && (
+                            {usuarioLogueado.usuario?.rol !== "ADMIN" ? (
                                 <NavDropdown title="Niños">
                                     <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Turnos</NavDropdown.Item>
                                     <NavDropdown.Item className='nav-link' onClick={() => {
@@ -88,6 +88,10 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                                         </>
 
                                     )}
+                                </NavDropdown>
+                            ) : (
+                                <NavDropdown title="admin">
+                                    <NavDropdown.Item className='nav-link' as={Link} to="/historial-ventas">Historial de Ventas</NavDropdown.Item>
                                 </NavDropdown>
                             )}
                         </Nav>

@@ -651,8 +651,12 @@ export const registrarPagoTurnoAPI = async (id, data) => {
 
 export const HistorialVentasAPI = async () => {
   try {
-    const respuesta = await fetch(`${ventasBackend}/historial-venta`);
-
+    const respuesta = await fetch(`${ventasBackend}/historial-venta`, {
+      method: "GET",
+      headers: {
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioKey")).token,
+      },
+    });
     return respuesta;
   } catch (err) {
     console.error(err);
