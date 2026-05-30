@@ -179,7 +179,7 @@ const FormularioPacientes = ({ titulo }) => {
                                     >
                                         <option value="">Seleccione una obra social</option>
                                         <option value="1">Subsidio</option>
-                                        <option value="2">Soreme</option>
+                                        <option value="2">Soremer</option>
                                         <option value="3">San Nicolas</option>
                                         <option value="4">Swiss Medical</option>
                                         <option value="5">Ricardo Mora</option>
