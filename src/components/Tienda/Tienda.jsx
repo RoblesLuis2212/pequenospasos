@@ -34,9 +34,6 @@ const Tienda = () => {
         obtenerProductos(paginaActual, categoria, busqueda);
     }, [paginaActual, categoria, busqueda]);
 
-    console.log("datos productos: ", productos);
-
-
     return (
         <section className='container-fluid fondo-tienda pb-2'>
             <div className="row">
