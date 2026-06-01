@@ -104,6 +104,14 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
         doc.setFontSize(14);
         doc.text(`Total: $${detalleCarrito.total}`, margenIzquierdo, y);
 
+        y += 12;
+        doc.setFillColor(240, 240, 240); // fondo gris claro
+        doc.rect(margenIzquierdo, y - 5, 182, 14, 'F');
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(60);
+        doc.text("Abonar en el local. Aceptamos todos los metodos de pago (efectivo, transferencia, credito y debito).", margenIzquierdo, y + 4);
+
         // Descargar
         doc.save(`compra_${venta.idVenta}.pdf`);
     };
@@ -112,7 +120,7 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
     return (
         <Modal show={showModalCompra} onHide={cerrarModalCompra}>
             <Modal.Header className='d-flex justify-content-center align-items-center'>
-                <h4 className='text-center titulo'>Reserva de pedido exitoso!</h4>
+                <h4 className='text-center titulo'>Reserva de pedido exitosa!</h4>
             </Modal.Header>
             <Modal.Body>
                 <p><strong>ID compra: </strong>{venta.idVenta}</p>
