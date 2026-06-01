@@ -16,7 +16,7 @@ const AdminTabs = ({ productos, setProductos, pedidos, setPedidos, pacientes, se
     const tabs = [
         { key: 'turnos', label: 'Turnos', component: <TurnosTabs turnos={turnos} setTurnos={setTurnos}></TurnosTabs> },
         { key: 'paciente', label: "Pacientes", component: <PacientesTabs pacientes={pacientes} setPaciente={setPaciente}></PacientesTabs> },
-        { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos} setModoModalProducto={setModoModalProducto} modoModalProducto={modoModalProducto} modoModalProducto={modoModalProducto} setProductoSeleccionado={setProductoSeleccionado} productoSeleccionado={productoSeleccionado} ></ProductosTabs> },
+        { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos} setModoModalProducto={setModoModalProducto} modoModalProducto={modoModalProducto} modoModalProducto={modoModalProducto} setProductoSeleccionado={setProductoSeleccionado} productoSeleccionado={productoSeleccionado}></ProductosTabs> },
         { key: 'pedidos', label: 'Pedidos', component: <PedidosTabs pedidos={pedidos} setPedidos={setPedidos}></PedidosTabs> },
         { key: 'caja', label: 'Caja', component: <CajaTabs caja={caja} setCaja={setCaja} abrirModalVenta={abrirModalVenta}></CajaTabs> }
     ];

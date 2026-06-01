@@ -2,7 +2,7 @@ import { Badge, Button } from "react-bootstrap";
 import { cambiarEstadoProductoAPI, listarProductosAPI } from "../../helpers/queries";
 import Swal from "sweetalert2";
 
-const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos }) => {
+const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos, setProductosInicio }) => {
 
     const formatearFecha = (fechaISO) => {
         const fecha = new Date(fechaISO);
@@ -28,6 +28,7 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos })
                 if (respuesta.status === 200) {
                     const productosActualizados = await datosNuevos.json();
                     setProductos(productosActualizados);
+                    await obtenerProductosInicio()
                 }
                 Swal.fire({
                     title: "Producto inhabilitado!",

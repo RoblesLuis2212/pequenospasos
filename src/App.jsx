@@ -35,13 +35,13 @@ function App() {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado])
 
-  const [productos, setProductos] = useState([]);
+  const [productosInicio, setProductosInicio] = useState([]);
 
   const obtenerProductosInicio = async () => {
     const respuesta = await listarProductosInicioAPI();
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
-      setProductos(datos);
+      setProductosInicio(datos);
     }
   }
 
@@ -64,7 +64,7 @@ function App() {
               <>
                 <HeroSection usuarioLogueado={usuarioLogueado}></HeroSection>
                 <Tratamientos></Tratamientos>
-                <ContainerProductos productos={productos}></ContainerProductos>
+                <ContainerProductos productosInicio={productosInicio}></ContainerProductos>
                 <FormularioContacto></FormularioContacto>
               </>
             }

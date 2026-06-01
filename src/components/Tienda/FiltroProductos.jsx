@@ -11,7 +11,7 @@ const FiltroProductos = ({ setCategoria }) => {
             <option value="3">Material Creativo</option>
             <option value="4">Rompecabezas</option>
             <option value="5">Juegos Sensoriales</option>
-            <option value="7">Juegos Didacticos</option>
+            <option value="6">Juegos Didacticos</option>
         </Form.Select>
     );
 };

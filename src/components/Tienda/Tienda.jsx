@@ -34,9 +34,6 @@ const Tienda = () => {
         obtenerProductos(paginaActual, categoria, busqueda);
     }, [paginaActual, categoria, busqueda]);
 
-    console.log("datos productos: ", productos);
-
-
     return (
         <section className='container-fluid fondo-tienda pb-2'>
             <div className="row">
@@ -49,7 +46,7 @@ const Tienda = () => {
                         <FiltroProductos setCategoria={setCategoria}></FiltroProductos>
                     </div>
                 </div>
-                {productos.map((itemProducto) => (
+                {productos.filter((producto) => producto.estado === "DISPONIBLE").map((itemProducto) => (
                     <div className="col-12 col-md-6 col-lg-3" key={itemProducto.idProducto}>
                         <CardProducto itemProducto={itemProducto}></CardProducto>
                     </div>
