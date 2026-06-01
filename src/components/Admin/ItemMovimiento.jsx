@@ -34,7 +34,7 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
                         <p className="mb-0 fw-500 ms-1" style={{ fontSize: '14px' }}>{itemMovimiento.turno?.paciente?.nombreCompleto && `${itemMovimiento.turno.paciente.nombreCompleto} (Paciente)`} </p>
                     </div>
                     <p className="mb-0 text-muted" style={{ fontSize: '12px' }}>
-                        {fechaFormateada} hs · {itemMovimiento.metodopago?.nombre} · {itemMovimiento.tipoVenta}
+                        {fechaFormateada} hs · {itemMovimiento.metodopago?.nombre} · {itemMovimiento.tipoVenta} · {itemMovimiento.pagoCon && ` Pagó: $${itemMovimiento.pagoCon} · Vuelto: $${itemMovimiento.vuelto}`}
                     </p>
                 </div>
                 <div className="text-end">
