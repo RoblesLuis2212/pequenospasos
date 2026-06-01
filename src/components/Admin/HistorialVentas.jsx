@@ -70,6 +70,7 @@ const HistorialVentas = () => {
         };
     });
 
+    console.log("Ventas: ", ventasFiltradas);
 
     return (
         <section className='container-fluid recuperar-container'>
