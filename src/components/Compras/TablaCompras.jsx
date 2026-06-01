@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { listarComprasUsuario } from '../../helpers/queries';
 
 const TablaCompras = ({ compras, obtenerComprasUsuario }) => {
+    console.log(compras);
     return (
         <Table responsive>
             <thead className='tabla-encabezado'>
@@ -17,7 +18,7 @@ const TablaCompras = ({ compras, obtenerComprasUsuario }) => {
                 </tr>
             </thead>
             <tbody>
-                {compras.map((itemCompra) => (
+                {compras.filter((c => c.estado === "PENDIENTE" || c.estado === "APROBADO")).sort((a, b) => new Date(b.fechaCompra) - new Date(a.fechaCompra)).slice(0, 3).map((itemCompra) => (
                     <ItemCompras itemCompra={itemCompra} key={itemCompra.idVenta} obtenerComprasUsuario={obtenerComprasUsuario}></ItemCompras>
                 ))}
             </tbody>
