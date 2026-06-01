@@ -41,16 +41,10 @@ const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
                         <p className='fw-bold'>${detalleCarrito?.total ?? 0}</p>
                     </div>
                     <div className='d-flex flex-column justify-content-center'>
-                        <Button className='btn-principal mt-2 w-100' onClick={finalizarCompra}>Finalizar Pedido</Button>
+                        <Button className='btn-principal mt-2 w-100' onClick={finalizarCompra}>Finalizar Reserva</Button>
                         <Button className='btn-transparente mt-3'>Seguir comprando</Button>
                     </div>
                     <hr />
-                    {/* metodos de pago */}
-                    <div className="d-flex justify-content-around">
-                        <img src={VisaLogo} className='metodo-pago' alt="metodo de pago Visa" />
-                        <img src={masterCardLogo} className='metodo-pago' alt="metodo de pago Master Card" />
-                        <img src={MPLogo} className='metodo-pago' alt="metodo de pago Mercado pago" />
-                    </div>
                 </Card.Body >
             </Card >
             <ModalDatosCompra showModalCompra={showModalCompra} cerrarModalCompra={cerrarModalCompra} detalleCarrito={detalleCarrito} venta={venta}></ModalDatosCompra>

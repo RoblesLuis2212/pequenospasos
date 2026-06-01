@@ -112,7 +112,7 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
     return (
         <Modal show={showModalCompra} onHide={cerrarModalCompra}>
             <Modal.Header className='d-flex justify-content-center align-items-center'>
-                <h4 className='text-center titulo'>Reserva de pedido exitoso!</h4>
+                <h4 className='text-center titulo'>Reserva de pedido exitosa!</h4>
             </Modal.Header>
             <Modal.Body>
                 <p><strong>ID compra: </strong>{venta.idVenta}</p>
