@@ -8,7 +8,7 @@ import autoTable from 'jspdf-autotable';
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 
-const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModalProducto, setProductoSeleccionado, productoSeleccionado, setProductosInicio }) => {
+const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModalProducto, setProductoSeleccionado, productoSeleccionado }) => {
     //Estado para abrir modal de crear y editar productos.
     const [showModalProductos, setShowModalProductos] = useState(false);
 
@@ -169,7 +169,7 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
                         <tbody>
                             {productosFiltrados.length > 0 ? (
                                 productosFiltrados.map((itemProducto) => (
-                                    <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto} abrirModalProductosEditar={abrirModalProductosEditar} setProductos={setProductos} setProductosInicio={setProductosInicio}></ItemProducto>
+                                    <ItemProducto itemProducto={itemProducto} key={itemProducto.idProducto} abrirModalProductosEditar={abrirModalProductosEditar} setProductos={setProductos}></ItemProducto>
                                 ))
                             ) : (
                                 <tr>

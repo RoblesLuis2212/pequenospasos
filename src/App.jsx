@@ -143,7 +143,7 @@ function App() {
             path="/admin"
             element={
               <ProtectAdmin usuarioLogueado={usuarioLogueado}>
-                <Administrador setProductosInicio={setProductosInicio}></Administrador>
+                <Administrador></Administrador>
               </ProtectAdmin>
             }
           >

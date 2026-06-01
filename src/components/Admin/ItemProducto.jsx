@@ -28,7 +28,7 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos, s
                 if (respuesta.status === 200) {
                     const productosActualizados = await datosNuevos.json();
                     setProductos(productosActualizados);
-                    setProductosInicio(productosActualizados);
+                    await obtenerProductosInicio()
                 }
                 Swal.fire({
                     title: "Producto inhabilitado!",
@@ -52,7 +52,6 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos, s
                 if (respuestaDatos.status === 200) {
                     const productosActualizados = await respuestaDatos.json();
                     setProductos(productosActualizados);
-                    setProductosInicio(productosActualizados);
                     Swal.fire({
                         title: "Producto activado exitosamente!",
                         icon: "success",

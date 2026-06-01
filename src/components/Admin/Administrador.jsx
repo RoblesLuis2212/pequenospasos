@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { listarPacientesAPI, listarPedidosAPI, listarProductosAPI, listarTurnos, obtenerCajaActivaAPI } from "../../helpers/queries";
 import ModalNuevaVenta from "./ModalNuevaVenta";
 
-const Administrador = ({ setProductosInicio }) => {
+const Administrador = () => {
     const [productos, setProductos] = useState([]);
 
     const obtenerProductos = async () => {
@@ -118,7 +118,7 @@ const Administrador = ({ setProductosInicio }) => {
                     </div>
                 </div>
             </section >
-            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={setCaja} setProductosInicio={setProductosInicio}></AdminTabs>
+            <AdminTabs productos={productos} setProductos={setProductos} pedidos={pedidos} setPedidos={setPedidos} pacientes={pacientes} setPaciente={setPaciente} turnos={turnos} setTurnos={setTurnos} caja={caja} setCaja={setCaja}></AdminTabs>
         </>
     );
 };
