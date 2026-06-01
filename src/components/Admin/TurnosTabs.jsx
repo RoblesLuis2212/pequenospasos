@@ -163,7 +163,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                         </thead>
                         <tbody>
                             {turnosFiltrados.length > 0 ? (
-                                turnosFiltrados.map((itemTurno) => (
+                                turnosFiltrados.filter((t => t.estado === "PENDIENTE" || t.estado === "APROBADO")).slice(0, 10).sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).map((itemTurno) => (
                                     <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno} setTurnos={setTurnos} abrirModalPagoTurno={abrirModalPagoTurno}></ItemTurnos>
                                 ))
                             ) : (
