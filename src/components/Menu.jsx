@@ -106,7 +106,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                             {usuarioLogueado.usuario ? (
                                 <>
                                     {usuarioLogueado.usuario.rol === "ADMIN" ? (
-                                        <Button className='btn-secundario' as={Link} to="/admin"><i class="bi bi-person-square"></i></Button>
+                                        <Nav.Link as={Link} to="/admin" className='text-decoration-underline'>Bienvenida Lucy!</Nav.Link>
                                     ) : (
                                         <Button className='btn-secundario' as={Link} to="/carrito"><i className="bi bi-cart-fill"></i></Button>
                                     )
