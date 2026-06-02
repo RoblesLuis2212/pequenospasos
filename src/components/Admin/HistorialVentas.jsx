@@ -159,7 +159,7 @@ const HistorialVentas = () => {
                 <div className="container mt-4">
                     <div className="border rounded-3 p-3 bg-light">
                         <p className="titulo" style={{ fontSize: '15px' }}>Historial de ventas</p>
-                        {ventasFiltradas.map((itemMovimiento, index) => (
+                        {ventasFiltradas.slice(0, 5).map((itemMovimiento, index) => (
                             <ItemMovimiento key={index} itemMovimiento={itemMovimiento} isLast={index === historial.length - 1}></ItemMovimiento>
                         ))}
                     </div>
