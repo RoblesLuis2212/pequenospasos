@@ -22,15 +22,17 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
             p.estado?.toLowerCase().includes(busqueda.toLowerCase()) ||
             fecha.toLocaleDateString("es-AR").includes(busqueda);
 
+        const coincideEstado = p.estado === "PENDIENTE" || p.estado === "APROBADO";
+
         if (filtroFecha === "hoy") return coincideBusqueda && fecha.toDateString() === ahora.toDateString();
         if (filtroFecha === "semana") {
             const haceSieteDias = new Date();
             haceSieteDias.setDate(ahora.getDate() - 7);
-            return coincideBusqueda && fecha >= haceSieteDias;
+            return coincideBusqueda && coincideEstado && fecha >= haceSieteDias;
         }
-        if (filtroFecha === "mes") return coincideBusqueda && fecha.getMonth() === ahora.getMonth() && fecha.getFullYear() === ahora.getFullYear();
+        if (filtroFecha === "mes") return coincideBusqueda && coincideEstado && fecha.getMonth() === ahora.getMonth() && fecha.getFullYear() === ahora.getFullYear();
 
-        return coincideBusqueda;
+        return coincideBusqueda && coincideEstado;
     });
 
     const exportarPlanillaPDF = () => {
@@ -168,8 +170,8 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={6} className="text-center py-4 text-muted">
-                                        No hay turnos cargados
+                                    <td colSpan={8} className="text-center py-4 text-muted">
+                                        No hay turnos disponibles
                                     </td>
                                 </tr>
                             )}
