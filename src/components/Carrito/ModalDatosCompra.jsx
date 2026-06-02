@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
+import logo from "../../assets/logoPequenosPasos.png";
 
 const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, venta }) => {
 
@@ -29,6 +30,15 @@ const ModalDatosCompra = ({ showModalCompra, cerrarModalCompra, detalleCarrito, 
 
         const margenIzquierdo = 14;
         let y = 25;
+
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const imgWidth = 60;
+        const imgHeight = 30;
+
+        const x = (pageWidth - imgHeight) / 2;
+        //Logo centrado
+        doc.addImage(logo, "PNG", x, 10, imgWidth, imgHeight);
+        y = 55;
 
         // Título
         doc.setFontSize(18);
