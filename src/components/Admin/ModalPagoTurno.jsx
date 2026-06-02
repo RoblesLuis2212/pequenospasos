@@ -2,11 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { registrarPagoTurnoAPI } from '../../helpers/queries';
+import { listarTurnos, pacientesconTurnos, registrarPagoTurnoAPI } from '../../helpers/queries';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTurno, turnoSeleccionado }) => {
+const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTurno, turnoSeleccionado, setTurnos }) => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors, setValue } = useForm();
 
@@ -16,9 +16,15 @@ const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTur
             pagoCon: Number(data.pagoCon)
         });
         if (respuesta.status === 200) {
+            const respuestaActualizada = await listarTurnos();
+            if (respuestaActualizada.status === 200) {
+                const datos = await respuestaActualizada.json();
+                setTurnos(datos);
+            }
+            cerrarModalPagoTurno();
             Swal.fire({ title: "Pago registrado exitosamente!", icon: "success" });
             reset();
-        } if (respuesta.status === 400) {
+        } else if (respuesta.status === 400) {
             Swal.fire({ title: "El monto recibido no puede ser menor al precio de la consulta!", icon: "warning" });
         } else {
             Swal.fire({ title: "Ocurrio un error al registrar el pago del turno. Intentelo mas tarde!", icon: "error" });
