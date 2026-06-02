@@ -117,6 +117,8 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
         setShowPagoTurno(true);
     }
 
+    console.log("turnos filtrados: ", turnosFiltrados);
+
     return (
         <>
             <div className="admin-wrapper">
