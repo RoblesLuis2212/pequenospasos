@@ -178,7 +178,7 @@ function App() {
           <Route
             path="/evolucion/:id"
             element={
-              <ProtectAdmin>
+              <ProtectAdmin usuarioLogueado={usuarioLogueado}>
                 <EvolucionPaciente></EvolucionPaciente>
               </ProtectAdmin>
             }
