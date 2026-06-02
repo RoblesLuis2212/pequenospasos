@@ -66,7 +66,7 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                         </thead>
                         <tbody>
                             {pacientesFiltrados.length > 0 ? (
-                                pacientesFiltrados.map((itemPaciente) => (
+                                pacientesFiltrados.slice(0, 5).map((itemPaciente) => (
                                     <ItemPaciente itemPaciente={itemPaciente} key={itemPaciente.idPaciente} setPaciente={setPaciente} abrirModalEscolar={abrirModalEscolar}></ItemPaciente>
                                 ))
                             ) : (
