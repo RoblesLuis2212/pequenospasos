@@ -68,27 +68,34 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                             <Nav.Link href='#tratamientos'>Tratamientos</Nav.Link>
                             <Nav.Link as={Link} to="/tienda">Tienda</Nav.Link>
                             {usuarioLogueado.usuario?.rol !== "ADMIN" ? (
-                                <NavDropdown title="Niños">
-                                    <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Turnos</NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' onClick={() => {
-                                        if (verificarSesion()) {
-                                            navigate("/registro-pacientes");
-                                        }
-                                    }}>Registrar Paciente</NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-link' onClick={() => {
-                                        if (verificarSesion()) {
-                                            navigate("/mis-turnos")
-                                        }
-                                    }}>Mis turnos</NavDropdown.Item>
-                                    {usuarioLogueado?.usuario && (
-                                        <>
+                                <>
+                                    <NavDropdown title="Niños">
+                                        <NavDropdown.Item onClick={abrirModalPacientes} className='nav-link'>Mis Niños</NavDropdown.Item>
+                                        <NavDropdown.Item className='nav-link' onClick={() => {
+                                            if (verificarSesion()) {
+                                                navigate("/registro-pacientes");
+                                            }
+                                        }}>Registrar Paciente</NavDropdown.Item>
+                                        <NavDropdown.Item className='nav-link' onClick={() => {
+                                            if (verificarSesion()) {
+                                                navigate("/mis-turnos")
+                                            }
+                                        }}>Mis turnos</NavDropdown.Item>
+                                        {usuarioLogueado?.usuario && (
+                                            <>
+                                            </>
+
+                                        )}
+                                    </NavDropdown>
+                                    {usuarioLogueado.usuario && (
+                                        <NavDropdown title="Mis Datos">
                                             <NavDropdown.Item className='nav-link' as={Link} to={"/cambiar-contrasena"}>Cambiar contraseña</NavDropdown.Item>
                                             <NavDropdown.Item className='nav-link' onClick={abrirModalPadre}>Mis datos personales</NavDropdown.Item>
                                             <NavDropdown.Item className='nav-link' as={Link} to={"/mis-compras"}>Mis Compras</NavDropdown.Item>
-                                        </>
 
+                                        </NavDropdown>
                                     )}
-                                </NavDropdown>
+                                </>
                             ) : (
                                 <NavDropdown title="admin">
                                     <NavDropdown.Item className='nav-link' as={Link} to="/historial-ventas">Historial de Ventas</NavDropdown.Item>
