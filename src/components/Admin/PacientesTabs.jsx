@@ -81,7 +81,7 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                 </div>
             </div>
             <ModalPaciente showModalPacientes={showModalPacientes} cerrarModalPacientes={cerrarModalPacientes}></ModalPaciente>
-            <ModalDatosEscolares cerrarModalEscolar={cerrarModalEscolar} showModalEscolar={showModalEscolar} pacienteSeleccionado={pacienteSeleccionado}></ModalDatosEscolares>
+            <ModalDatosEscolares cerrarModalEscolar={cerrarModalEscolar} showModalEscolar={showModalEscolar} pacienteSeleccionado={pacienteSeleccionado} setPaciente={setPaciente}></ModalDatosEscolares>
         </>
     );
 };
