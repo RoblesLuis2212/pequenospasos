@@ -179,7 +179,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                     </Table>
                 </div>
             </div>
-            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno} turnoSeleccionado={turnoSeleccionado}></ModalPagoTurno>
+            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno} turnoSeleccionado={turnoSeleccionado} setTurnos={setTurnos}></ModalPagoTurno>
         </>
 
 

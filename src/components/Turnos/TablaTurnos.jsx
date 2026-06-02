@@ -34,8 +34,8 @@ const TablaTurnos = () => {
                 </tr>
             </thead>
             <tbody>
-                {turnos.map((itemTurno) => (
-                    <ItemTurno key={itemTurno.idTurno} itemTurno={itemTurno} obtenerTurnos={obtenerTurnos}></ItemTurno>
+                {turnos.filter((t => t.estado === "APROBADO" || t.estado === "PENDIENTE")).filter((t => new Date(t.fecha) >= new Date())).sort((a, b) => new Date(a.fecha) - new Date(b.fecha)).slice(0, 4).map((itemTurno) => (
+                    <ItemTurno key={itemTurno.idTurno} itemTurno={itemTurno} obtenerTurnos={obtenerTurnos} setTurnos={setTurnos}></ItemTurno>
                 ))}
             </tbody>
         </Table>
