@@ -156,6 +156,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                                 <th>Paciente</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>
+                                <th>Precio consulta</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>

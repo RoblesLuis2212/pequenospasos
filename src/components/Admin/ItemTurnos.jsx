@@ -71,6 +71,7 @@ const ItemTurnos = ({ itemTurno, setTurnos, abrirModalPagoTurno, turnoSelecciona
                 <td>{itemTurno.paciente.nombreCompleto}</td>
                 <td>{texto}</td>
                 <td>{hora}:{minutos} hs</td>
+                <td>${itemTurno.paciente?.obraSocial?.precioConsulta || "25000"}</td>
                 <td>
                     <div>
                         <span className={`badge bg-${colorEstado[itemTurno.estado]}`}>
