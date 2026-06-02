@@ -45,6 +45,7 @@ const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
                         <Button className='btn-transparente mt-3'>Seguir comprando</Button>
                     </div>
                     <hr />
+                    <p className='text-secondary-emphasis'>El pago se realiza en el local al retirar el pedido. Aceptamos efectivo, transferencia, débito y crédito.</p>
                 </Card.Body >
             </Card >
             <ModalDatosCompra showModalCompra={showModalCompra} cerrarModalCompra={cerrarModalCompra} detalleCarrito={detalleCarrito} venta={venta}></ModalDatosCompra>
