@@ -30,7 +30,7 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
         p.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
         p.categoria.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
         String(p.precio).includes(busqueda) || p.estado.toLowerCase().includes(busqueda.toLowerCase())
-    )
+    ).filter((p) => busqueda ? true : p.estado !== "INACTIVO").sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion)).slice(0, 5)
     //Funcion para la exportacion de pdf
     const exportarPDF = () => {
         const doc = new jsPDF();

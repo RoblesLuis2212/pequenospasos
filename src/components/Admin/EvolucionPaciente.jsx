@@ -62,7 +62,7 @@ const EvolucionPaciente = () => {
                         {/* Cards */}
                         <div className="d-flex flex-column gap-3">
                             {datosEvolucion.length > 0 ? (
-                                datosEvolucion.map((itemEvolucion) => (
+                                datosEvolucion.slice(0, 3).map((itemEvolucion) => (
                                     <CardEvolucion key={itemEvolucion.idEvolucion} itemEvolucion={itemEvolucion} abrirModalEvolucionEditar={abrirModalEvolucionEditar}
                                     ></CardEvolucion>
                                 ))
