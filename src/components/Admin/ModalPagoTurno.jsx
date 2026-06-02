@@ -17,10 +17,12 @@ const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTur
         });
         if (respuesta.status === 200) {
             Swal.fire({ title: "Pago registrado exitosamente!", icon: "success" });
+            reset();
+        } if (respuesta.status === 400) {
+            Swal.fire({ title: "El monto recibido no puede ser menor al precio de la consulta!", icon: "warning" });
         } else {
             Swal.fire({ title: "Ocurrio un error al registrar el pago del turno. Intentelo mas tarde!", icon: "error" });
         }
-        reset();
     }
 
     useEffect(() => {
