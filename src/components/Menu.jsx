@@ -60,7 +60,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
         <div>
             <Navbar expand="lg" className="navbar">
                 <Container fluid>
-                    <Navbar.Brand className='logo ms-2' as={Link} to="/">Pequeños Pasos</Navbar.Brand>
+                    <Navbar.Brand className='logo ms-2' as={Link} to="/">Pequeños Pasos<i className="bi bi-balloon-fill ms-1"></i></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mx-auto align-items-center mt-1 mt-md-0">
