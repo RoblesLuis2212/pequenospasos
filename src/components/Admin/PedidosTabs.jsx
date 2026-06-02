@@ -12,7 +12,6 @@ const PedidosTabs = ({ pedidos, setPedidos }) => {
         String(p.idVenta).includes(busqueda)
     ).sort((a, b) => new Date(b.fechaCompra) - new Date(a.fechaCompra)).filter((p) => p.estado === "PENDIENTE" || p.estado === "APROBADO" && p.tipoVenta !== "CONSULTA").slice(0, 5)
 
-    console.log("Pedidos: ", pedidos);
 
     return (
         <div className="admin-wrapper">

@@ -2,11 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { set, useForm } from 'react-hook-form';
-import { agregarDatosEscolaresAPI, editarDatosEscolaresAPI, obtenerDatosEscolaresAPI } from '../../helpers/queries';
+import { agregarDatosEscolaresAPI, editarDatosEscolaresAPI, listarPacientesAPI, obtenerDatosEscolaresAPI } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 import { use, useEffect, useState } from 'react';
 
-const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar, pacienteSeleccionado }) => {
+const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar, pacienteSeleccionado, setPaciente }) => {
 
     const { register, handleSubmit, formState: { errors }, clearErrors, reset, setValue } = useForm();
 
@@ -19,6 +19,11 @@ const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar, pacienteSel
                     icon: "success",
                     draggable: true
                 });
+                const respuestaActualizada = await listarPacientesAPI();
+                if (respuestaActualizada.status === 200) {
+                    const datos = await respuestaActualizada.json();
+                    setPaciente(datos);
+                }
                 cerrarModalEscolar();
             } else {
                 Swal.fire({
@@ -94,7 +99,7 @@ const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar, pacienteSel
                             onChange={() => clearErrors("turno")}
                         >
                             <option value="">Seleccione un turno</option>
-                            <option value="MAÑANA">Mañana</option>
+                            <option value="MANANA">Mañana</option>
                             <option value="TARDE">Tarde</option>
                             <option value="NOCHE">Noche</option>
                         </Form.Select>
