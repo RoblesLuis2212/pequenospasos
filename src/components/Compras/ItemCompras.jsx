@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { cancelarCompraUsuario, listarComprasUsuario } from "../../helpers/queries";
 import jsPDF from "jspdf";
 import Compras from "./Compras";
-
+import Swal from "sweetalert2";
 
 const ItemCompras = ({ itemCompra, obtenerComprasUsuario }) => {
     //Formateo de la hora a un formato mas legible
@@ -125,10 +125,24 @@ const ItemCompras = ({ itemCompra, obtenerComprasUsuario }) => {
     };
 
     const cancelarCompra = async () => {
+        const result = await Swal.fire({
+            title: "¿Cancelar compra?",
+            text: "Esta acción no se puede deshacer",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, cancelar",
+            cancelButtonText: "No",
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+        });
+
+        if (!result.isConfirmed) return;
         const respuesta = await cancelarCompraUsuario(itemCompra.idVenta);
-        if (respuesta.status === 200) {
-            alert("Compra cancelada exitosamente");
+        if (respuesta && respuesta.status === 200) {
+            Swal.fire("Cancelado", "Compra cancelada exitosamente", "success");
             obtenerComprasUsuario();
+        } else {
+            Swal.fire("Error", "No se pudo cancelar la compra", "error");
         }
     }
 
