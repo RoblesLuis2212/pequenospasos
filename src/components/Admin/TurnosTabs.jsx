@@ -32,8 +32,11 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
             haceSieteDias.setDate(ahora.getDate() - 7);
             return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true) && fecha >= haceSieteDias;
         }
-        if (filtroFecha === "mes") return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true) && fecha.getMonth() === ahora.getMonth() && fecha.getFullYear() === ahora.getFullYear();
-
+        if (filtroFecha === "mes") {
+            const hace30dias = new Date();
+            hace30dias.setDate(ahora.getDate() - 30);
+            return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true) && fecha >= hace30dias;
+        }
         return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true);
     });
 
