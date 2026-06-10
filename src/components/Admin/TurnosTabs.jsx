@@ -23,16 +23,18 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
             fecha.toLocaleDateString("es-AR").includes(busqueda);
 
         const coincideEstado = p.estado === "PENDIENTE" || p.estado === "APROBADO";
+        const buscarporEstado = busqueda !== "" && p.estado?.toLowerCase().includes(busqueda.toLocaleLowerCase());
+        const aplicarFiltroEstado = busqueda === "";
 
-        if (filtroFecha === "hoy") return coincideBusqueda && fecha.toDateString() === ahora.toDateString();
+        if (filtroFecha === "hoy") return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true) && fecha.toDateString() === ahora.toDateString();
         if (filtroFecha === "semana") {
             const haceSieteDias = new Date();
             haceSieteDias.setDate(ahora.getDate() - 7);
-            return coincideBusqueda && coincideEstado && fecha >= haceSieteDias;
+            return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true) && fecha >= haceSieteDias;
         }
-        if (filtroFecha === "mes") return coincideBusqueda && coincideEstado && fecha.getMonth() === ahora.getMonth() && fecha.getFullYear() === ahora.getFullYear();
+        if (filtroFecha === "mes") return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true) && fecha.getMonth() === ahora.getMonth() && fecha.getFullYear() === ahora.getFullYear();
 
-        return coincideBusqueda && coincideEstado;
+        return coincideBusqueda && (aplicarFiltroEstado ? coincideEstado : true);
     });
 
     const exportarPlanillaPDF = () => {
@@ -165,7 +167,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                         </thead>
                         <tbody>
                             {turnosFiltrados.length > 0 ? (
-                                turnosFiltrados.filter((t => t.estado === "PENDIENTE" || t.estado === "APROBADO")).sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).slice(0, 10).map((itemTurno) => (
+                                turnosFiltrados.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).slice(0, 10).map((itemTurno) => (
                                     <ItemTurnos itemTurno={itemTurno} key={itemTurno.idTurno} setTurnos={setTurnos} abrirModalPagoTurno={abrirModalPagoTurno}></ItemTurnos>
                                 ))
                             ) : (

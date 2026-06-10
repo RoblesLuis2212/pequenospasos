@@ -54,6 +54,7 @@ const Administrador = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setTurnos(datos);
+            console.log(datos);
         }
     }
 
