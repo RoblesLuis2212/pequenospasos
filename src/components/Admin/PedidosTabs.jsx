@@ -6,12 +6,19 @@ import { useState } from 'react';
 const PedidosTabs = ({ pedidos, setPedidos }) => {
     const [busqueda, setBusqueda] = useState("");
 
-    const pedidosFiltrados = pedidos.filter((p) =>
-        p.nombreCompleto?.toLowerCase().includes(busqueda.toLowerCase()) ||
-        p.estado?.toLowerCase().includes(busqueda.toLowerCase()) ||
-        String(p.idVenta).includes(busqueda)
-    ).sort((a, b) => new Date(b.fechaCompra) - new Date(a.fechaCompra)).filter((p) => p.estado === "PENDIENTE" || p.estado === "APROBADO" && p.tipoVenta !== "CONSULTA").slice(0, 5)
-
+    const pedidosFiltrados = pedidos
+        .filter((p) =>
+            p.estado === "PENDIENTE" || p.estado === "APROBADO"
+        )
+        .filter((p) => p.tipoVenta !== "CONSULTA")
+        .filter((p) =>
+            p.nombreCompleto?.toLowerCase().includes(busqueda.toLowerCase()) ||
+            p.usuario?.nombreCompleto?.toLowerCase().includes(busqueda.toLowerCase()) ||
+            p.estado?.toLowerCase().includes(busqueda.toLowerCase()) ||
+            String(p.idVenta).includes(busqueda)
+        )
+        .sort((a, b) => new Date(b.fechaCompra) - new Date(a.fechaCompra))
+        .slice(0, 5);
 
     return (
         <div className="admin-wrapper">
