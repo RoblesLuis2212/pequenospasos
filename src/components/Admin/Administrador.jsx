@@ -26,7 +26,6 @@ const Administrador = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setPedidos(datos);
-            console.log(datos);
         }
     }
 
