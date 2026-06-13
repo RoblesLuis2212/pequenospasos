@@ -28,7 +28,7 @@ const ItemCompras = ({ itemCompra, obtenerComprasUsuario }) => {
             PENDIENTE: 'warning',
             APROBADO: 'success',
             CANCELADO: 'danger',
-            FINALIZADO: 'secondary'
+            RETIRADO: 'secondary'
         };
         return <Badge bg={colores[estado] ?? 'secondary'}>{estado}</Badge>;
     }
@@ -158,7 +158,7 @@ const ItemCompras = ({ itemCompra, obtenerComprasUsuario }) => {
                     <div className="d-flex justify-content-center">
                         <Button variant="success me-2" onClick={descargarPDF}><i className="bi bi-filetype-pdf"></i></Button>
 
-                        {itemCompra.estado !== "CANCELADO" && (
+                        {itemCompra.estado !== "CANCELADO" && itemCompra.estado != "RETIRADO" && (
                             <Button variant="danger me-2" onClick={cancelarCompra}><i className="bi bi-x-circle-fill"></i></Button>
                         )}
                     </div>

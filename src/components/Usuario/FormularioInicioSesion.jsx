@@ -75,7 +75,7 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                         </InputGroupText>
                         <Form.Control type="password" placeholder="Contraseña"
                             {...register("password", {
-                                required: "Este campo es obligatorio",
+                                required: "La contaseña es obligatoria",
                                 pattern: {
                                     message: "contraseña no valida"
                                 }
@@ -83,6 +83,11 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                             onChange={() => clearErrors("root")}
                         />
                     </InputGroup>
+                    {errors.password && (
+                        <Form.Text className="text-danger">
+                            {errors.password.message}
+                        </Form.Text>
+                    )}
                     {errors.root && (
                         <Form.Text className="text-danger">
                             {errors.root.message}
