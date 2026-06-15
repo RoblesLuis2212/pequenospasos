@@ -52,7 +52,7 @@ const PacientesTabs = ({ pacientes, setPaciente }) => {
                     <Table hover className="admin-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ID</th>
                                 <th>Nombre completo</th>
                                 <th>DNI</th>
                                 <th>Domicilio</th>

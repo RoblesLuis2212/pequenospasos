@@ -91,7 +91,7 @@ const ModalDatosEscolares = ({ cerrarModalEscolar, showModalEscolar, pacienteSel
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label className='etiquetas'>Escuela</Form.Label>
+                        <Form.Label className='etiquetas'>Turno</Form.Label>
                         <Form.Select className='custom-input input-form'
                             {...register("turno", {
                                 required: "Por favor seleccione turno"
