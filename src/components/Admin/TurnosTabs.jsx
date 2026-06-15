@@ -72,14 +72,14 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
         const horariosCorrectos = [];
         let minutos = 30;
         let horas = 16;
-        while (horas < 21 || (horas === 21 && minutos === 30)) {
+        while (horas < 21 || (horas === 21 && minutos <= 0)) {
             horariosCorrectos.push(`${horas.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}`);
             minutos += 30;
             if (minutos === 60) { minutos = 0; horas++; }
         }
 
         // Filtrar turnos de esta semana
-        const turnosSemana = turnos.filter((t) => {
+        const turnosSemana = turnosFiltrados.filter((t) => {
             const fechaTurno = new Date(t.fecha);
             return fechaTurno >= dias[0] && fechaTurno <= dias[4];
         });
@@ -159,7 +159,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                     <Table hover responsive className="admin-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ID</th>
                                 <th>Paciente</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>

@@ -63,10 +63,10 @@ const FormularioActualizarDatos = ({ usuarioLogueado, cerrarModalPadre }) => {
                         })}
                         onChange={() => clearErrors("nombreCompleto")}
                     />
-                    <Form.Text className="text-danger">
-                        {errors.nombreCompleto?.message}
-                    </Form.Text>
                 </InputGroup>
+                <Form.Text className="text-danger">
+                    {errors.nombreCompleto?.message}
+                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -89,10 +89,10 @@ const FormularioActualizarDatos = ({ usuarioLogueado, cerrarModalPadre }) => {
                         })}
                         onChange={() => clearErrors("telefono")}
                     />
-                    <Form.Text className="text-danger">
-                        {errors.telefono?.message}
-                    </Form.Text>
                 </InputGroup>
+                <Form.Text className="text-danger">
+                    {errors.telefono?.message}
+                </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label className='etiquetas'>Email</Form.Label>
@@ -103,15 +103,17 @@ const FormularioActualizarDatos = ({ usuarioLogueado, cerrarModalPadre }) => {
                     <Form.Control type="email" placeholder="ej: juanperez@gmail.com"
                         {...register("email", {
                             required: "Este campo es obligatorio",
-                            pattern: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-                            message: "Email no valido"
+                            pattern: {
+                                value: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]{2,6}$/,
+                                message: "Email no valido"
+                            }
                         })}
                         onChange={() => clearErrors("email")}
                     />
-                    <Form.Text className="text-danger">
-                        {errors.email?.message}
-                    </Form.Text>
                 </InputGroup>
+                <Form.Text className="text-danger">
+                    {errors.email?.message}
+                </Form.Text>
             </Form.Group>
             <div className="d-flex flex-column justify-content-center">
                 <Button className='btn-principal mt-2' type="submit">

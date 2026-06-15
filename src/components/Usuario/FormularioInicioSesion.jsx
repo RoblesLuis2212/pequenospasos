@@ -11,6 +11,7 @@ import { useState } from 'react';
 
 const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
     const { register, handleSubmit, formState: { errors }, reset, clearErrors, setError } = useForm();
+    const navigate = useNavigate();
 
     const postValidaciones = async (data) => {
         //utilizamos el helper de inicio de sesion pasandole los datos del usuario
@@ -23,6 +24,9 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                 usuario: datos.usuario,
                 token: datos.token
             })
+            if (datos.usuario.rol === "ADMIN") {
+                navigate("/admin");
+            }
             //mensaje de exito en caso del inicio de sesion exitoso
             Swal.fire({
                 icon: 'success',
@@ -42,7 +46,6 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
         }
     }
 
-    const navigate = useNavigate();
 
     return (
         <>
@@ -75,7 +78,7 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                         </InputGroupText>
                         <Form.Control type="password" placeholder="Contraseña"
                             {...register("password", {
-                                required: "Este campo es obligatorio",
+                                required: "La contaseña es obligatoria",
                                 pattern: {
                                     message: "contraseña no valida"
                                 }
@@ -83,6 +86,11 @@ const FormularioInicioSesion = ({ setUsuarioLogueado, handleClose }) => {
                             onChange={() => clearErrors("root")}
                         />
                     </InputGroup>
+                    {errors.password && (
+                        <Form.Text className="text-danger">
+                            {errors.password.message}
+                        </Form.Text>
+                    )}
                     {errors.root && (
                         <Form.Text className="text-danger">
                             {errors.root.message}
