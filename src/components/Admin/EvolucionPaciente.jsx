@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardEvolucion from "./CardEvolucion";
 import ModalEvolucion from "./ModalEvolucion";
+import { FormControl, Form } from "react-bootstrap";
 
 const EvolucionPaciente = () => {
 
@@ -17,7 +18,6 @@ const EvolucionPaciente = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setDatosEvolucion(datos);
-            console.log(datos);
         }
     }
 
@@ -42,6 +42,37 @@ const EvolucionPaciente = () => {
         setShowModalEvolucion(true);
     }
 
+    const [fechaDesde, setFechaDesde] = useState("");
+    const [fechaHasta, setFechaHasta] = useState("");
+
+    const fechaEvolucion = new Date(datosEvolucion.fecha);
+
+    const evolucionesFiltradas = datosEvolucion.filter((evolucion) => {
+        const fechaEvolucion = new Date(evolucion.fecha);
+
+
+        if (fechaDesde) {
+            const desde = new Date(fechaDesde);
+            desde.setHours(0, 0, 0, 0);
+
+            if (fechaEvolucion < desde) return false;
+        }
+
+        if (fechaHasta) {
+            const hasta = new Date(fechaHasta);
+            hasta.setHours(23, 59, 59, 999);
+
+            if (fechaEvolucion > hasta) return false;
+        }
+
+        return true;
+    });
+
+    const hayFiltro = fechaDesde || fechaHasta;
+
+    const registrosAMostrar = hayFiltro
+        ? evolucionesFiltradas
+        : datosEvolucion.slice(0, 3);
 
     return (
         <>
@@ -59,10 +90,33 @@ const EvolucionPaciente = () => {
                             </Button>
                         </div>
 
+                        <div className="d-flex gap-3 my-3">
+                            <div className="flex-grow-1">
+                                <label>Desde</label>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    value={fechaDesde}
+                                    onChange={(e) => setFechaDesde(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="flex-grow-1">
+                                <label>Hasta</label>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    value={fechaHasta}
+                                    onChange={(e) => setFechaHasta(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+
                         {/* Cards */}
                         <div className="d-flex flex-column gap-3">
-                            {datosEvolucion.length > 0 ? (
-                                datosEvolucion.slice(0, 3).map((itemEvolucion) => (
+                            {registrosAMostrar.length > 0 ? (
+                                registrosAMostrar.map((itemEvolucion) => (
                                     <CardEvolucion key={itemEvolucion.idEvolucion} itemEvolucion={itemEvolucion} abrirModalEvolucionEditar={abrirModalEvolucionEditar}
                                     ></CardEvolucion>
                                 ))
