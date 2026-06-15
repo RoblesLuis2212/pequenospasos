@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardEvolucion from "./CardEvolucion";
 import ModalEvolucion from "./ModalEvolucion";
+import { FormControl, Form } from "react-bootstrap";
 
 const EvolucionPaciente = () => {
 
@@ -42,6 +43,14 @@ const EvolucionPaciente = () => {
         setShowModalEvolucion(true);
     }
 
+    const [busqueda, setBusqueda] = useState("");
+
+    const evolucionesFiltradas = datosEvolucion.filter((evolucion) =>
+        evolucion.descripcion
+            .toLowerCase()
+            .includes(busqueda.toLowerCase())
+    );
+
 
     return (
         <>
@@ -59,10 +68,22 @@ const EvolucionPaciente = () => {
                             </Button>
                         </div>
 
+                        <div className="d-flex gap-2 mb-3">
+                            <Form.Control
+                                type="text"
+                                placeholder="Buscar evolución..."
+                                onChange={(e) => setBusqueda(e.target.value)}
+                                className="input-filtro"
+                                value={busqueda}
+                                onChange={(e) => setBusqueda(e.target.value)}
+                            />
+                        </div>
+
+
                         {/* Cards */}
                         <div className="d-flex flex-column gap-3">
-                            {datosEvolucion.length > 0 ? (
-                                datosEvolucion.slice(0, 3).map((itemEvolucion) => (
+                            {evolucionesFiltradas.length > 0 ? (
+                                evolucionesFiltradas.slice(0, 3).map((itemEvolucion) => (
                                     <CardEvolucion key={itemEvolucion.idEvolucion} itemEvolucion={itemEvolucion} abrirModalEvolucionEditar={abrirModalEvolucionEditar}
                                     ></CardEvolucion>
                                 ))
