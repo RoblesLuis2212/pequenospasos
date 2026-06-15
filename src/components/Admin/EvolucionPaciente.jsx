@@ -43,14 +43,37 @@ const EvolucionPaciente = () => {
         setShowModalEvolucion(true);
     }
 
-    const [busqueda, setBusqueda] = useState("");
+    const [fechaDesde, setFechaDesde] = useState("");
+    const [fechaHasta, setFechaHasta] = useState("");
 
-    const evolucionesFiltradas = datosEvolucion.filter((evolucion) =>
-        evolucion.descripcion
-            .toLowerCase()
-            .includes(busqueda.toLowerCase())
-    );
+    const fechaEvolucion = new Date(datosEvolucion.fecha);
 
+    const evolucionesFiltradas = datosEvolucion.filter((evolucion) => {
+        const fechaEvolucion = new Date(evolucion.fecha);
+
+
+        if (fechaDesde) {
+            const desde = new Date(fechaDesde);
+            desde.setHours(0, 0, 0, 0);
+
+            if (fechaEvolucion < desde) return false;
+        }
+
+        if (fechaHasta) {
+            const hasta = new Date(fechaHasta);
+            hasta.setHours(23, 59, 59, 999);
+
+            if (fechaEvolucion > hasta) return false;
+        }
+
+        return true;
+    });
+
+    const hayFiltro = fechaDesde || fechaHasta;
+
+    const registrosAMostrar = hayFiltro
+        ? evolucionesFiltradas
+        : datosEvolucion.slice(0, 3);
 
     return (
         <>
@@ -68,22 +91,33 @@ const EvolucionPaciente = () => {
                             </Button>
                         </div>
 
-                        <div className="d-flex gap-2 mb-3">
-                            <Form.Control
-                                type="text"
-                                placeholder="Buscar evolución..."
-                                onChange={(e) => setBusqueda(e.target.value)}
-                                className="input-filtro"
-                                value={busqueda}
-                                onChange={(e) => setBusqueda(e.target.value)}
-                            />
+                        <div className="d-flex gap-3 my-3">
+                            <div className="flex-grow-1">
+                                <label>Desde</label>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    value={fechaDesde}
+                                    onChange={(e) => setFechaDesde(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="flex-grow-1">
+                                <label>Hasta</label>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    value={fechaHasta}
+                                    onChange={(e) => setFechaHasta(e.target.value)}
+                                />
+                            </div>
                         </div>
 
 
                         {/* Cards */}
                         <div className="d-flex flex-column gap-3">
-                            {evolucionesFiltradas.length > 0 ? (
-                                evolucionesFiltradas.slice(0, 3).map((itemEvolucion) => (
+                            {registrosAMostrar.length > 0 ? (
+                                registrosAMostrar.map((itemEvolucion) => (
                                     <CardEvolucion key={itemEvolucion.idEvolucion} itemEvolucion={itemEvolucion} abrirModalEvolucionEditar={abrirModalEvolucionEditar}
                                     ></CardEvolucion>
                                 ))
