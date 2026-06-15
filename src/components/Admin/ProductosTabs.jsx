@@ -155,7 +155,7 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
                     <Table hover className="productos-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ID</th>
                                 <th>Imagen</th>
                                 <th>Nombre</th>
                                 <th>Categoría</th>

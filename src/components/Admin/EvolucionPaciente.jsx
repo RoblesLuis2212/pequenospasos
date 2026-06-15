@@ -18,7 +18,6 @@ const EvolucionPaciente = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setDatosEvolucion(datos);
-            console.log(datos);
         }
     }
 
