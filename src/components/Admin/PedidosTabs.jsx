@@ -39,7 +39,7 @@ const PedidosTabs = ({ pedidos, setPedidos }) => {
                 <Table hover className="admin-table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Cliente</th>
                             <th>Productos</th>
                             <th>Fecha de compra</th>

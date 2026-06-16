@@ -41,7 +41,7 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
         autoTable(doc, {
             startY: 25,
             head: [["#", "Nombre", "Categoría", "Stock", "Precio", "Estado"]],
-            body: productosFiltrados.map((p) => [
+            body: productos.map((p) => [
                 p.idProducto,
                 p.nombre,
                 p.categoria.nombre,
@@ -86,7 +86,7 @@ const ProductosTabs = ({ productos, setProductos, setModoModalProducto, modoModa
         hoja.getRow(1).height = 25;
 
         // Filas de datos
-        productosFiltrados.forEach((p, index) => {
+        productos.forEach((p, index) => {
             const fila = hoja.addRow({
                 id: p.idProducto,
                 nombre: p.nombre,

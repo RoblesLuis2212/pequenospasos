@@ -25,10 +25,9 @@ const ItemProducto = ({ itemProducto, abrirModalProductosEditar, setProductos, s
             const respuesta = await cambiarEstadoProductoAPI(itemProducto.idProducto, estadoNuevo);
             if (respuesta.status === 200) {
                 const datosNuevos = await listarProductosAPI();
-                if (respuesta.status === 200) {
+                if (datosNuevos.status === 200) {
                     const productosActualizados = await datosNuevos.json();
                     setProductos(productosActualizados);
-                    await obtenerProductosInicio()
                 }
                 Swal.fire({
                     title: "Producto inhabilitado!",
