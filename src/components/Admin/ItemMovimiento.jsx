@@ -20,6 +20,8 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
         hour12: false
     }).replace(",", "")
 
+    console.log("item turno: ", itemMovimiento);
+
     return (
         <>
             <div
@@ -28,7 +30,7 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
             >
                 <div>
                     <div className="d-flex">
-                        <p className="mb-0 fw-500" style={{ fontSize: '14px' }}>{itemMovimiento.usuario?.nombreCompleto}
+                        <p className="mb-0 fw-500" style={{ fontSize: '14px' }}>{itemMovimiento.turno?.paciente?.usuario?.nombreCompleto || itemMovimiento.usuario?.nombreCompleto}
                             {itemMovimiento.turno?.paciente?.nombreCompleto && ' ·'}
                         </p>
                         <p className="mb-0 fw-500 ms-1" style={{ fontSize: '14px' }}>{itemMovimiento.turno?.paciente?.nombreCompleto && `${itemMovimiento.turno.paciente.nombreCompleto} (Paciente)`} </p>

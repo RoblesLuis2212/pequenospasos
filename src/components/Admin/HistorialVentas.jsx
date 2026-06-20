@@ -13,6 +13,7 @@ const HistorialVentas = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setHistorial(datos);
+            console.log("Historial de ventas: ", datos);
         }
     }
 
@@ -26,22 +27,43 @@ const HistorialVentas = () => {
     const [filtroFecha, setFiltroFecha] = useState('');
     const [busqueda, setBusqueda] = useState('');
 
-    const ventasFiltradas = historial.filter(v => {
-        const coincideTipo = filtroTipo ? v.tipoVenta === filtroTipo : true
-
-        const coincideMetodo = filtroMetodo ? v.metodoPagoId === Number(filtroMetodo) : true
-
-        const fechaVenta = new Date(v.fechaCompra);
-        const hoy = new Date();
-        const coincideFecha = !filtroFecha ? true : filtroFecha === 'hoy' ? fechaVenta.toDateString() === hoy.toDateString() :
-            filtroFecha === 'mes' ? fechaVenta.getMonth() === hoy.getMonth() && fechaVenta.getFullYear() === hoy.getFullYear() :
-                filtroFecha === 'año' ? fechaVenta.getFullYear() === hoy.getFullYear() : true;
-
-        const coincideBusqueda = busqueda ? v.turno?.paciente?.nombreCompleto.toLowerCase().includes(busqueda.toLocaleLowerCase()) : true
 
 
-        return coincideTipo && coincideMetodo && coincideFecha && coincideBusqueda;
-    })
+    const ventasFiltradas = historial
+        .filter(v => {
+            const nombrePaciente = v.turno?.paciente?.nombreCompleto || "";
+            const nombrePadreConsulta = v.turno?.paciente?.usuario?.nombreCompleto || "";
+            const nombrePadreProducto = v.usuario?.nombreCompleto || "";
+            const textoBusqueda = busqueda.toLowerCase();
+
+            const coincideBusqueda =
+                !busqueda ||
+                nombrePaciente.toLowerCase().includes(textoBusqueda) ||
+                nombrePadreConsulta.toLowerCase().includes(textoBusqueda) ||
+                nombrePadreProducto.toLowerCase().includes(textoBusqueda);
+            const coincideTipo = filtroTipo ? v.tipoVenta === filtroTipo : true;
+            const coincideMetodo = filtroMetodo
+                ? v.metodoPagoId === Number(filtroMetodo)
+                : true;
+
+            const fechaVenta = new Date(v.fechaCompra);
+            const hoy = new Date();
+
+            const coincideFecha = !filtroFecha
+                ? true
+                : filtroFecha === 'hoy'
+                    ? fechaVenta.toDateString() === hoy.toDateString()
+                    : filtroFecha === 'mes'
+                        ? fechaVenta.getMonth() === hoy.getMonth() &&
+                        fechaVenta.getFullYear() === hoy.getFullYear()
+                        : filtroFecha === 'año'
+                            ? fechaVenta.getFullYear() === hoy.getFullYear()
+                            : true;
+
+
+            return coincideTipo && coincideMetodo && coincideFecha && coincideBusqueda;
+        })
+        .sort((a, b) => new Date(b.fechaCompra) - new Date(a.fechaCompra));
 
     //Total recuadado por ventas
     const totalRecaudado = historial.reduce((acc, v) => acc + Number(v.monto), 0);
