@@ -20,8 +20,6 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
         hour12: false
     }).replace(",", "")
 
-    console.log("item turno: ", itemMovimiento);
-
     return (
         <>
             <div

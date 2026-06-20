@@ -13,7 +13,6 @@ const HistorialVentas = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setHistorial(datos);
-            console.log("Historial de ventas: ", datos);
         }
     }
 
@@ -91,8 +90,6 @@ const HistorialVentas = () => {
                 .reduce((acc, v) => acc + Number(v.monto), 0),
         };
     });
-
-    console.log("Ventas: ", ventasFiltradas);
 
     return (
         <section className='container-fluid recuperar-container'>
