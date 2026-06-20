@@ -56,7 +56,6 @@ const CajaTabs = ({ caja, setCaja }) => {
             Swal.fire({ title: "Ocurrio un error al cerrar la caja. Intentelo más tarde", icon: "error" });
         }
     }
-    console.log("caja actual: ", caja);
 
 
     return (
