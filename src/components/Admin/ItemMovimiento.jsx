@@ -9,7 +9,8 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
         "APROBADO": "success",
     };
 
-    const fecha = new Date(itemMovimiento.fechaRetiro);
+    const fechaBase = itemMovimiento.fechaRetiro || itemMovimiento.turno?.fecha;
+    const fecha = new Date(fechaBase);
 
     const fechaFormateada = fecha.toLocaleDateString("es-AR", {
         weekday: "long",
@@ -18,7 +19,7 @@ const ItemMovimiento = ({ isLast, itemMovimiento }) => {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false
-    }).replace(",", "")
+    }).replace(",", "");
 
     return (
         <>
