@@ -2,11 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { listarTurnos, pacientesconTurnos, registrarPagoTurnoAPI } from '../../helpers/queries';
+import { listarTurnos, obtenerCajaActivaAPI, pacientesconTurnos, registrarPagoTurnoAPI } from '../../helpers/queries';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTurno, turnoSeleccionado, setTurnos }) => {
+const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTurno, turnoSeleccionado, setTurnos, setCaja }) => {
 
     const { register, handleSubmit, reset, formState: { errors }, clearErrors, setValue } = useForm();
 
@@ -20,6 +20,11 @@ const ModalPagoTurno = ({ showPagoTurno, abrirModalPagoTurno, cerrarModalPagoTur
             if (respuestaActualizada.status === 200) {
                 const datos = await respuestaActualizada.json();
                 setTurnos(datos);
+            }
+            const respuestaCaja = await obtenerCajaActivaAPI();
+            if (respuestaCaja.status === 200) {
+                const datosActualizados = await respuestaCaja.json();
+                setCaja(datosActualizados);
             }
             cerrarModalPagoTurno();
             Swal.fire({ title: "Pago registrado exitosamente!", icon: "success" });

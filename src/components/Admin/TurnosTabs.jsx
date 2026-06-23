@@ -7,7 +7,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import ModalPagoTurno from './ModalPagoTurno';
 
-const TurnosTabs = ({ turnos, setTurnos }) => {
+const TurnosTabs = ({ turnos, setTurnos, setCaja }) => {
 
     const [busqueda, setBusqueda] = useState("");
 
@@ -184,7 +184,7 @@ const TurnosTabs = ({ turnos, setTurnos }) => {
                     </Table>
                 </div>
             </div>
-            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno} turnoSeleccionado={turnoSeleccionado} setTurnos={setTurnos}></ModalPagoTurno>
+            <ModalPagoTurno showPagoTurno={showPagoTurno} abrirModalPagoTurno={abrirModalPagoTurno} cerrarModalPagoTurno={cerrarModalPagoTurno} turnoSeleccionado={turnoSeleccionado} setTurnos={setTurnos} setCaja={setCaja}></ModalPagoTurno>
         </>
 
 

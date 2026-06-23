@@ -14,7 +14,7 @@ const AdminTabs = ({ productos, setProductos, pedidos, setPedidos, pacientes, se
     const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
     const tabs = [
-        { key: 'turnos', label: 'Turnos', component: <TurnosTabs turnos={turnos} setTurnos={setTurnos}></TurnosTabs> },
+        { key: 'turnos', label: 'Turnos', component: <TurnosTabs turnos={turnos} setTurnos={setTurnos} setCaja={setCaja}></TurnosTabs> },
         { key: 'paciente', label: "Pacientes", component: <PacientesTabs pacientes={pacientes} setPaciente={setPaciente}></PacientesTabs> },
         { key: 'productos', label: 'Productos', component: <ProductosTabs productos={productos} setProductos={setProductos} setModoModalProducto={setModoModalProducto} modoModalProducto={modoModalProducto} modoModalProducto={modoModalProducto} setProductoSeleccionado={setProductoSeleccionado} productoSeleccionado={productoSeleccionado}></ProductosTabs> },
         { key: 'pedidos', label: 'Pedidos', component: <PedidosTabs pedidos={pedidos} setPedidos={setPedidos}></PedidosTabs> },
