@@ -46,7 +46,7 @@ const Tienda = () => {
                         <FiltroProductos setCategoria={setCategoria}></FiltroProductos>
                     </div>
                 </div>
-                {productos.filter((producto) => producto.estado === "DISPONIBLE").map((itemProducto) => (
+                {productos.map((itemProducto) => (
                     <div className="col-12 col-md-6 col-lg-3" key={itemProducto.idProducto}>
                         <CardProducto itemProducto={itemProducto}></CardProducto>
                     </div>
