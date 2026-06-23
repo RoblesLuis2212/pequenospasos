@@ -178,9 +178,14 @@ const HistorialVentas = () => {
                 <div className="container mt-4">
                     <div className="border rounded-3 p-3 bg-light">
                         <p className="titulo" style={{ fontSize: '15px' }}>Historial de ventas</p>
-                        {ventasFiltradas.slice(0, 5).map((itemMovimiento, index) => (
-                            <ItemMovimiento key={index} itemMovimiento={itemMovimiento} isLast={index === historial.length - 1}></ItemMovimiento>
-                        ))}
+                        {ventasFiltradas.length > 0 ? (
+                            ventasFiltradas.slice(0, 5).map((itemMovimiento, index) => (
+                                <ItemMovimiento key={index} itemMovimiento={itemMovimiento} isLast={index === historial.length - 1}></ItemMovimiento>
+                            ))
+                        ) : (
+                            <p className='text-muted text-center'>No hay ventas registradas para mostrar</p>
+                        )
+                        }
                     </div>
                 </div>
                 {/* Estadisticas de ventas de productos vs consultas */}
