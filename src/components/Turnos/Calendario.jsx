@@ -34,7 +34,6 @@ const Calendario = () => {
         if (respuesta.status === 200) {
             const datos = await respuesta.json();
             setDatosPaciente(datos);
-            console.log("datos del paciente: ", datos);
         }
     }
 
@@ -55,12 +54,17 @@ const Calendario = () => {
     }
 
     const selectAllow = (selectInfo) => {
-        const fechaSeleccionada = selectInfo.start.toISOString();
+        const fechaSeleccionada = selectInfo.start;
+        const ahora = new Date();
+
+        if (fechaSeleccionada <= ahora) {
+            return false;
+        }
 
         // Verificamos si la fecha seleccionada coincide con algún turno ocupado
         const estaOcupado = turnos.some((turno) => {
             const fechaTurno = new Date(turno.start).toISOString();
-            return fechaTurno === fechaSeleccionada;
+            return fechaTurno === fechaSeleccionada.toISOString();
         });
 
         return !estaOcupado; // si está ocupado retorna false y bloquea la selección
@@ -143,7 +147,7 @@ const Calendario = () => {
                     meridiem: false
                 }}
                 validRange={{
-                    start: new Date() //Con esto evitamos que se pueda solicitar un turno en una fecha anterior a la actual
+                    start: new Date()
                 }}
                 selectable={"true"}
                 select={confirmarTurno}
