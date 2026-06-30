@@ -7,6 +7,7 @@ import { finalizarCompraUsuario } from '../../helpers/queries';
 import Swal from 'sweetalert2';
 import ModalDatosCompra from './ModalDatosCompra';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
     const [showModalCompra, setShowModalCompra] = useState(false);
@@ -42,7 +43,7 @@ const CardResumen = ({ detalleCarrito, obtenerCarrito }) => {
                     </div>
                     <div className='d-flex flex-column justify-content-center'>
                         <Button className='btn-principal mt-2 w-100' onClick={finalizarCompra}>Finalizar Reserva</Button>
-                        <Button className='btn-transparente mt-3'>Seguir comprando</Button>
+                        <Button className='btn-transparente mt-3' as={Link} to="/tienda">Seguir comprando</Button>
                     </div>
                     <hr />
                     <p className='text-secondary-emphasis'>El pago se realiza en el local al retirar el pedido. Aceptamos efectivo, transferencia, débito y crédito.</p>
