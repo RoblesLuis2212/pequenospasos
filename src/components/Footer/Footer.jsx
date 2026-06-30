@@ -3,6 +3,7 @@ import "./Footer.css";
 import ModalIniciarSesion from "../Usuario/ModalIniciarSesion";
 import { useState } from "react";
 import ModalPacientes from "../Pacientes/ModalPacientes";
+import { HashLink } from "react-router-hash-link";
 
 const Footer = () => {
     const [show, setShow] = useState(false);
@@ -25,9 +26,9 @@ const Footer = () => {
                         {/* Columna principal */}
                         <h5 className="logo">Pequeños Pasos<i className="bi bi-balloon-fill ms-1"></i></h5>
                         <Link className="text-decoration-none link-footer mt-2" to={"/"}>Inicio</Link>
-                        <Link className="text-decoration-none link-footer mt-2" href="#tratamientos">Nuestros servicios</Link>
-                        <Link className="text-decoration-none link-footer mt-2">Preguntas frecuentes</Link>
-                        <Link className="text-decoration-none link-footer mt-2" to={"/"} >Acerca de nosotros</Link>
+                        <HashLink className="text-decoration-none link-footer mt-2" smooth to={"/#tratamientos"}>Nuestros servicios</HashLink>
+                        <Link className="text-decoration-none link-footer mt-2" to={"/preguntas-frecuentes"}>Preguntas frecuentes</Link>
+                        <Link className="text-decoration-none link-footer mt-2" to={"/nosotros"} >Acerca de nosotros</Link>
                     </div>
                     <div className="col-12 col-md-4 col-lg-3 d-flex flex-column align-items-center align-items-md-start order-2">
                         {/* Columnas con las funcionalidades que manipulará el paciente */}
